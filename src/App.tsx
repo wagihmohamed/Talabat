@@ -1,8 +1,11 @@
+import { Routes, Route } from "react-router-dom";
+import { LoginScreen } from "./screens";
+
 function App() {
   return (
-    <>
-      <h1 className="text-4xl">Hello World!</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<LoginScreen />} />
+    </Routes>
   );
 }
 
