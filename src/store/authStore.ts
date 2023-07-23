@@ -4,7 +4,8 @@ import { persist } from "zustand/middleware";
 import jwt_decode from "jwt-decode";
 
 interface AuthStore {
-  id: string;
+  id: number;
+  username: string;
   token: string | null;
   email: string;
   setToken: (token: string) => void;
@@ -12,8 +13,10 @@ interface AuthStore {
 }
 
 interface TokenDecoded {
+  username: string;
+  token: string;
+  id: number;
   email: string;
-  id: string;
 }
 
 const useAuthStore = create<AuthStore>()(
@@ -21,20 +24,17 @@ const useAuthStore = create<AuthStore>()(
     (set) => ({
       token: null,
       email: "",
-      id: "",
-      subDomain: "",
-      isAdmin: false,
-      isStudent: false,
-      isTeacher: false,
-      role: "",
-      setToken: (token) => {
-        localStorage.setItem("token", token);
-        const decodedToken: TokenDecoded = jwt_decode(token);
-        const { email } = decodedToken;
+      id: 0,
+      username: "",
+      setToken: (userToken) => {
+        localStorage.setItem("token", userToken);
+        const decodedToken: TokenDecoded = jwt_decode(userToken);
+        const { email, id, token, username } = decodedToken;
         set({
           email,
           token,
-          id: decodedToken.id,
+          id,
+          username,
         });
       },
       logout: () => {
@@ -42,6 +42,8 @@ const useAuthStore = create<AuthStore>()(
         set({
           token: null,
           email: "",
+          id: 0,
+          username: "",
         });
         queryClient.clear();
         router.navigate(`/login`);

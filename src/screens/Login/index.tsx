@@ -32,7 +32,7 @@ export const LoginScreen = () => {
   return (
     <div className="w-full h-screen bg-white default">
       <div className="grid grid-cols-12 h-full w-full">
-        <div className="flex flex-col col-span-4 justify-center items-center">
+        <div className="flex flex-col col-span-12 md:col-span-6 lg:col-span-4 justify-center items-center">
           <h1 className="text-3xl font-bold mb-4">مرحبا بك</h1>
           <p className="text-gray-500 mb-8">
             سجل الدخول للمتابعة الى لوحة التحكم
@@ -80,10 +80,18 @@ export const LoginScreen = () => {
             </form>
           </Form>
         </div>
-        <div className="flex bg-white col-span-8 ">
-          <img className="h-full" src={LoginImage} alt="login" />
+        <div className="hidden bg-white sm:hidden md:flex md:col-span-6 lg:col-span-8 ">
+          <img
+            className="h-full sm:hidden md:block object-cover"
+            src={LoginImage}
+            alt="login"
+          />
         </div>
       </div>
     </div>
   );
 };
+
+/* 
+ 
+*/

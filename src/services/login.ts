@@ -10,7 +10,10 @@ export const loginService = async ({
   await sleep(1500);
   if (username === "admin" && password === "admin1234") {
     return {
-      token: "123456789",
+      username: "admin",
+      token: "ewasdkjnandlwaidjlwadnaw",
+      id: 162,
+      email: "admin@admin.com",
     };
   }
   throw new Error("اسم المستخدم أو كلمة المرور غير صحيحة");
