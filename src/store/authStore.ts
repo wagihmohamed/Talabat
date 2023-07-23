@@ -45,7 +45,7 @@ const useAuthStore = create<AuthStore>()(
           username: "",
         });
         queryClient.clear();
-        router.navigate(`/login`);
+        router.navigate(`/`);
       },
     }),
     {
