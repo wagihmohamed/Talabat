@@ -12,30 +12,21 @@ import {
   Input,
 } from "@/components";
 import { useForm } from "react-hook-form";
-
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: "اسم المستخدم يجب ان يكون اكثر من حرفين",
-    })
-    .max(50, {
-      message: "اسم المستخدم يجب ان يكون اقل من 50 حرف",
-    }),
-  password: z.string().min(8).max(50),
-});
+import { loginFormSchema } from "./formUtils";
+import { useLogin } from "@/hooks";
 
 export const LoginScreen = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate: login, isError, error, isLoading } = useLogin();
+  const form = useForm<z.infer<typeof loginFormSchema>>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       username: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof loginFormSchema>) => {
+    login(values);
   };
 
   return (
@@ -49,6 +40,12 @@ export const LoginScreen = () => {
           <p className="text-gray-500 mb-8">
             سجل الدخول للمتابعة الى لوحة التحكم
           </p>
+          {isError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+              <strong className="font-bold">خطأ!</strong>
+              <span className="block sm:inline">{error?.message}</span>
+            </div>
+          )}
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -74,13 +71,13 @@ export const LoginScreen = () => {
                   <FormItem>
                     <FormLabel>كلمة المرور</FormLabel>
                     <FormControl>
-                      <Input placeholder="****" {...field} />
+                      <Input placeholder="****" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button className="w-full" type="submit">
+              <Button isLoading={isLoading} className="w-full" type="submit">
                 تسجيل الدخول
               </Button>
             </form>
