@@ -14,7 +14,6 @@ interface AuthStore {
 
 interface TokenDecoded {
   username: string;
-  token: string;
   id: number;
   email: string;
 }
@@ -29,10 +28,10 @@ const useAuthStore = create<AuthStore>()(
       setToken: (userToken) => {
         localStorage.setItem("token", userToken);
         const decodedToken: TokenDecoded = jwt_decode(userToken);
-        const { email, id, token, username } = decodedToken;
+        const { email, id, username } = decodedToken;
         set({
           email,
-          token,
+          token: userToken,
           id,
           username,
         });
