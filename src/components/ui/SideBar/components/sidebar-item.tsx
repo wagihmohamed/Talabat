@@ -13,9 +13,11 @@ export const SideBarItem = ({
   ...rest
 }: SideBarItemProps) => {
   return (
-    <Button {...rest} variant={variant} className="w-full justify-start">
+    <Button {...rest} variant={variant} className="w-full justify-start gap-2">
       {icon}
-      {title}
+      <p className="hidden md:block text-xs md:text-sm font-semibold text-slate-900">
+        {title}
+      </p>
     </Button>
   );
 };
