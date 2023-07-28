@@ -171,7 +171,7 @@ export function Sidebar({ className, children }: SidebarProps) {
           </div>
         </div>
       </div>
-      <div className="col-span-4 lg:border-l">{children}</div>
+      <div className="col-span-4 lg:border-l p-6">{children}</div>
     </div>
   );
 }

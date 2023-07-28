@@ -1,0 +1,188 @@
+import { Restuarant } from "@/models";
+
+export const restaurantsData: Restuarant[] = [
+  {
+    address: {
+      city: "نيويورك",
+      geo: {
+        lat: "40.7128",
+        lng: "-74.0060",
+      },
+      street: "شارع المركز الرئيسي 123",
+      suite: "الجناح 101",
+      zipcode: "10001",
+    },
+    company: {
+      bs: "طعام لذيذ",
+      catchPhrase: "تقديم السعادة",
+      name: "شركة جنة الطعام",
+    },
+    email: "restaurant1@example.com",
+    id: 1,
+    name: "أطباق لذيذة",
+    phone: "123-456-7890",
+    username: "tasty123",
+    website: "www.tastydelights.com",
+  },
+  {
+    address: {
+      city: "لوس أنجلوس",
+      geo: {
+        lat: "34.0522",
+        lng: "-118.2437",
+      },
+      street: "شارع البلوط 456",
+      suite: "الجناح 202",
+      zipcode: "90001",
+    },
+    company: {
+      bs: "مأكولات رفيعة",
+      catchPhrase: "نكهة الأناقة",
+      name: "شركة لقمات شهية",
+    },
+    email: "restaurant2@example.com",
+    id: 2,
+    name: "بيسترو شهي",
+    phone: "987-654-3210",
+    username: "gourmetbistro",
+    website: "www.gourmetbistro.com",
+  },
+  {
+    address: {
+      city: "شيكاغو",
+      geo: {
+        lat: "41.8781",
+        lng: "-87.6298",
+      },
+      street: "شارع الكرز 789",
+      suite: "الجناح 303",
+      zipcode: "60601",
+    },
+    company: {
+      bs: "وصفات عائلية",
+      catchPhrase: "التقليد على الصحن",
+      name: "شركة وجبات منزلية",
+    },
+    email: "restaurant3@example.com",
+    id: 3,
+    name: "مطبخ دافئ",
+    phone: "111-222-3333",
+    username: "cozykitchen",
+    website: "www.cozykitchen.com",
+  },
+  {
+    address: {
+      city: "باريس",
+      geo: {
+        lat: "48.8566",
+        lng: "2.3522",
+      },
+      street: "101 شارع المطبخ",
+      suite: "الجناح 101",
+      zipcode: "75001",
+    },
+    company: {
+      bs: "أطباق فرنسية لذيذة",
+      catchPhrase: "استمتع بالنكهات",
+      name: "المطبخ الملكي",
+    },
+    email: "restaurant11@example.com",
+    id: 11,
+    name: "البسترو الصغير",
+    phone: "+33 1 2345 6789",
+    username: "petitbistro",
+    website: "www.lepetitbistro.com",
+  },
+  {
+    address: {
+      city: "روما",
+      geo: {
+        lat: "41.9028",
+        lng: "12.4964",
+      },
+      street: "555 شارع الطعم",
+      suite: "الجناح 202",
+      zipcode: "00187",
+    },
+    company: {
+      bs: "طعم إيطالي",
+      catchPhrase: "نكهة إيطالية",
+      name: "بون آبيتيتو",
+    },
+    email: "restaurant12@example.com",
+    id: 12,
+    name: "لا تراتوريا",
+    phone: "+39 06 1234 5678",
+    username: "latrattoria",
+    website: "www.latrattoria.com",
+  },
+  {
+    address: {
+      city: "دبي",
+      geo: {
+        lat: "25.276987",
+        lng: "55.296249",
+      },
+      street: "333 شارع الشيخ زايد",
+      suite: "الطابق 15",
+      zipcode: "12345",
+    },
+    company: {
+      bs: "أطباق شرق أوسطية",
+      catchPhrase: "نكهات السوق",
+      name: "توابل الصحراء",
+    },
+    email: "restaurant13@example.com",
+    id: 13,
+    name: "ليالي عربية",
+    phone: "+971 4 5678 9012",
+    username: "arabiannights",
+    website: "www.arabiannights.com",
+  },
+  {
+    address: {
+      city: "شنغهاي",
+      geo: {
+        lat: "31.2304",
+        lng: "121.4737",
+      },
+      street: "777 شارع نانجينج",
+      suite: "الجناح 88",
+      zipcode: "200001",
+    },
+    company: {
+      bs: "مأكولات شرقية غريبة",
+      catchPhrase: "رحلة إلى الشرق",
+      name: "قصر الفتى الأحمر",
+    },
+    email: "restaurant14@example.com",
+    id: 14,
+    name: "المصباح الأحمر",
+    phone: "+86 21 9876 5432",
+    username: "redlantern",
+    website: "www.redlantern.com",
+  },
+  {
+    address: {
+      city: "موسكو",
+      geo: {
+        lat: "55.7558",
+        lng: "37.6176",
+      },
+      street: "888 شارع تفيرسكايا",
+      suite: "المبنى 10",
+      zipcode: "125009",
+    },
+    company: {
+      bs: "كلاسيكيات روسية",
+      catchPhrase: "نكهة الوطن",
+      name: "بليني وبورشت",
+    },
+    email: "restaurant15@example.com",
+    id: 15,
+    name: "المطبخ الكرمليني",
+    phone: "+7 495 123 4567",
+    username: "kremlinkitchen",
+    website: "www.kremlinkitchen.com",
+  },
+];
