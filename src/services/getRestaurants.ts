@@ -1,7 +1,7 @@
 import { sleep } from "@/lib/sleep";
-import { restaurantsData } from "@/mockup/restuarants";
+import { restuarantsData } from "@/mockup";
 
 export const getRestaurantsService = async () => {
   await sleep(2000);
-  return restaurantsData;
+  return restuarantsData;
 };

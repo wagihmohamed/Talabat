@@ -1,6 +1,6 @@
 import { Restuarant } from "@/models";
 
-export const restaurantsData: Restuarant[] = [
+export const restuarantsData: Restuarant[] = [
   {
     address: {
       city: "نيويورك",
