@@ -9,5 +9,6 @@ export * from "./dropdown-menu";
 export * from "./checkbox";
 export * from "./alert-dialog";
 export * from "./DeleteRestuarantDialog";
+export * from "./dialog";
 import { RestaurantsTable } from "./RestaurantsTable";
 export { RestaurantsTable };
