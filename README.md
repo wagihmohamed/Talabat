@@ -1,6 +1,6 @@
-# MV-ECOMMERCE
+# Talabatk
 
-This the super admin dashboard
+This the super admin dashboard for Talabatak
 
 ## Project structure
 
@@ -15,8 +15,7 @@ The project is divided into the following main parts:
 - lib
 - Models
 - services
-- zustand store
-- theme
+- store
 
 ## Libraries and tools used
 
