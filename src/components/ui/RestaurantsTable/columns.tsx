@@ -1,9 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Pencil, ChevronLeft } from "lucide-react";
+import { MoreHorizontal, ChevronLeft } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -12,6 +11,7 @@ import {
   DeleteRestuarantDialog,
 } from "@/components";
 import { Restuarant } from "@/models";
+import { EditRestaurant } from "./components/EditRestaurant";
 
 export const columns: ColumnDef<Restuarant>[] = [
   {
@@ -78,13 +78,9 @@ export const columns: ColumnDef<Restuarant>[] = [
                 <span className="sr-only">الاجراءات</span>
                 الاجراءات
               </DropdownMenuLabel>
+              <EditRestaurant restaurant={restuarant} />
               <DeleteRestuarantDialog restuarant={restuarant} />
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex items-center justify-end gap-2">
-                <span className="sr-only">تعديل المطعم</span>
-                تعديل
-                <Pencil className="h-4 w-4" />
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <div>
