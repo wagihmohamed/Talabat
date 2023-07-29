@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
 import { Beef, Utensils, Martini } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -9,10 +10,16 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Sidebar({ className, children }: SidebarProps) {
   const { logout } = useAuth();
+  const navigation = useNavigate();
+  const location = useLocation().pathname;
+  const checkPathName = (pathStartsWith: string) => {
+    if (location.startsWith(pathStartsWith)) return "secondary";
+    return "ghost";
+  };
   return (
-    <div className="grid grid-cols-5 h-full">
+    <div className="grid grid-cols-5 h-screen">
       <div className={cn("pb-11 bg-slate-50", className)}>
-        <div className="space-y-4 py-4 flex flex-col h-full">
+        <div className="space-y-4 py-4 sticky top-0 h-screen flex flex-col">
           <div className="flex-1">
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 text-sm md:text-lg font-semibold tracking-tight">
@@ -21,13 +28,15 @@ export function Sidebar({ className, children }: SidebarProps) {
               <div className="space-y-1">
                 <SideBarItem
                   title="كل المطاعم"
-                  variant="secondary"
+                  variant={checkPathName("/home")}
                   icon={<Beef className="shrink-0" />}
+                  onClick={() => navigation("/home")}
                 />
                 <SideBarItem
-                  title="المطاعم المفضلة"
+                  title="الأقسام"
                   icon={<Utensils className="shrink-0" />}
-                  variant="ghost"
+                  variant={checkPathName("/categories")}
+                  onClick={() => navigation("/categories")}
                 />
                 <SideBarItem
                   title="المشروبات"
