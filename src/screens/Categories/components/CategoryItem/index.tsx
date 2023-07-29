@@ -1,12 +1,11 @@
 import { Category } from "@/models";
-import { Trash2 } from "lucide-react";
+import { DeleteCategoryDialog } from "../DeleteCategory";
 
 interface CategoryItemProps {
   category: Category;
-  onDelete: () => void;
 }
 
-export const CategoryItem = ({ category, onDelete }: CategoryItemProps) => {
+export const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
     <div
       key={category.id}
@@ -14,7 +13,7 @@ export const CategoryItem = ({ category, onDelete }: CategoryItemProps) => {
     >
       <div className="flex justify-between items-center group">
         <h2 className="text-lg font-bold">القسم: {category.name}</h2>
-        <Trash2 onClick={onDelete} className="text-red-500 cursor-pointer" />
+        <DeleteCategoryDialog category={category} />
       </div>
     </div>
   );

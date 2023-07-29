@@ -4,3 +4,4 @@ export * from "./useAddRestaurant";
 export * from "./useCategories";
 export * from "./useEditRestaurant";
 export * from "./useDeleteRestaurant";
+export * from "./useDeleteCategory";

@@ -23,11 +23,7 @@ export const CategoriesScreen = () => {
           >
             <div className="grid grid-cols-12 gap-4">
               {categories.map((category) => (
-                <CategoryItem
-                  onDelete={() => {}}
-                  category={category}
-                  key={category.id}
-                />
+                <CategoryItem category={category} key={category.id} />
               ))}
             </div>
           </LoadingErrorPlaceholder>
