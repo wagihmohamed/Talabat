@@ -20,23 +20,23 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { addAdminFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useAddRestaurant } from "@/hooks";
+import { useAddAdmin } from "@/hooks";
 import { useState } from "react";
 import { ADMIN_ROLES } from "@/mockup";
 
 export const AddAdmin = () => {
   const [open, setOpen] = useState(false);
-  //   const {
-  //     mutate: addRestaurant,
-  //     isLoading,
-  //     reset,
-  //   } = useAddRestaurant({
-  //     onSuccess: () => {
-  //       reset();
-  //       setOpen(false);
-  //       form.reset();
-  //     },
-  //   });
+  const {
+    mutate: addAdmin,
+    isLoading,
+    reset,
+  } = useAddAdmin({
+    onSuccess: () => {
+      reset();
+      setOpen(false);
+      form.reset();
+    },
+  });
   const form = useForm<z.infer<typeof addAdminFormSchema>>({
     resolver: zodResolver(addAdminFormSchema),
     defaultValues: {
@@ -47,9 +47,24 @@ export const AddAdmin = () => {
       role: "",
     },
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   values: z.infer<typeof addAdminFormSchema>
-  const onSubmit = () => {};
+
+  const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {
+    const roleLabel = ADMIN_ROLES.find(
+      (role) => role.value === values.role
+    ) || {
+      label: "",
+      value: "",
+    };
+    addAdmin({
+      id: Math.random(),
+      name: values.name,
+      phone: values.phone,
+      role: values.role,
+      password: values.password,
+      status: "active",
+      roleLabel: roleLabel.label || "",
+    });
+  };
 
   return (
     <Dialog
@@ -157,8 +172,7 @@ export const AddAdmin = () => {
               )}
             />
             <DialogFooter className="mt-4">
-              {/* isLoading={isLoading} */}
-              <Button size="lg" type="submit">
+              <Button isLoading={isLoading} size="lg" type="submit">
                 اضافه
               </Button>
               <DialogClode

@@ -6,3 +6,4 @@ export * from "./editRestaurant";
 export * from "./deleteRestaurant";
 export * from "./deleteCategory";
 export * from "./addCategory";
+export * from "./addAdmin";
