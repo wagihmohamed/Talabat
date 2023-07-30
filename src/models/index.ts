@@ -26,3 +26,13 @@ export interface Category {
   id: number;
   name: string;
 }
+
+export type AdminStatus = "active" | "suspended";
+export interface Admin {
+  id: number;
+  name: string;
+  phone: string;
+  role: number;
+  roleLabel: string;
+  status: AdminStatus;
+}
