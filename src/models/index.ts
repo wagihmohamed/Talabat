@@ -36,3 +36,7 @@ export interface Admin {
   roleLabel: string;
   status: AdminStatus;
 }
+
+export interface AddAdminParams extends Admin {
+  password: string;
+}
