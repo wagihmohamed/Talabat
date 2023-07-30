@@ -1,8 +1,9 @@
 import { AdminsTable, Sidebar } from "@/components";
 import { adminColumns } from "@/components/ui/AdminsTable/columns";
-import { adminsData } from "@/mockup/adminsData";
+import { useAdmins } from "@/hooks";
 
 export const AdminsScreen = () => {
+  const { data: admins = [], isLoading, isError } = useAdmins();
   return (
     <div className="border-t">
       <div className="h-screen">
@@ -12,7 +13,12 @@ export const AdminsScreen = () => {
             يمكنك إضافة مشرفين جدد أو حذف المشرفين الحاليين, يمكنك أيضاً تعديل
             بيانات المشرفين الحاليين.
           </p>
-          <AdminsTable data={adminsData} columns={adminColumns} />
+          <AdminsTable
+            isLoading={isLoading}
+            isError={isError}
+            data={admins}
+            columns={adminColumns}
+          />
         </Sidebar>
       </div>
     </div>
