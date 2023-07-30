@@ -44,27 +44,20 @@ export const AddAdmin = () => {
       name: "",
       password: "",
       phone: "",
-      role: "",
+      role: [],
     },
   });
 
   const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {
-    const roleLabel = ADMIN_ROLES.find(
-      (role) => role.value === values.role
-    ) || {
-      label: "",
-      value: "",
-    };
     addAdmin({
-      id: Math.random(),
       name: values.name,
       phone: values.phone,
-      role: values.role,
+      roles: values.role.map((role) => role.value),
       password: values.password,
       status: "active",
-      roleLabel: roleLabel.label || "",
     });
   };
+  console.log(form.getValues());
 
   return (
     <Dialog
@@ -127,8 +120,10 @@ export const AddAdmin = () => {
                       <CustomSelect
                         options={ADMIN_ROLES}
                         onChange={(e: { value: string | undefined }) => {
-                          field.onChange(e.value);
+                          field.onChange(e);
                         }}
+                        isMulti
+                        value={field.value}
                         helperText={
                           form.formState.errors.role?.message || undefined
                         }

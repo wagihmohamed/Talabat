@@ -2,6 +2,14 @@ import { ADMIN_ROLES } from "@/mockup";
 import * as z from "zod";
 
 const allowedRoleIds = ADMIN_ROLES.map((role) => role.value);
+
+const roleObjectSchema = z.object({
+  label: z.string(),
+  value: z.string().refine((value) => allowedRoleIds.includes(value), {
+    message: "الرجاء تحديد دور صحيح",
+  }),
+});
+
 export const addAdminFormSchema = z
   .object({
     name: z
@@ -31,8 +39,8 @@ export const addAdminFormSchema = z
     confirmPassword: z.string().min(5, {
       message: "تأكيد كلمة المرور  يجب ان يكون اكثر من 5 حروف",
     }),
-    role: z.string().refine((value) => allowedRoleIds.includes(value), {
-      message: "الرجاء تحديد دور صحيح",
+    role: z.array(roleObjectSchema).min(1, {
+      message: "الرجاء تحديد دور واحد على الاقل",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
