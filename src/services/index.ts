@@ -7,3 +7,4 @@ export * from "./deleteRestaurant";
 export * from "./deleteCategory";
 export * from "./addCategory";
 export * from "./addAdmin";
+export * from "./getAdmins";
