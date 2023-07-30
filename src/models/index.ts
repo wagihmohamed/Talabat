@@ -32,7 +32,7 @@ export interface Admin {
   id: number;
   name: string;
   phone: string;
-  role: number;
+  role: string;
   roleLabel: string;
   status: AdminStatus;
 }

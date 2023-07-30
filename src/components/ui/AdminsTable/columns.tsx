@@ -47,7 +47,7 @@ export const adminColumns: ColumnDef<Admin>[] = [
     accessorKey: "role",
     header: "الدور",
     cell: ({ getValue }) => {
-      const adminRole = ADMIN_ROLES.find((role) => role.id === getValue());
+      const adminRole = ADMIN_ROLES.find((role) => role.value === getValue());
       return <div className="text-center">{adminRole?.label}</div>;
     },
   },
@@ -88,7 +88,7 @@ export const adminColumns: ColumnDef<Admin>[] = [
           </DropdownMenu>
           <div>
             <span className="sr-only">الذهاب الى صفحة تفاصيل المشرف</span>
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 cursor-pointer" />
           </div>
         </div>
       );
