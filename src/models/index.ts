@@ -37,6 +37,10 @@ export interface Admin {
   status: AdminStatus;
 }
 
-export interface AddAdminParams extends Admin {
+export interface AddAdminParams {
+  name: string;
+  phone: string;
+  roles: string[];
+  status: AdminStatus;
   password: string;
 }
