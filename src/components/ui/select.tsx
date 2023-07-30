@@ -16,6 +16,7 @@ interface CustomSelectProps {
   maxWidth?: string;
   name?: string;
   isLoading?: boolean;
+  className?: string;
 }
 
 export const CustomSelect = ({
@@ -33,6 +34,7 @@ export const CustomSelect = ({
   name,
   maxWidth,
   isLoading,
+  className,
 }: CustomSelectProps) => {
   return (
     <>
@@ -50,6 +52,7 @@ export const CustomSelect = ({
         loadingMessage={() => "Loading..."}
         isMulti={isMulti}
         isDisabled={disabled}
+        className={className}
         placeholder={placeholder || "اختر"}
         styles={{
           control: (provided) => ({
