@@ -48,7 +48,8 @@ export const AddAdmin = () => {
     },
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {};
+  //   values: z.infer<typeof addAdminFormSchema>
+  const onSubmit = () => {};
 
   return (
     <Dialog
