@@ -1,6 +1,7 @@
 import { LoadingErrorPlaceholder, Sidebar } from "@/components";
 import { useCategories } from "@/hooks";
 import { CategoryItem } from "./components/CategoryItem";
+import { AddCategory } from "./components/AddCategory";
 
 export const CategoriesScreen = () => {
   const { data: categories = [], isLoading, isError } = useCategories();
@@ -21,6 +22,7 @@ export const CategoriesScreen = () => {
             isError={isError}
             isLoading={isLoading}
           >
+            <AddCategory />
             <div className="grid grid-cols-12 gap-4">
               {categories.map((category) => (
                 <CategoryItem category={category} key={category.id} />
