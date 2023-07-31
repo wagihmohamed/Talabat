@@ -19,43 +19,53 @@ import {
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { addAdminFormSchema } from "./formUtils";
+import { editAdminFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddAdmin } from "@/hooks";
+import { useEditAdmin } from "@/hooks";
 import { useState } from "react";
 import { ADMIN_ROLES } from "@/mockup";
+import { Admin } from "@/models";
+import { Pencil } from "lucide-react";
 
-export const AddAdmin = () => {
+export const EditAdminDialog = ({
+  admin
+}: {
+  admin: Admin
+}) => {
   const [open, setOpen] = useState(false);
   const {
-    mutate: addAdmin,
+    mutate: editAdmin,
     isLoading,
     reset,
-  } = useAddAdmin({
+  } = useEditAdmin({
     onSuccess: () => {
       reset();
       setOpen(false);
       form.reset();
     },
   });
-  const form = useForm<z.infer<typeof addAdminFormSchema>>({
-    resolver: zodResolver(addAdminFormSchema),
+
+  const userRoles = admin.roles.map((role) => {
+    return ADMIN_ROLES.find((adminRole) => adminRole.value === role)
+  })
+
+
+  const form = useForm<z.infer<typeof editAdminFormSchema>>({
+    resolver: zodResolver(editAdminFormSchema),
     defaultValues: {
-      confirmPassword: "",
-      name: "",
-      password: "",
-      phone: "",
-      role: [],
+      name: admin.name,
+      phone: admin.phone,
+      role: userRoles,
     },
   });
 
-  const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {
-    addAdmin({
+  const onSubmit = (values: z.infer<typeof editAdminFormSchema>) => {
+    editAdmin({
       name: values.name,
       phone: values.phone,
       roles: values.role.map((role) => role.value),
-      password: values.password,
       status: "active",
+      password: "123456",
     });
   };
 
@@ -68,7 +78,14 @@ export const AddAdmin = () => {
       open={open}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">اضافه مشرف</Button>
+        <Button
+          className="flex w-full items-center justify-end gap-2"
+          variant="ghost"
+        >
+          <span className="sr-only">حذف المشرف</span>
+          تعديل
+          <Pencil className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -128,38 +145,6 @@ export const AddAdmin = () => {
                           form.formState.errors.role?.message || undefined
                         }
                       />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center">
-                    <FormLabel className="col-span-2">كلمه المرور</FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input type="password" {...field} />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center gap-1">
-                    <FormLabel className="col-span-2">
-                      تاكيد كلمه المرور
-                    </FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input type="password" {...field} />
                     </FormControl>
                   </FormItem>
                   <FormMessage className="text-xs" />

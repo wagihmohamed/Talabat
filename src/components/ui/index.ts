@@ -8,7 +8,7 @@ export * from "./SideBar";
 export * from "./dropdown-menu";
 export * from "./checkbox";
 export * from "./alert-dialog";
-export * from "./DeleteRestuarantDialog";
+export * from "./RestaurantsTable/components/DeleteRestuarantDialog";
 export * from "./dialog";
 export * from "./select";
 export * from "./AdminsTable";
