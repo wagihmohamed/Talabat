@@ -12,7 +12,7 @@ import {
 } from "@/components";
 import { Admin } from "@/models";
 import { ADMIN_ROLES } from "@/mockup";
-import { DeleteAdminDialog } from "./components";
+import { DeleteAdminDialog, EditAdminDialog } from "./components";
 
 export const adminColumns: ColumnDef<Admin>[] = [
   {
@@ -47,9 +47,13 @@ export const adminColumns: ColumnDef<Admin>[] = [
   {
     accessorKey: "role",
     header: "الدور",
-    cell: ({ getValue }) => {
-      const adminRole = ADMIN_ROLES.find((role) => role.value === getValue());
-      return <div className="text-center">{adminRole?.label}</div>;
+    cell: ({ row }) => {
+      const useRoles = row.original.roles;
+      const filteredAdminRules = useRoles.map((api) => {
+        return ADMIN_ROLES.find((role) => role.value === api);
+      });
+      const adminRole = filteredAdminRules.map((role) => role?.label);
+      return <div className="text-center">{adminRole + " "}</div>;
     },
   },
   {
@@ -84,6 +88,7 @@ export const adminColumns: ColumnDef<Admin>[] = [
                 الاجراءات
               </DropdownMenuLabel>
               <DeleteAdminDialog admin={admin} />
+              <EditAdminDialog admin={admin} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

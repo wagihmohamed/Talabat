@@ -9,3 +9,4 @@ export * from "./useAddCategory";
 export * from "./useAddAdmin";
 export * from "./useAdmins";
 export * from "./useDeleteAdmin";
+export * from "./useEditAdmin";
