@@ -8,3 +8,4 @@ export * from "./useDeleteCategory";
 export * from "./useAddCategory";
 export * from "./useAddAdmin";
 export * from "./useAdmins";
+export * from "./useDeleteAdmin";
