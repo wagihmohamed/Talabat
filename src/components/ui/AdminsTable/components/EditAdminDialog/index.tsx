@@ -63,9 +63,17 @@ export const EditAdminDialog = ({
     editAdmin({
       name: values.name,
       phone: values.phone,
-      roles: values.role.map((role) => role.value),
-      status: "active",
+      roles: {
+        manage_admins: false,
+        manage_orders: false,
+        manage_products: false,
+        manage_deliveries: false,
+        manage_vendors: false,
+      },
       password: "123456",
+      confirm_password: "123456",
+      email: '',
+      fcm: null,
     });
   };
 
