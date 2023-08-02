@@ -1,7 +1,8 @@
-import { sleep } from "@/lib/sleep";
-import { deliveriesPersons } from "@/mockup";
+import { api } from "@/api";
+import { getDeliveriesUsers } from "@/api/apiURLs";
+import { DeliveryResponse } from "@/models";
 
 export const getDeliveriesService = async () => {
-  await sleep(2000);
-  return deliveriesPersons;
+  const response = await api.get<DeliveryResponse>(getDeliveriesUsers);
+  return response.data;
 };
