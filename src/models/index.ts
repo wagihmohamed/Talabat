@@ -28,6 +28,14 @@ export interface CreateRestaurantParams {
   image: null | string;
 }
 
+export interface EditRestaurantParams {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
 export interface CreateRestaurantResponse {
   message: string;
   user: {

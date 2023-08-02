@@ -18,7 +18,7 @@ import {
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { addRestaurantFormSchema } from "./formUtils";
+import { editRestaurantFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditRestaurant } from "@/hooks";
 import { useState } from "react";
@@ -43,8 +43,8 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
     },
   });
 
-  const form = useForm<z.infer<typeof addRestaurantFormSchema>>({
-    resolver: zodResolver(addRestaurantFormSchema),
+  const form = useForm<z.infer<typeof editRestaurantFormSchema>>({
+    resolver: zodResolver(editRestaurantFormSchema),
     defaultValues: {
       address: restaurant.address,
       email: restaurant.email,
@@ -52,30 +52,13 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
       phone: restaurant.phone,
     },
   });
-  const onSubmit = (values: z.infer<typeof addRestaurantFormSchema>) => {
+  const onSubmit = (values: z.infer<typeof editRestaurantFormSchema>) => {
     editRestaurant({
-      name: values.name,
+      address: values.address,
       email: values.email,
+      name: values.name,
       phone: values.phone,
-      address: {
-        city: values.address,
-        street: values.address,
-
-        geo: {
-          lat: "0",
-          lng: "0",
-        },
-        suite: values.address,
-        zipcode: values.address,
-      },
-      company: {
-        name: "XDD",
-        bs: "LOL",
-        catchPhrase: "LOL",
-      },
-      website: "LOL.COM",
-      id: 0,
-      username: "LOL",
+      id: restaurant.id,
     });
   };
   return (
@@ -95,7 +78,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
           <Pencil className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] md:max-w-[700px]">
         <DialogHeader>
           <DialogTitle>تعديل مطعم</DialogTitle>
         </DialogHeader>
@@ -134,41 +117,47 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
                 </>
               )}
             />
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center">
-                    <FormLabel className="col-span-2">العنوان</FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center gap-1">
-                    <FormLabel className="col-span-2">
-                      البريد الالكتروني
-                    </FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
+            <div className="flex justify-between items-center gap-4">
+              <div>
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <>
+                      <FormItem className="grid grid-cols-8 items-center">
+                        <FormLabel className="col-span-2">العنوان</FormLabel>
+                        <FormControl className="col-span-6">
+                          <Input {...field} />
+                        </FormControl>
+                      </FormItem>
+                      <FormMessage className="text-xs" />
+                    </>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <>
+                      <FormItem className="grid grid-cols-8 items-center gap-1">
+                        <FormLabel className="col-span-2">
+                          البريد الالكتروني
+                        </FormLabel>
+                        <FormControl className="col-span-6">
+                          <Input {...field} />
+                        </FormControl>
+                      </FormItem>
+                      <FormMessage className="text-xs" />
+                    </>
+                  )}
+                />
+              </div>
+            </div>
             <DialogFooter className="mt-4">
               <Button isLoading={isLoading} size="lg" type="submit">
-                تعديل
+                اضافه
               </Button>
               <DialogClode
                 className={buttonVariants({
