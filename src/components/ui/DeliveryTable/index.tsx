@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/table";
 import { Button, Input, LoadingErrorPlaceholder } from "@/components";
 import { useEffect, useState } from "react";
-// import { AddRestaurant } from "./components/AddRestaurant";
+import { AddDelivery } from "./components";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -61,7 +61,7 @@ export function DeliveryTable<TData, TValue>({
     return (
         <LoadingErrorPlaceholder isLoading={isLoading} isError={isError}>
             <div className="flex justify-start items-center">
-                {/* <AddRestaurant /> */}
+                <AddDelivery />
             </div>
             <div className="flex items-center py-4">
                 <Input
