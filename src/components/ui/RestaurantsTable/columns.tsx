@@ -9,11 +9,14 @@ import {
   Button,
   Checkbox,
   DeleteRestuarantDialog,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
 } from "@/components";
-import { Restuarant } from "@/models";
+import { RestuarantItemResponse } from "@/models";
 import { EditRestaurant } from "./components/EditRestaurant";
 
-export const columns: ColumnDef<Restuarant>[] = [
+export const columns: ColumnDef<RestuarantItemResponse>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -36,12 +39,27 @@ export const columns: ColumnDef<Restuarant>[] = [
     enableHiding: false,
   },
   {
+    id: "image",
+    accessorKey: "image",
+    cell: ({ row }) => {
+      const value = row.original;
+      return (
+        <Avatar className="mx-auto">
+          <AvatarImage src={value.image || ''} alt="restaurant image" />
+          <AvatarFallback>
+            {value.name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar >
+      )
+    },
+  },
+  {
     accessorKey: "name",
     header: "الاسم",
   },
   {
-    accessorKey: "username",
-    header: "اسم المستخدم",
+    accessorKey: "address",
+    header: "العنوان",
   },
   {
     accessorKey: "phone",
@@ -50,14 +68,6 @@ export const columns: ColumnDef<Restuarant>[] = [
   {
     accessorKey: "email",
     header: "البريد الالكتروني",
-  },
-  {
-    accessorKey: "address.street",
-    header: "الشارع",
-  },
-  {
-    accessorKey: "address.city",
-    header: "المدينة",
   },
   {
     id: "actions",
@@ -85,7 +95,7 @@ export const columns: ColumnDef<Restuarant>[] = [
           </DropdownMenu>
           <div>
             <span className="sr-only">الذهاب الى صفحة تفاصيل المطعم</span>
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 cursor-pointer" />
           </div>
         </div>
       );

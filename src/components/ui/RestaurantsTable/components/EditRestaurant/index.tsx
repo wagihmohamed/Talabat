@@ -22,11 +22,11 @@ import { addRestaurantFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditRestaurant } from "@/hooks";
 import { useState } from "react";
-import { Restuarant } from "@/models";
+import { RestuarantItemResponse } from "@/models";
 import { Pencil } from "lucide-react";
 
 interface EditRestaurantProps {
-  restaurant: Restuarant;
+  restaurant: RestuarantItemResponse;
 }
 
 export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
@@ -46,7 +46,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
   const form = useForm<z.infer<typeof addRestaurantFormSchema>>({
     resolver: zodResolver(addRestaurantFormSchema),
     defaultValues: {
-      address: restaurant.address.street,
+      address: restaurant.address,
       email: restaurant.email,
       name: restaurant.name,
       phone: restaurant.phone,

@@ -1,5 +1,25 @@
 import axios from "axios";
+const baseURL = import.meta.env.VITE_BASE_URL
+
+console.log(baseURL);
 
 export const api = axios.create({
-  baseURL: "",
+  baseURL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
+
+api.interceptors.request.use(
+  async (config) => {
+    // const token = localStorage.getItem('token');
+
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
+    return config;
+  },
+  async (error) => {
+    return Promise.reject(error);
+  }
+);

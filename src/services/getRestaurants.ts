@@ -1,7 +1,7 @@
-import { sleep } from "@/lib/sleep";
-import { restuarantsData } from "@/mockup";
+import { api } from "@/api";
+import { RestuarantResponse } from "@/models";
 
 export const getRestaurantsService = async () => {
-  await sleep(2000);
-  return restuarantsData;
+  const response = await api.get<RestuarantResponse>("vendor/get-vendors");
+  return response.data;
 };
