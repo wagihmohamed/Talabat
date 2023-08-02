@@ -11,6 +11,7 @@ import {
   Badge,
 } from "@/components";
 import { DeliveryPerson } from "@/models";
+import { DeleteDeliveryDialog } from "./components";
 
 export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
   {
@@ -60,8 +61,8 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
   },
   {
     id: "actions",
-    cell: () => {
-      // const restuarant = row.original;
+    cell: ({ row }) => {
+      const deliveryUser = row.original;
 
       return (
         <div className="flex justify-center items-center gap-4">
@@ -78,7 +79,7 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
                 الاجراءات
               </DropdownMenuLabel>
               {/* <EditRestaurant restaurant={restuarant} /> */}
-              {/* <DeleteRestuarantDialog restuarant={restuarant} /> */}
+              <DeleteDeliveryDialog deliveryUser={deliveryUser} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

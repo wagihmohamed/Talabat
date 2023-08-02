@@ -12,3 +12,4 @@ export * from "./deleteAdmin";
 export * from "./editAdmin";
 export * from "./getDeliveries";
 export * from "./addDeliveryUser";
+export * from "./deleteDeliveryUser";
