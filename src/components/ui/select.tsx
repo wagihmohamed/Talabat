@@ -86,7 +86,7 @@ export const CustomSelect = ({
           onChange(e);
         }}
       />
-      {error && <p className="select-error">{helperText}</p>}
+      {error && <p className="text-destructive text-xs font-medium">{helperText}</p>}
     </>
   );
 };
