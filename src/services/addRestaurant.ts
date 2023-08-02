@@ -1,9 +1,12 @@
-import { sleep } from "@/lib/sleep";
-import { restuarantsData } from "@/mockup";
-import { Restuarant } from "@/models";
+import { api } from "@/api";
+import { addRestaurant } from "@/api/apiURLs";
+import { CreateRestaurantResponse, CreateRestaurantParams } from "@/models";
+import { AxiosResponse } from "axios";
 
-export const addRestaurantsService = async (newRestaurant: Restuarant) => {
-  await sleep(2000);
-  const newRestaurantData = restuarantsData.push(newRestaurant);
-  return newRestaurantData;
+export const addRestaurantsService = async (newRestaurant: CreateRestaurantParams) => {
+  const response = await api.post<
+    CreateRestaurantParams,
+    AxiosResponse<CreateRestaurantResponse>
+  >(addRestaurant, newRestaurant);
+  return response.data;
 };

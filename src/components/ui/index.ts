@@ -14,6 +14,7 @@ export * from "./select";
 export * from "./AdminsTable";
 export * from "./badge";
 export * from "./avatar";
+export * from "./textarea";
 import { AdminsTable } from "./AdminsTable";
 import { RestaurantsTable } from "./RestaurantsTable";
 import { DeliveryTable } from "./DeliveryTable";
