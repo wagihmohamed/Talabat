@@ -1,14 +1,12 @@
-import { sleep } from "@/lib/sleep";
-import { restuarantsData } from "@/mockup";
-import { Restuarant } from "@/models";
+import { api } from "@/api";
+import { editRestaurant } from "@/api/apiURLs";
+import { EditRestaurantParams, CreateRestaurantResponse } from "@/models";
+import { AxiosResponse } from "axios";
 
-export const editRestaurantsService = async (newRestauran: Restuarant) => {
-  await sleep(2000);
-  const newRestaurantData = restuarantsData.map((restaurant) => {
-    if (restaurant.id === newRestauran.id) {
-      return newRestauran;
-    }
-    return restaurant;
-  });
-  return newRestaurantData;
+export const editRestaurantsService = async (newRestauran: EditRestaurantParams) => {
+  const response = await api.patch<
+    EditRestaurantParams,
+    AxiosResponse<CreateRestaurantResponse>
+  >(editRestaurant, newRestauran);
+  return response.data;
 };

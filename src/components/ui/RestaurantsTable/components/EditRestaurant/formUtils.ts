@@ -1,6 +1,16 @@
 import * as z from "zod";
 
-export const addRestaurantFormSchema = z.object({
+export const addRestaurantFormInitialValues = {
+  address: "",
+  email: "",
+  name: "",
+  phone: "",
+  password: "",
+  confirm_password: "",
+  description: "",
+}
+
+export const editRestaurantFormSchema = z.object({
   name: z
     .string()
     .min(2, {
@@ -36,4 +46,13 @@ export const addRestaurantFormSchema = z.object({
     .max(50, {
       message: "البريد الالكتروني  يجب ان يكون اقل من 50 حرف",
     }),
+  //   description: z
+  //     .string(),
+  //   password: z
+  //     .string(),
+  //   confirm_password: z
+  //     .string()
+  // }).refine((data) => data.password === data.confirm_password, {
+  //   message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+  //   path: ["confirmPassword"],
 });
