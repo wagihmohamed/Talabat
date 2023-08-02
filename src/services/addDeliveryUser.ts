@@ -1,9 +1,11 @@
-import { sleep } from "@/lib/sleep";
-import { deliveriesPersons } from "@/mockup";
-import { DeliveryPerson } from "@/models";
+import { api } from "@/api";
+import { addDeliveryUser } from "@/api/apiURLs";
+import { CreateDeliveryParams, CreateDeliveryResponse } from "@/models";
+import { AxiosResponse } from "axios";
 
-export const addDeliveryUserService = async (newDelivery: DeliveryPerson) => {
-    await sleep(2000);
-    const newDeliveryData = deliveriesPersons.push(newDelivery);
-    return newDeliveryData;
+export const addDeliveryUserService = async (newDelivery: CreateDeliveryParams) => {
+    const response = await api.post<CreateDeliveryResponse,
+        AxiosResponse<CreateDeliveryResponse>
+    >(addDeliveryUser, newDelivery);
+    return response.data;
 };

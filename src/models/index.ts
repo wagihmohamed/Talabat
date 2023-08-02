@@ -1,8 +1,9 @@
+// API
 export interface RestuarantResponse {
   count: number;
   results: RestuarantItemResponse[];
 }
-
+// API
 export interface RestuarantItemResponse {
   id: number;
   name: string;
@@ -14,7 +15,7 @@ export interface RestuarantItemResponse {
   description: string;
   image: null | string;
 }
-
+// API
 export interface CreateRestaurantParams {
   name: string;
   email: string;
@@ -27,7 +28,7 @@ export interface CreateRestaurantParams {
   confirm_password: string;
   image: null | string;
 }
-
+// API
 export interface EditRestaurantParams {
   id: number;
   name: string;
@@ -35,7 +36,7 @@ export interface EditRestaurantParams {
   phone: string;
   address: string;
 }
-
+// API
 export interface CreateRestaurantResponse {
   message: string;
   user: {
@@ -107,4 +108,54 @@ export interface DeliveryPerson {
   status: "active" | "suspended";
   restaurantId: number;
   restaurantName: string;
+}
+
+// API
+export interface DeliveryResponse {
+  count: number;
+  results: DeliveryUser[];
+}
+// API
+export interface DeliveryUser {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: null;
+  role: string;
+  fcm: string;
+  token: string;
+  createdAt: Date;
+  updatedAt: Date;
+  delivery: Delivery;
+}
+// API
+export interface Delivery {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  userId: number;
+}
+// API
+export interface CreateDeliveryParams {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  password: string;
+  confirm_password: string;
+  fcm: string | null;
+}
+// API
+export interface CreateDeliveryResponse {
+  message: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    fcm: string | null;
+    token: string;
+    role: string;
+  }
 }

@@ -3,7 +3,9 @@ import { deliveriesColumns } from "@/components/ui/DeliveryTable/columns";
 import { useDeliveries } from "@/hooks";
 
 export const DeliveriesScreen = () => {
-    const { data: deliveries = [], isLoading, isError } = useDeliveries();
+    const { data: deliveries = {
+        results: [],
+    }, isLoading, isError } = useDeliveries();
     return (
         <div className="border-t">
             <div className="h-screen">
@@ -19,7 +21,12 @@ export const DeliveriesScreen = () => {
                         isLoading={isLoading}
                         isError={isError}
                     >
-                        <DeliveryTable data={deliveries} columns={deliveriesColumns} />
+                        <DeliveryTable
+                            data={deliveries.results}
+                            columns={deliveriesColumns}
+                            isError={isError}
+                            isLoading={isLoading}
+                        />
                     </LoadingErrorPlaceholder>
                 </Sidebar>
             </div>

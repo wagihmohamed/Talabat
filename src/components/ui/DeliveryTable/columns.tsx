@@ -10,10 +10,10 @@ import {
   Checkbox,
   Badge,
 } from "@/components";
-import { DeliveryPerson } from "@/models";
-import { DeleteDeliveryDialog, EditRestaurant } from "./components";
+import { DeliveryUser } from "@/models";
+// import { DeleteDeliveryDialog, EditRestaurant } from "./components";
 
-export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
+export const deliveriesColumns: ColumnDef<DeliveryUser>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -46,6 +46,10 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
   {
     accessorKey: "restaurantName",
     header: "المطعم",
+    cell: ({ getValue }) => {
+      const restaurantName = getValue();
+      return restaurantName ? restaurantName : "لا يوجد";
+    }
   },
   {
     accessorKey: "status",
@@ -61,8 +65,9 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const deliveryUser = row.original;
+    cell: () => {
+      // { row }
+      // const deliveryUser = row.original;
 
       return (
         <div className="flex justify-center items-center gap-4">
@@ -78,8 +83,8 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
                 <span className="sr-only">الاجراءات</span>
                 الاجراءات
               </DropdownMenuLabel>
-              <DeleteDeliveryDialog deliveryUser={deliveryUser} />
-              <EditRestaurant deliveryUser={deliveryUser} />
+              {/* <DeleteDeliveryDialog deliveryUser={deliveryUser} />
+              <EditRestaurant deliveryUser={deliveryUser} /> */}
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

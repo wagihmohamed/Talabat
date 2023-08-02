@@ -13,7 +13,6 @@ import {
     FormMessage,
     Input,
     DialogClode,
-    CustomSelect,
     Button,
     buttonVariants
 } from "@/components";
@@ -23,18 +22,9 @@ import { addDeliveryFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddDelivery } from "@/hooks";
 import { useState } from "react";
-import { useRestaurants } from "@/hooks";
 
 export const AddDelivery = () => {
     const [open, setOpen] = useState(false);
-    const { data: restaurants = {
-        results: []
-    } } = useRestaurants();
-    const restaurantsOptions = restaurants?.results.map((restaurant) => ({
-        label: restaurant.name,
-        value: restaurant.id.toString(),
-    }));
-
     const {
         mutate: addDeliveryUser,
         isLoading,
@@ -51,7 +41,10 @@ export const AddDelivery = () => {
         defaultValues: {
             name: "",
             phone: "",
-            restaurant: undefined,
+            address: "",
+            confirm_password: "",
+            email: "",
+            password: "",
         },
     });
 
@@ -59,10 +52,11 @@ export const AddDelivery = () => {
         addDeliveryUser({
             name: values.name,
             phone: values.phone,
-            id: Math.floor(Math.random() * 1000),
-            restaurantId: parseInt(values.restaurant?.value),
-            restaurantName: values.restaurant?.label,
-            status: "active",
+            address: values.address,
+            password: values.password,
+            confirm_password: values.confirm_password,
+            email: values.email,
+            fcm: null
         });
     };
 
@@ -118,6 +112,66 @@ export const AddDelivery = () => {
                         />
                         <FormField
                             control={form.control}
+                            name="address"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2"> العنوان</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2">البريد الالكتروني</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2">كلمه المرور</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input type="password" {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="confirm_password"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2">تاكيد كلمه المرور</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input type="password" {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
+                        {/* <FormField
+                            control={form.control}
                             name="restaurant"
                             render={({ field }) => (
                                 <>
@@ -142,8 +196,7 @@ export const AddDelivery = () => {
                                     </p>
                                 </>
                             )}
-                        />
-
+                        /> */}
                         <DialogFooter className="mt-4">
                             <Button isLoading={isLoading} size="lg" type="submit">
                                 اضافه
