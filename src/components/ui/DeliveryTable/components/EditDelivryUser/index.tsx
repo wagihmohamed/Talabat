@@ -32,8 +32,10 @@ interface EditRestaurantProps {
 }
 
 export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
-    const { data: restaurants = [] } = useRestaurants();
-    const restaurantsOptions = restaurants?.map((restaurant) => ({
+    const { data: restaurants = {
+        results: []
+    } } = useRestaurants();
+    const restaurantsOptions = restaurants?.results.map((restaurant) => ({
         label: restaurant.name,
         value: restaurant.id.toString(),
     }));
