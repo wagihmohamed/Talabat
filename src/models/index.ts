@@ -92,15 +92,48 @@ export interface Admin {
   roleLabel: string;
   status: AdminStatus;
 }
-
+// API
+export type Roles = {
+  manage_orders: boolean;
+  manage_products: boolean;
+  manage_admins: boolean;
+  manage_deliveries: boolean;
+  manage_vendors: boolean;
+}
 export interface AddAdminParams {
   name: string;
+  email: string;
   phone: string;
-  roles: string[];
-  status: AdminStatus;
+  fcm: string | null;
   password: string;
+  confirm_password: string;
+  roles: Roles
 }
-
+// API
+export interface AddAdminResponse {
+  message: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    fcm: string | null;
+    super_admin: boolean;
+    role: string;
+    roles: {
+      id: number;
+      manage_orders: boolean;
+      manage_products: boolean;
+      manage_admins: boolean;
+      manage_deliveries: boolean;
+      manage_vendors: boolean;
+      adminId: number;
+      createdAt: string;
+      updatedAt: string;
+    },
+    token: string;
+  }
+}
 export interface DeliveryPerson {
   id: number;
   name: string;
@@ -157,5 +190,41 @@ export interface CreateDeliveryResponse {
     fcm: string | null;
     token: string;
     role: string;
+  }
+}
+// API
+export interface AdminResponse {
+  count: number;
+  results: AdminItem[]
+}
+// API
+export interface AdminItem {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  role: string;
+  fcm: string;
+  token: string;
+  createdAt: string;
+  updatedAt: string;
+  admin: {
+    id: number;
+    super_admin: boolean;
+    createdAt: string;
+    updatedAt: string;
+    userId: number;
+    adminRole: {
+      id: number;
+      manage_orders: boolean;
+      manage_products: boolean;
+      manage_admins: boolean;
+      manage_deliveries: boolean;
+      manage_vendors: boolean;
+      createdAt: string;
+      updatedAt: string;
+      adminId: number;
+    }
   }
 }

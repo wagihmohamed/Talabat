@@ -3,13 +3,6 @@ import * as z from "zod";
 
 const allowedRoleIds = ADMIN_ROLES.map((role) => role.value);
 
-const roleObjectSchema = z.object({
-  label: z.string(),
-  value: z.string().refine((value) => allowedRoleIds.includes(value), {
-    message: "الرجاء تحديد دور صحيح",
-  }),
-});
-
 export const addAdminFormSchema = z
   .object({
     name: z
@@ -19,6 +12,11 @@ export const addAdminFormSchema = z
       })
       .max(50, {
         message: "الاسم  يجب ان يكون اقل من 50 حرف",
+      }),
+    email: z
+      .string()
+      .email({
+        message: "البريد الالكتروني غير صحيح",
       }),
     phone: z
       .string()
@@ -39,9 +37,17 @@ export const addAdminFormSchema = z
     confirmPassword: z.string().min(5, {
       message: "تأكيد كلمة المرور  يجب ان يكون اكثر من 5 حروف",
     }),
-    role: z.array(roleObjectSchema).min(1, {
-      message: "الرجاء تحديد دور واحد على الاقل",
-    }),
+    roles: z
+      .array(
+        z.object({
+          value: z.string().refine((value) => allowedRoleIds.includes(value), {
+            message: "الرجاء تحديد دور صحيح",
+          }),
+        })
+      )
+      .min(1, {
+        message: "الرجاء تحديد دور واحد على الأقل",
+      }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",

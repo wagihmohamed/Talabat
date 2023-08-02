@@ -1,10 +1,13 @@
-import { sleep } from "@/lib/sleep";
-import { adminsData } from "@/mockup";
-import { AddAdminParams } from "@/models";
+import { api } from "@/api";
+import { addAdmin } from "@/api/apiURLs";
+import { AddAdminParams, AddAdminResponse } from "@/models";
+import { AxiosResponse } from "axios";
+
 
 export const addAdminService = async (newAdmin: AddAdminParams) => {
-  await sleep(2000);
-  console.log(newAdmin);
-
-  return adminsData;
+  const response = await api.post<
+    AddAdminParams,
+    AxiosResponse<AddAdminResponse>
+  >(addAdmin, newAdmin);
+  return response.data;
 };

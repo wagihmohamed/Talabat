@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddAdmin } from "@/hooks";
 import { useState } from "react";
 import { ADMIN_ROLES } from "@/mockup";
+import { Roles } from "@/models";
 
 export const AddAdmin = () => {
   const [open, setOpen] = useState(false);
@@ -45,17 +46,35 @@ export const AddAdmin = () => {
       name: "",
       password: "",
       phone: "",
-      role: [],
+      roles: [],
+      email: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {
+    const finalRoles = values.roles.map((role) => role.value);
+    const adminGrantedAndDeniedRoles = ADMIN_ROLES.reduce(
+      (acc, role) => {
+        if (finalRoles.includes(role.value)) {
+          acc.granted[role.value] = true;
+        } else {
+          acc.denied[role.value] = false;
+        }
+        return acc;
+      },
+      { granted: {} as Record<string, boolean>, denied: {} as Record<string, boolean> }
+    );
     addAdmin({
       name: values.name,
       phone: values.phone,
-      roles: values.role.map((role) => role.value),
+      roles: {
+        ...adminGrantedAndDeniedRoles.granted,
+        ...adminGrantedAndDeniedRoles.denied,
+      } as Roles,
       password: values.password,
-      status: "active",
+      email: values.email,
+      confirm_password: values.confirmPassword,
+      fcm: null,
     });
   };
 
@@ -96,6 +115,21 @@ export const AddAdmin = () => {
             />
             <FormField
               control={form.control}
+              name="email"
+              render={({ field }) => (
+                <>
+                  <FormItem className="grid grid-cols-8 items-center">
+                    <FormLabel className="col-span-2">البريد الالكتروني</FormLabel>
+                    <FormControl className="col-span-6">
+                      <Input {...field} />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="phone"
               render={({ field }) => (
                 <>
@@ -111,7 +145,7 @@ export const AddAdmin = () => {
             />
             <FormField
               control={form.control}
-              name="role"
+              name="roles"
               render={({ field }) => (
                 <>
                   <FormItem className="grid grid-cols-8 items-center">
@@ -123,9 +157,11 @@ export const AddAdmin = () => {
                           field.onChange(e);
                         }}
                         isMulti
-                        value={field.value}
+                        // value={ADMIN_ROLES.filter((role) =>
+                        //   form.getValues("roles").includes(role.value)
+                        // )}
                         helperText={
-                          form.formState.errors.role?.message || undefined
+                          form.formState.errors.roles?.message || undefined
                         }
                       />
                     </FormControl>
