@@ -13,6 +13,8 @@ dist-ssr
 *.local
 yarn-error.log
 yarn.lock
+.env
+env
 
 # Editor directories and files
 .vscode/*

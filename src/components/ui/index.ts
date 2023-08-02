@@ -13,6 +13,7 @@ export * from "./dialog";
 export * from "./select";
 export * from "./AdminsTable";
 export * from "./badge";
+export * from "./avatar";
 import { AdminsTable } from "./AdminsTable";
 import { RestaurantsTable } from "./RestaurantsTable";
 import { DeliveryTable } from "./DeliveryTable";

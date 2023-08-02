@@ -11,14 +11,14 @@ import {
   Button,
 } from "@/components";
 import { useDeleteRestaurant } from "@/hooks";
-import { Restuarant } from "@/models";
+import { RestuarantItemResponse } from "@/models";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
 export const DeleteRestuarantDialog = ({
   restuarant,
 }: {
-  restuarant: Restuarant;
+  restuarant: RestuarantItemResponse;
 }) => {
   const {
     mutate: deleteRestaurant,

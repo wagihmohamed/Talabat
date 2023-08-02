@@ -1,3 +1,21 @@
+export interface RestuarantResponse {
+  count: number;
+  results: RestuarantItemResponse[];
+}
+
+export interface RestuarantItemResponse {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  fcm: string;
+  role: string;
+  description: string;
+  image: null | string;
+}
+
+
 export interface Restuarant {
   id: number;
   name: string;

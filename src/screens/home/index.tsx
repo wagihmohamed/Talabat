@@ -3,7 +3,9 @@ import { columns } from "@/components/ui/RestaurantsTable/columns";
 import { useRestaurants } from "@/hooks";
 
 export const HomeScreen = () => {
-  const { data: restaurants, isLoading, isError } = useRestaurants();
+  const { data: restaurants = {
+    results: []
+  }, isLoading, isError } = useRestaurants();
 
   return (
     <div className="border-t">
@@ -14,7 +16,7 @@ export const HomeScreen = () => {
             isLoading={isLoading}
             isError={isError}
             columns={columns}
-            data={restaurants || []}
+            data={restaurants.results}
           />
         </Sidebar>
       </div>
