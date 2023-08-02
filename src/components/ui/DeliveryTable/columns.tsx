@@ -11,7 +11,7 @@ import {
   Badge,
 } from "@/components";
 import { DeliveryPerson } from "@/models";
-import { DeleteDeliveryDialog } from "./components";
+import { DeleteDeliveryDialog, EditRestaurant } from "./components";
 
 export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
   {
@@ -78,8 +78,8 @@ export const deliveriesColumns: ColumnDef<DeliveryPerson>[] = [
                 <span className="sr-only">الاجراءات</span>
                 الاجراءات
               </DropdownMenuLabel>
-              {/* <EditRestaurant restaurant={restuarant} /> */}
               <DeleteDeliveryDialog deliveryUser={deliveryUser} />
+              <EditRestaurant deliveryUser={deliveryUser} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

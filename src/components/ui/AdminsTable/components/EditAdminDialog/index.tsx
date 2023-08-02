@@ -82,7 +82,6 @@ export const EditAdminDialog = ({
           className="flex w-full items-center justify-end gap-2"
           variant="ghost"
         >
-          <span className="sr-only">حذف المشرف</span>
           تعديل
           <Pencil className="h-4 w-4" />
         </Button>
