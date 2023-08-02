@@ -1,7 +1,8 @@
-import { sleep } from "@/lib/sleep";
-import { adminsData } from "@/mockup";
+import { api } from "@/api";
+import { getAdmins } from "@/api/apiURLs";
+import { AdminResponse } from '@/models'
 
 export const getAdminsService = async () => {
-  await sleep(2000);
-  return adminsData;
+  const response = await api.get<AdminResponse>(getAdmins);
+  return response.data;
 };

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addAdminService } from "@/services";
 import { AddAdminParams } from "@/models";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 export const useAddAdmin = ({ onSuccess }: { onSuccess: () => void }) => {
   const queryClient = useQueryClient();
@@ -14,8 +15,10 @@ export const useAddAdmin = ({ onSuccess }: { onSuccess: () => void }) => {
       toast.success("تم اضافة المشرف بنجاح");
       onSuccess();
     },
-    onError: () => {
-      toast.error("حدث خطأ ما");
+    onError: (err: AxiosError<{
+      error: string;
+    }>) => {
+      toast.error(err.response?.data.error || "حدث خطأ ما");
     },
   });
 };

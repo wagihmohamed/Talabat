@@ -3,7 +3,9 @@ import { adminColumns } from "@/components/ui/AdminsTable/columns";
 import { useAdmins } from "@/hooks";
 
 export const AdminsScreen = () => {
-  const { data: admins = [], isLoading, isError } = useAdmins();
+  const { data: admins = {
+    results: [],
+  }, isLoading, isError } = useAdmins();
   return (
     <div className="border-t">
       <div className="h-screen">
@@ -16,7 +18,7 @@ export const AdminsScreen = () => {
           <AdminsTable
             isLoading={isLoading}
             isError={isError}
-            data={admins}
+            data={admins.results}
             columns={adminColumns}
           />
         </Sidebar>

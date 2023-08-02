@@ -1,18 +1,22 @@
 export const ADMIN_ROLES = [
   {
-    value: "10",
-    label: "مشرف عام",
+    value: "manage_orders",
+    label: "مشرف طلبات",
   },
   {
-    value: "20",
-    label: "مشرف مطاعم",
+    value: "manage_products",
+    label: "مشرف منتجات",
   },
   {
-    value: "30",
+    value: "manage_admins",
     label: "مشرف مستخدمين",
   },
   {
-    value: "40",
-    label: "مشرف أقسام",
+    value: "manage_deliveries",
+    label: "مشرف توصيلات",
+  },
+  {
+    value: "manage_vendors",
+    label: "مشرف مطاعم",
   },
 ];

@@ -10,11 +10,14 @@ import {
   Checkbox,
   Badge,
 } from "@/components";
-import { Admin } from "@/models";
-import { ADMIN_ROLES } from "@/mockup";
-import { DeleteAdminDialog, EditAdminDialog } from "./components";
+import { AdminItem } from "@/models";
+import { displayUserRoles, extractRoles } from "./transformRolObj";
+// import { DeleteAdminDialog, EditAdminDialog } from "./components";
 
-export const adminColumns: ColumnDef<Admin>[] = [
+
+
+
+export const adminColumns: ColumnDef<AdminItem>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -45,15 +48,16 @@ export const adminColumns: ColumnDef<Admin>[] = [
     header: "الهاتف",
   },
   {
+    accessorKey: "email",
+    header: "البريد الالكتروني",
+  },
+  {
     accessorKey: "role",
     header: "الدور",
     cell: ({ row }) => {
-      const useRoles = row.original.roles;
-      const filteredAdminRules = useRoles.map((api) => {
-        return ADMIN_ROLES.find((role) => role.value === api);
-      });
-      const adminRole = filteredAdminRules.map((role) => role?.label);
-      return <div className="text-center">{adminRole + " "}</div>;
+      const roles = extractRoles(row.original.admin.adminRole);
+
+      return <div className="text-center">{displayUserRoles(roles)}</div>;
     },
   },
   {
@@ -70,8 +74,8 @@ export const adminColumns: ColumnDef<Admin>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const admin = row.original;
+    cell: () => {
+      // const admin = row.original;
 
       return (
         <div className="flex justify-center items-center gap-4">
@@ -87,8 +91,8 @@ export const adminColumns: ColumnDef<Admin>[] = [
                 <span className="sr-only">الاجراءات</span>
                 الاجراءات
               </DropdownMenuLabel>
-              <DeleteAdminDialog admin={admin} />
-              <EditAdminDialog admin={admin} />
+              {/* <DeleteAdminDialog admin={admin} />
+              <EditAdminDialog admin={admin} /> */}
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>
