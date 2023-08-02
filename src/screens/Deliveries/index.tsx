@@ -1,6 +1,9 @@
-import { Sidebar } from "@/components";
+import { DeliveryTable, LoadingErrorPlaceholder, Sidebar } from "@/components";
+import { deliveriesColumns } from "@/components/ui/DeliveryTable/columns";
+import { useDeliveries } from "@/hooks";
 
 export const DeliveriesScreen = () => {
+    const { data: deliveries = [], isLoading, isError } = useDeliveries();
     return (
         <div className="border-t">
             <div className="h-screen">
@@ -12,7 +15,12 @@ export const DeliveriesScreen = () => {
                         يمكنك إضافة موظفين جدد أو حذف الموظفين الحاليين, يمكنك أيضاً تعديل
                         بيانات الموظفين الحاليين.
                     </p>
-
+                    <LoadingErrorPlaceholder
+                        isLoading={isLoading}
+                        isError={isError}
+                    >
+                        <DeliveryTable data={deliveries} columns={deliveriesColumns} />
+                    </LoadingErrorPlaceholder>
                 </Sidebar>
             </div>
         </div>

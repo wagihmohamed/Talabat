@@ -10,3 +10,4 @@ export * from "./useAddAdmin";
 export * from "./useAdmins";
 export * from "./useDeleteAdmin";
 export * from "./useEditAdmin";
+export * from "./useDeliveries";
