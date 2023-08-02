@@ -14,10 +14,11 @@ import {
   FormMessage,
   Input,
   DialogClode,
+  Textarea,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { addRestaurantFormSchema } from "./formUtils";
+import { addRestaurantFormInitialValues, addRestaurantFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddRestaurant } from "@/hooks";
 import { useState } from "react";
@@ -37,37 +38,20 @@ export const AddRestaurant = () => {
   });
   const form = useForm<z.infer<typeof addRestaurantFormSchema>>({
     resolver: zodResolver(addRestaurantFormSchema),
-    defaultValues: {
-      address: "",
-      email: "",
-      name: "",
-      phone: "",
-    },
+    defaultValues: addRestaurantFormInitialValues,
   });
   const onSubmit = (values: z.infer<typeof addRestaurantFormSchema>) => {
     addRestaurant({
-      name: values.name,
+      address: values.address,
       email: values.email,
+      name: values.name,
       phone: values.phone,
-      address: {
-        city: values.address,
-        street: values.address,
-
-        geo: {
-          lat: "0",
-          lng: "0",
-        },
-        suite: values.address,
-        zipcode: values.address,
-      },
-      company: {
-        name: "XDD",
-        bs: "LOL",
-        catchPhrase: "LOL",
-      },
-      website: "LOL.COM",
-      id: 0,
-      username: "LOL",
+      image: null,
+      password: values.password,
+      confirm_password: values.confirm_password,
+      description: values.description,
+      fcm: null,
+      open: true,
     });
   };
   return (
@@ -81,7 +65,7 @@ export const AddRestaurant = () => {
       <DialogTrigger asChild>
         <Button variant="outline">اضافه مطعم</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] md:max-w-[700px]">
         <DialogHeader>
           <DialogTitle>اضافه مطعم</DialogTitle>
         </DialogHeader>
@@ -120,15 +104,55 @@ export const AddRestaurant = () => {
                 </>
               )}
             />
+            <div className="flex justify-between items-center gap-4">
+              <div>
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <>
+                      <FormItem className="grid grid-cols-8 items-center">
+                        <FormLabel className="col-span-2">العنوان</FormLabel>
+                        <FormControl className="col-span-6">
+                          <Input {...field} />
+                        </FormControl>
+                      </FormItem>
+                      <FormMessage className="text-xs" />
+                    </>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <>
+                      <FormItem className="grid grid-cols-8 items-center gap-1">
+                        <FormLabel className="col-span-2">
+                          البريد الالكتروني
+                        </FormLabel>
+                        <FormControl className="col-span-6">
+                          <Input {...field} />
+                        </FormControl>
+                      </FormItem>
+                      <FormMessage className="text-xs" />
+                    </>
+                  )}
+                />
+              </div>
+            </div>
             <FormField
               control={form.control}
-              name="address"
+              name="password"
               render={({ field }) => (
                 <>
-                  <FormItem className="grid grid-cols-8 items-center">
-                    <FormLabel className="col-span-2">العنوان</FormLabel>
+                  <FormItem className="grid grid-cols-8 items-center gap-1">
+                    <FormLabel className="col-span-2">
+                      كلمه المرور
+                    </FormLabel>
                     <FormControl className="col-span-6">
-                      <Input {...field} />
+                      <Input type="password" {...field} />
                     </FormControl>
                   </FormItem>
                   <FormMessage className="text-xs" />
@@ -137,15 +161,32 @@ export const AddRestaurant = () => {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="confirm_password"
               render={({ field }) => (
                 <>
                   <FormItem className="grid grid-cols-8 items-center gap-1">
                     <FormLabel className="col-span-2">
-                      البريد الالكتروني
+                      تاكيد كلمه المرور
                     </FormLabel>
                     <FormControl className="col-span-6">
-                      <Input {...field} />
+                      <Input type="password" {...field} />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <>
+                  <FormItem className="grid grid-cols-8 items-center gap-1">
+                    <FormLabel className="col-span-2">
+                      وصف المطعم
+                    </FormLabel>
+                    <FormControl className="col-span-6">
+                      <Textarea  {...field} />
                     </FormControl>
                   </FormItem>
                   <FormMessage className="text-xs" />

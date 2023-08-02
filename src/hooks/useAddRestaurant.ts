@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addRestaurantsService } from "@/services";
-import { Restuarant } from "@/models";
+import { CreateRestaurantParams } from "@/models";
 import { toast } from "react-toastify";
 
 export const useAddRestaurant = ({ onSuccess }: { onSuccess: () => void }) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (newRestaurant: Restuarant) => {
+    mutationFn: (newRestaurant: CreateRestaurantParams) => {
       return addRestaurantsService(newRestaurant);
     },
     onSuccess: () => {

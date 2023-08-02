@@ -15,6 +15,35 @@ export interface RestuarantItemResponse {
   image: null | string;
 }
 
+export interface CreateRestaurantParams {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  fcm: string | null;
+  open: boolean;
+  description: string | null;
+  password: string;
+  confirm_password: string;
+  image: null | string;
+}
+
+export interface CreateRestaurantResponse {
+  message: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
+    description: string;
+    image: null | string;
+    fcm: string | null;
+    token: string;
+    role: string;
+    open: boolean;
+  }
+}
 
 export interface Restuarant {
   id: number;
