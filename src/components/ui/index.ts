@@ -15,4 +15,5 @@ export * from "./AdminsTable";
 export * from "./badge";
 import { AdminsTable } from "./AdminsTable";
 import { RestaurantsTable } from "./RestaurantsTable";
-export { RestaurantsTable, AdminsTable };
+import { DeliveryTable } from "./DeliveryTable";
+export { DeliveryTable, RestaurantsTable, AdminsTable };

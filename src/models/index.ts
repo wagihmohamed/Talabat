@@ -44,3 +44,12 @@ export interface AddAdminParams {
   status: AdminStatus;
   password: string;
 }
+
+export interface DeliveryPerson {
+  id: number;
+  name: string;
+  phone: string;
+  status: "active" | "suspended";
+  restaurantId: number;
+  restaurantName: string;
+}
