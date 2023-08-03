@@ -12,7 +12,7 @@ import {
 } from "@/components";
 import { AdminItem } from "@/models";
 import { displayUserRoles, extractRoles } from "./transformRolObj";
-// import { DeleteAdminDialog, EditAdminDialog } from "./components";
+import { DeleteAdminDialog } from "./components";
 
 
 
@@ -74,8 +74,8 @@ export const adminColumns: ColumnDef<AdminItem>[] = [
   },
   {
     id: "actions",
-    cell: () => {
-      // const admin = row.original;
+    cell: ({ row }) => {
+      const admin = row.original;
 
       return (
         <div className="flex justify-center items-center gap-4">
@@ -91,8 +91,8 @@ export const adminColumns: ColumnDef<AdminItem>[] = [
                 <span className="sr-only">الاجراءات</span>
                 الاجراءات
               </DropdownMenuLabel>
-              {/* <DeleteAdminDialog admin={admin} />
-              <EditAdminDialog admin={admin} /> */}
+              <DeleteAdminDialog admin={admin} />
+              {/* <EditAdminDialog admin={admin} /> */}
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

@@ -11,11 +11,11 @@ import {
   Button,
 } from "@/components";
 import { useDeleteAdmin } from "@/hooks";
-import { Admin } from "@/models";
+import { AdminItem } from "@/models";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
-export const DeleteAdminDialog = ({ admin }: { admin: Admin }) => {
+export const DeleteAdminDialog = ({ admin }: { admin: AdminItem }) => {
   const {
     mutate: deleteAdmin,
     isLoading,
