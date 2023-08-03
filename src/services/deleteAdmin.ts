@@ -1,12 +1,7 @@
-import { sleep } from "@/lib/sleep";
-import { adminsData } from "@/mockup";
+import { api } from "@/api";
+import { deleteUser } from "@/api/apiURLs";
 
 export const deleteAdminService = async (adminId: number) => {
-  await sleep(2000);
-  const newAdminsData = adminsData.filter((admin) => {
-    if (admin.id !== adminId) {
-      return admin;
-    }
-  });
-  return newAdminsData;
+  const response = await api.delete(deleteUser + `/${adminId}`);
+  return response.data;
 };
