@@ -7,6 +7,10 @@ export const addRestaurantsService = async (newRestaurant: CreateRestaurantParam
   const response = await api.post<
     CreateRestaurantParams,
     AxiosResponse<CreateRestaurantResponse>
-  >(addRestaurant, newRestaurant);
+  >(addRestaurant, newRestaurant, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };

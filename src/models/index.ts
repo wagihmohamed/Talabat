@@ -26,7 +26,7 @@ export interface CreateRestaurantParams {
   description: string | null;
   password: string;
   confirm_password: string;
-  image: null | string;
+  image: File | undefined | FormData | string | object | null;
 }
 // API
 export interface EditRestaurantParams {
