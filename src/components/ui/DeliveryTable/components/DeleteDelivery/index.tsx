@@ -11,11 +11,11 @@ import {
     Button,
 } from "@/components";
 import { useDeleteDeliveryUser } from "@/hooks";
-import { DeliveryPerson } from "@/models";
+import { DeliveryUser } from "@/models";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
-export const DeleteDeliveryDialog = ({ deliveryUser }: { deliveryUser: DeliveryPerson }) => {
+export const DeleteDeliveryDialog = ({ deliveryUser }: { deliveryUser: DeliveryUser }) => {
     const {
         mutate: deleteDeliveryUser,
         isLoading,
