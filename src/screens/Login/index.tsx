@@ -26,7 +26,10 @@ export const LoginScreen = () => {
   });
 
   const onSubmit = (values: z.infer<typeof loginFormSchema>) => {
-    login(values);
+    login({
+      key: values.username,
+      password: values.password,
+    });
   };
 
   return (

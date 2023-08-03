@@ -116,7 +116,7 @@ export function DeliveryTable<TData, TValue>({
                                     colSpan={columns.length}
                                     className="h-24 text-2xl font-semibold text-center"
                                 >
-                                    لا يوجد مطاعم!
+                                    لا يوجد عمال توصيل!
                                 </TableCell>
                             </TableRow>
                         )}

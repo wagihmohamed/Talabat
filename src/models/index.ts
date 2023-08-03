@@ -228,3 +228,38 @@ export interface AdminItem {
     }
   }
 }
+
+// API
+export interface LoginParams {
+  key: string;
+  password: string;
+}
+// API
+export interface LoginResponse {
+  message: string;
+  user: User;
+}
+// API
+export interface User {
+  id: number;
+  name: string;
+  fcm: string;
+  email: string;
+  phone: string;
+  role: string;
+  super_admin: boolean;
+  roles: LoginRoles;
+  token: string;
+}
+// API
+export interface LoginRoles {
+  id: number;
+  manage_orders: boolean;
+  manage_products: boolean;
+  manage_admins: boolean;
+  manage_deliveries: boolean;
+  manage_vendors: boolean;
+  createdAt: string;
+  updatedAt: string;
+  adminId: number;
+}

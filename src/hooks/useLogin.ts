@@ -3,22 +3,15 @@ import { loginService } from "@/services";
 import { toast } from "react-toastify";
 import { useAuth } from "@/store";
 import { useNavigate } from "react-router-dom";
+import { LoginParams } from "@/models";
 
 export const useLogin = () => {
-  const { setToken } = useAuth();
+  const { setLoginVlaues } = useAuth();
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: ({
-      username,
-      password,
-    }: {
-      username: string;
-      password: string;
-    }) => {
-      return loginService({ username, password });
-    },
-    onSuccess: (res: string) => {
-      setToken(res);
+    mutationFn: ({ key, password }: LoginParams) => loginService({ key, password }),
+    onSuccess: (res) => {
+      setLoginVlaues(res);
       navigate("/home");
       toast.success("تم تسجيل الدخول بنجاح");
     },

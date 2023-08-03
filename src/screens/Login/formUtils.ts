@@ -11,8 +11,8 @@ export const loginFormSchema = z.object({
       }),
     password: z
       .string()
-      .min(8, {
-        message: "كلمة المرور يجب ان تكون اكثر من 8 حروف",
+      .min(6, {
+        message: "كلمة المرور يجب ان تكون اكثر من 6 حروف",
       })
       .max(50, {
         message: "كلمة المرور يجب ان تكون اقل من 50 حرف",

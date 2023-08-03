@@ -1,18 +1,19 @@
-import { sleep } from "@/lib/sleep";
-
-const fakeToken =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTIzNDU2Nzg5MCwidXNlcm5hbWUiOiJTYWhlciBBaG1lZCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIn0.nqGxH3Lx_GenCjMpEOX-ZaO3FsXOSVBbEWubDfzQd8Y";
+import { api } from "@/api";
+import { adminLogin } from "@/api/apiURLs";
+import { LoginParams, LoginResponse } from "@/models";
+import { AxiosResponse } from "axios";
 
 export const loginService = async ({
-  username,
+  key,
   password,
-}: {
-  username: string;
-  password: string;
-}) => {
-  await sleep(1500);
-  if (username === "admin" && password === "admin1234") {
-    return fakeToken;
-  }
-  throw new Error("اسم المستخدم أو كلمة المرور غير صحيحة");
+}: LoginParams) => {
+  const response = await api.post<
+    LoginParams,
+    AxiosResponse<LoginResponse>
+  >(adminLogin, {
+    key,
+    password,
+  });
+  return response.data;
+
 };
