@@ -1,12 +1,7 @@
-import { sleep } from "@/lib/sleep";
-import { restuarantsData } from "@/mockup";
+import { api } from "@/api";
+import { deleteUser } from "@/api/apiURLs";
 
 export const deleteRestaurantsService = async (restaurantId: number) => {
-  await sleep(2000);
-  const newRestaurantData = restuarantsData.filter((restaurant) => {
-    if (restaurant.id !== restaurantId) {
-      return restaurant;
-    }
-  });
-  return newRestaurantData;
+  const response = await api.delete(deleteUser + `/${restaurantId}`);
+  return response.data;
 };
