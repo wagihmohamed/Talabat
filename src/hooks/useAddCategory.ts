@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addCategoryService } from "@/services";
-import { Category } from "@/models";
+import { AddCategoryPayload, addCategoryService } from "@/services";
 import { toast } from "react-toastify";
 
 export const useAddCategory = ({ onSuccess }: { onSuccess: () => void }) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (newCategory: Category) => {
+    mutationFn: (newCategory: AddCategoryPayload) => {
       return addCategoryService(newCategory);
     },
     onSuccess: () => {

@@ -14,6 +14,7 @@ import {
   FormMessage,
   Input,
   DialogClode,
+  ImageUploader,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ import { useState } from "react";
 
 export const AddCategory = () => {
   const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File>();
   const {
     mutate: addCategory,
     isLoading,
@@ -42,7 +44,12 @@ export const AddCategory = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof addCategoryFormSchema>) => {
-    addCategory({ name: values.name, id: Math.random(), createdAt: new Date().toISOString(), image: "https://picsum.photos/200/300", updatedAt: new Date().toISOString() });
+    const fm = new FormData()
+    fm.append("image", selectedImage as File)
+    addCategory({
+      image: fm.get('image')?.valueOf() ?? null,
+      name: values.name,
+    });
   };
   return (
     <Dialog
@@ -64,6 +71,9 @@ export const AddCategory = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
+            <div className="mx-auto flex flex-col">
+              <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            </div>
             <FormField
               control={form.control}
               name="name"

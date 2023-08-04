@@ -81,7 +81,7 @@ export interface Restuarant {
 export interface Category {
   id: number;
   name: string;
-  image: string;
+  image: File | undefined | FormData | string | object | null;
   createdAt: string;
   updatedAt: string;
 }
