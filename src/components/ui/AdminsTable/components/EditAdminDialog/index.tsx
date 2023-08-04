@@ -74,6 +74,7 @@ export const EditAdminDialog = ({
       confirm_password: "123456",
       email: '',
       fcm: null,
+      image: null,
     });
   };
 
