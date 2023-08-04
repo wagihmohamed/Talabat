@@ -1,12 +1,7 @@
-import { sleep } from "@/lib/sleep";
-import { categories } from "@/mockup";
+import { api } from "@/api";
+import { deleteCategory } from "@/api/apiURLs";
 
 export const deleteCategoryService = async (categorytId: number) => {
-  await sleep(2000);
-  const newCategoriesData = categories.filter((category) => {
-    if (category.id !== categorytId) {
-      return category;
-    }
-  });
-  return newCategoriesData;
+  const response = await api.delete(deleteCategory + categorytId);
+  return response.data;
 };
