@@ -14,7 +14,8 @@ import {
     Input,
     DialogClode,
     Button,
-    buttonVariants
+    buttonVariants,
+    ImageUploader,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,8 @@ import { useState } from "react";
 
 export const AddDelivery = () => {
     const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<File>();
+
     const {
         mutate: addDeliveryUser,
         isLoading,
@@ -47,8 +50,11 @@ export const AddDelivery = () => {
             password: "",
         },
     });
+    console.log(form.formState.errors);
 
     const onSubmit = (values: z.infer<typeof addDeliveryFormSchema>) => {
+        const fm = new FormData()
+        fm.append("image", selectedImage as File)
         addDeliveryUser({
             name: values.name,
             phone: values.phone,
@@ -56,7 +62,8 @@ export const AddDelivery = () => {
             password: values.password,
             confirm_password: values.confirm_password,
             email: values.email,
-            fcm: null
+            fcm: null,
+            image: fm.get('image')?.valueOf() ?? null,
         });
     };
 
@@ -65,6 +72,7 @@ export const AddDelivery = () => {
             onOpenChange={(open) => {
                 setOpen(open);
                 form.reset();
+                setSelectedImage(undefined);
             }}
             open={open}
         >
@@ -80,6 +88,9 @@ export const AddDelivery = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="grid gap-4 py-4"
                     >
+                        <div className="mx-auto flex flex-col">
+                            <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+                        </div>
                         <FormField
                             control={form.control}
                             name="name"
