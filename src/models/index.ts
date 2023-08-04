@@ -166,6 +166,7 @@ export interface DeliveryUser {
   createdAt: Date;
   updatedAt: Date;
   delivery: Delivery;
+  image: null | string;
 }
 // API
 export interface Delivery {

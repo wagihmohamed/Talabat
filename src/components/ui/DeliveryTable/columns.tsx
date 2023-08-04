@@ -9,6 +9,9 @@ import {
   Button,
   Checkbox,
   Badge,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
 } from "@/components";
 import { DeliveryUser } from "@/models";
 import { DeleteDeliveryDialog } from "./components";
@@ -34,6 +37,21 @@ export const deliveriesColumns: ColumnDef<DeliveryUser>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    id: "image",
+    accessorKey: "image",
+    cell: ({ row }) => {
+      const value = row.original;
+      return (
+        <Avatar className="mx-auto">
+          <AvatarImage src={value.image || ''} alt="restaurant image" />
+          <AvatarFallback>
+            {value.name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar >
+      )
+    },
   },
   {
     accessorKey: "name",
