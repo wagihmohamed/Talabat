@@ -184,6 +184,7 @@ export interface CreateDeliveryParams {
   password: string;
   confirm_password: string;
   fcm: string | null;
+  image?: File | undefined | FormData | string | object | null;
 }
 // API
 export interface CreateDeliveryResponse {

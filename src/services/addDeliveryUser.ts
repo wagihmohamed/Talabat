@@ -6,6 +6,10 @@ import { AxiosResponse } from "axios";
 export const addDeliveryUserService = async (newDelivery: CreateDeliveryParams) => {
     const response = await api.post<CreateDeliveryResponse,
         AxiosResponse<CreateDeliveryResponse>
-    >(addDeliveryUser, newDelivery);
+    >(addDeliveryUser, newDelivery, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
     return response.data;
 };

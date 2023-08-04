@@ -53,13 +53,13 @@ export const addDeliveryFormSchema = z
       .max(50, {
         message: "كلمة المرور  يجب ان يكون اقل من 50 حرف",
       }),
-    restaurant: z
-      .object({
-        value: z.string().min(1),
-        label: z.string(),
-      }).refine((data) => data.value !== "", {
-        message: "يجب اختيار مطعم",
-      }),
+    // restaurant: z
+    //   .object({
+    //     value: z.string().min(1),
+    //     label: z.string(),
+    //   }).refine((data) => data.value !== "", {
+    //     message: "يجب اختيار مطعم",
+    //   }),
   }).refine((data) => data.password === data.confirm_password, {
     message: "كلمة المرور غير متطابقة",
     path: ["confirm_password"],
