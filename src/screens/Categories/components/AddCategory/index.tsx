@@ -1,4 +1,3 @@
-import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +14,8 @@ import {
   Input,
   DialogClode,
   ImageUploader,
+  Button,
+  buttonVariants
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";

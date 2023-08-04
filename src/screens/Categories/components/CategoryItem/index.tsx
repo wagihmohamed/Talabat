@@ -1,6 +1,7 @@
 import { Category } from "@/models";
 import { DeleteCategoryDialog } from "../DeleteCategory";
 import { handleFormateDate } from "@/lib/formatDate";
+import { EditCategory } from "../EditCategory";
 
 interface CategoryItemProps {
   category: Category;
@@ -14,6 +15,7 @@ export const CategoryItem = ({ category }: CategoryItemProps) => {
         <div className="flex justify-between items-center">
           <div className="font-bold text-xl mb-2">{category.name}</div>
           <DeleteCategoryDialog category={category} />
+          <EditCategory category={category} />
         </div>
         <p className="text-gray-700 text-base mt-2">
           تم إنشاء القسم في: {handleFormateDate(category.createdAt)}

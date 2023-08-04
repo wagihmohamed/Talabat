@@ -14,3 +14,4 @@ export * from "./getDeliveries";
 export * from "./addDeliveryUser";
 export * from "./deleteDeliveryUser";
 export * from "./editDeliveryUser";
+export * from "./editCategory";

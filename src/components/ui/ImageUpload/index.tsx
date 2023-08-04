@@ -15,7 +15,11 @@ export const ImageUploader = ({ selectedImage, setSelectedImage }: Props) => {
                         <img
                             alt="not found"
                             className="w-32 h-32 rounded-3xl object-contain"
-                            src={URL.createObjectURL(selectedImage)}
+                            src={
+                                typeof selectedImage === "string"
+                                    ? selectedImage
+                                    : URL.createObjectURL(selectedImage)
+                            }
                         />
                         <br />
                         <Trash2 className="w-6 h-6 text-red-500 cursor-pointer absolute top-0 right-0" onClick={() => setSelectedImage(undefined)} />
