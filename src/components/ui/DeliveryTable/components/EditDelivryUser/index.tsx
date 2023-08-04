@@ -15,7 +15,7 @@ import {
     DialogClode,
     Button,
     buttonVariants,
-    CustomSelect,
+    // CustomSelect,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -25,20 +25,20 @@ import { useEditDeliveryUser } from "@/hooks";
 import { useState } from "react";
 import { DeliveryPerson } from "@/models";
 import { Pencil } from "lucide-react";
-import { useRestaurants } from "@/hooks";
+// import { useRestaurants } from "@/hooks";
 
 interface EditRestaurantProps {
     deliveryUser: DeliveryPerson;
 }
 
 export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
-    const { data: restaurants = {
-        results: []
-    } } = useRestaurants();
-    const restaurantsOptions = restaurants?.results.map((restaurant) => ({
-        label: restaurant.name,
-        value: restaurant.id.toString(),
-    }));
+    // const { data: restaurants = {
+    //     results: []
+    // } } = useRestaurants();
+    // const restaurantsOptions = restaurants?.results.map((restaurant) => ({
+    //     label: restaurant.name,
+    //     value: restaurant.id.toString(),
+    // }));
     const [open, setOpen] = useState(false);
     const {
         mutate: editDeliveryUser,
@@ -56,10 +56,6 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
         defaultValues: {
             name: deliveryUser.name,
             phone: deliveryUser.phone,
-            restaurant: {
-                label: deliveryUser.restaurantName,
-                value: deliveryUser?.restaurantId.toString(),
-            },
         },
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -68,8 +64,8 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
             id: deliveryUser.id,
             name: values.name,
             phone: values.phone,
-            restaurantId: parseInt(values.restaurant.value),
-            restaurantName: values.restaurant.label,
+            restaurantId: 1,
+            restaurantName: '',
             status: deliveryUser.status,
         });
     };
@@ -129,7 +125,7 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
                                 </>
                             )}
                         />
-                        <FormField
+                        {/* <FormField
                             control={form.control}
                             name="restaurant"
                             render={({ field }) => (
@@ -156,7 +152,7 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
                                     </p>
                                 </>
                             )}
-                        />
+                        /> */}
 
                         <DialogFooter className="mt-4">
                             <Button isLoading={isLoading} size="lg" type="submit">
