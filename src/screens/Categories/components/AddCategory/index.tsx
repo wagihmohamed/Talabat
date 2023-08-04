@@ -42,7 +42,7 @@ export const AddCategory = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof addCategoryFormSchema>) => {
-    addCategory({ name: values.name, id: Math.random() });
+    addCategory({ name: values.name, id: Math.random(), createdAt: new Date().toISOString(), image: "https://picsum.photos/200/300", updatedAt: new Date().toISOString() });
   };
   return (
     <Dialog
