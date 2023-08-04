@@ -35,6 +35,7 @@ export interface EditRestaurantParams {
   email: string;
   phone: string;
   address: string;
+  image: File | undefined | FormData | string | object | null;
 }
 // API
 export interface CreateRestaurantResponse {

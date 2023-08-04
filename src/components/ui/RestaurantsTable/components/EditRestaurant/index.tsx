@@ -15,6 +15,7 @@ import {
   DialogClode,
   Button,
   buttonVariants,
+  ImageUploader,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -31,6 +32,9 @@ interface EditRestaurantProps {
 
 export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedImage, setSelectedImage] = useState<any>(restaurant.image);
+
   const {
     mutate: editRestaurant,
     isLoading,
@@ -53,12 +57,16 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
     },
   });
   const onSubmit = (values: z.infer<typeof editRestaurantFormSchema>) => {
+    const fm = new FormData()
+    fm.append("image", selectedImage as File)
+
     editRestaurant({
       address: values.address,
       email: values.email,
       name: values.name,
       phone: values.phone,
       id: restaurant.id,
+      image: fm.get('image')?.valueOf() ?? null,
     });
   };
   return (
@@ -87,6 +95,9 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
+            <div className="mx-auto flex flex-col">
+              <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            </div>
             <FormField
               control={form.control}
               name="name"
