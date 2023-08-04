@@ -1,6 +1,5 @@
-import { Category } from "@/models";
 
-export const categories: Category[] = [
+export const categories = [
   {
     id: 1,
     name: "خضروات",

@@ -77,10 +77,13 @@ export interface Restuarant {
     bs: string;
   };
 }
-
+// API
 export interface Category {
   id: number;
   name: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type AdminStatus = "active" | "suspended";
