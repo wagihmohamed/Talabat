@@ -8,6 +8,10 @@ export const addAdminService = async (newAdmin: AddAdminParams) => {
   const response = await api.post<
     AddAdminParams,
     AxiosResponse<AddAdminResponse>
-  >(addAdmin, newAdmin);
+  >(addAdmin, newAdmin, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
   return response.data;
 };
