@@ -4,7 +4,9 @@ import { CategoryItem } from "./components/CategoryItem";
 import { AddCategory } from "./components/AddCategory";
 
 export const CategoriesScreen = () => {
-  const { data: categories = [], isLoading, isError } = useCategories();
+  const { data: categories = {
+    results: []
+  }, isLoading, isError } = useCategories();
   return (
     <div className="border-t">
       <div className="h-screen">
@@ -15,7 +17,7 @@ export const CategoriesScreen = () => {
             أيضًا إضافة منتجات لكل قسم.
           </p>
           <LoadingErrorPlaceholder
-            isEmpty={categories.length === 0}
+            isEmpty={categories.results.length === 0}
             emptyText={
               <h1 className="text-2xl font-bold text-center">لا يوجد أقسام</h1>
             }
@@ -23,8 +25,8 @@ export const CategoriesScreen = () => {
             isLoading={isLoading}
           >
             <AddCategory />
-            <div className="grid grid-cols-12 gap-4">
-              {categories.map((category) => (
+            <div className="grid grid-cols-12 gap-4 mt-4">
+              {categories.results.map((category) => (
                 <CategoryItem category={category} key={category.id} />
               ))}
             </div>

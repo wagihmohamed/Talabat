@@ -1,7 +1,12 @@
-import { sleep } from "@/lib/sleep";
-import { categories } from "@/mockup";
+import { api } from "@/api";
+import { getCategoreis } from "@/api/apiURLs";
+import { Category } from "@/models";
+
+interface CategoryResponse {
+  results: Category[];
+}
 
 export const getCategoriesService = async () => {
-  await sleep(2000);
-  return categories;
+  const response = await api.get<CategoryResponse>(getCategoreis);
+  return response.data;
 };
