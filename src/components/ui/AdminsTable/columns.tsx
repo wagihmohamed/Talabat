@@ -15,7 +15,7 @@ import {
 } from "@/components";
 import { AdminItem } from "@/models";
 import { displayUserRoles, extractRoles } from "./transformRolObj";
-import { DeleteAdminDialog } from "./components";
+import { DeleteAdminDialog, EditAdminDialog, EditAdminRoles } from "./components";
 
 
 
@@ -75,7 +75,7 @@ export const adminColumns: ColumnDef<AdminItem>[] = [
     cell: ({ row }) => {
       const roles = extractRoles(row.original.admin.adminRole);
 
-      return <div className="text-center">{displayUserRoles(roles)}</div>;
+      return <div className="text-center">{displayUserRoles(roles) || 'لا يوجد'}</div>;
     },
   },
   {
@@ -110,7 +110,8 @@ export const adminColumns: ColumnDef<AdminItem>[] = [
                 الاجراءات
               </DropdownMenuLabel>
               <DeleteAdminDialog admin={admin} />
-              {/* <EditAdminDialog admin={admin} /> */}
+              <EditAdminDialog admin={admin} />
+              <EditAdminRoles admin={admin} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>
