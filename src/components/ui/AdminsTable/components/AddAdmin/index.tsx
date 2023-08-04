@@ -15,7 +15,8 @@ import {
   DialogClode,
   CustomSelect,
   Button,
-  buttonVariants
+  buttonVariants,
+  ImageUploader
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -28,6 +29,8 @@ import { Roles } from "@/models";
 
 export const AddAdmin = () => {
   const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File>();
+
   const {
     mutate: addAdmin,
     isLoading,
@@ -52,6 +55,8 @@ export const AddAdmin = () => {
   });
 
   const onSubmit = (values: z.infer<typeof addAdminFormSchema>) => {
+    const fm = new FormData()
+    fm.append("image", selectedImage as File)
     const finalRoles = values.roles.map((role) => role.value);
     const adminGrantedAndDeniedRoles = ADMIN_ROLES.reduce(
       (acc, role) => {
@@ -75,6 +80,7 @@ export const AddAdmin = () => {
       email: values.email,
       confirm_password: values.confirmPassword,
       fcm: null,
+      image: fm.get('image')?.valueOf() ?? null,
     });
   };
 
@@ -83,6 +89,7 @@ export const AddAdmin = () => {
       onOpenChange={(open) => {
         setOpen(open);
         form.reset();
+        setSelectedImage(undefined);
       }}
       open={open}
     >
@@ -98,6 +105,9 @@ export const AddAdmin = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
+            <div className="mx-auto flex flex-col">
+              <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            </div>
             <FormField
               control={form.control}
               name="name"

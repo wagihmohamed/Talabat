@@ -112,6 +112,7 @@ export interface AddAdminParams {
   password: string;
   confirm_password: string;
   roles: Roles
+  image: File | undefined | FormData | string | object | null;
 }
 // API
 export interface AddAdminResponse {
@@ -209,6 +210,7 @@ export interface AdminItem {
   phone: string;
   address: string;
   role: string;
+  image: null | string;
   fcm: string;
   token: string;
   createdAt: string;
