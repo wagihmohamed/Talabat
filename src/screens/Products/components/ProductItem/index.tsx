@@ -4,6 +4,7 @@ import { Button, Badge, Avatar, AvatarFallback, AvatarImage } from '@/components
 import { useProductItemStyles } from './styles';
 import { Product } from '@/models';
 import { DeleteProductDialog } from '..';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductItemProps {
     product: Product;
@@ -11,6 +12,7 @@ interface ProductItemProps {
 
 export const ProductCard = ({ product }: ProductItemProps) => {
     const { classes } = useProductItemStyles();
+    const navigate = useNavigate();
 
     const images = product.productImages.map((image) => image.image);
 
@@ -21,7 +23,7 @@ export const ProductCard = ({ product }: ProductItemProps) => {
     ));
 
     return (
-        <Card radius="md" withBorder padding="xl">
+        <Card radius="md" className='col-span-3 md:col-span-2 lg:col-span-1 shadow-sm' withBorder padding="xl">
             <Card.Section>
                 <Carousel
                     dir='ltr'
@@ -84,7 +86,13 @@ export const ProductCard = ({ product }: ProductItemProps) => {
                     </Badge>}
             </div>
             <Group mt="md">
-                <Button variant='outline'>تعديل</Button>
+                <Button onClick={() => {
+                    navigate(`${product.id}/edit`, {
+                        state: {
+                            product
+                        }
+                    });
+                }} variant='outline'>تعديل</Button>
                 <DeleteProductDialog product={product} />
             </Group>
         </Card>

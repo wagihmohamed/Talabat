@@ -14,7 +14,7 @@ export const useDeleteProduct = ({
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["products"]);
-            toast.success("تم حذف العنصر بنجاح");
+            toast.success("تم حذف المنتج بنجاح");
             onSuccess();
         },
         onError: () => {

@@ -52,10 +52,10 @@ export const DeleteProductDialog = ({ product }: { product: Product }) => {
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        هل انت متأكد من حذف العنصر {product.title}؟
+                        هل انت متأكد من حذف المنتج {product.title}؟
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        لا يمكنك التراجع عن هذا الاجراء, سيتم حذف العنصر نهائياً
+                        لا يمكنك التراجع عن هذا الاجراء, سيتم حذف المنتج نهائياً
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
