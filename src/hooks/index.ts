@@ -18,3 +18,4 @@ export * from "./useEditCategory";
 export * from "./useUpdateAdminRoles";
 export * from "./useProducts";
 export * from "./useDeleteProduct";
+export * from "./useEditProduct";

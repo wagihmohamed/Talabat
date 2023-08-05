@@ -305,3 +305,14 @@ export interface ProductImage {
   id: number;
   image: string;
 }
+
+export interface EditProductPayload {
+  title: string;
+  description: string;
+  price: string;
+  vendorId: string;
+  categoryId: string;
+  featured: string;
+  available: string;
+  image?: File | undefined | FormData | string | object | null;
+}

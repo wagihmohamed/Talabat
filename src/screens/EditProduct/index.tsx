@@ -1,5 +1,5 @@
 import { Product } from "@/models";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
@@ -19,7 +19,7 @@ import {
     Switch
 } from '@/components'
 import { ChevronRight, X } from "lucide-react";
-import { useCategories, useRestaurants } from "@/hooks";
+import { useCategories, useEditProduct, useRestaurants } from "@/hooks";
 import { editProductFormSchema } from "./formUtils";
 
 interface LocationState {
@@ -30,15 +30,14 @@ type ProfileFormValues = z.infer<typeof editProductFormSchema>
 
 
 export const EditProductScreen = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const { productId } = useParams();
-    const { data: restaurants = {
-        count: 0,
-        results: []
-    } } = useRestaurants();
-    const { data: categories = {
-        results: []
-    } } = useCategories();
+    const { productId = '' } = useParams();
+    const { restaurantOptions } = useRestaurants();
+    const { categoryOptions } = useCategories();
+    const { mutate: editProduct, isLoading } = useEditProduct({
+        onSuccess: () => {
+            handleNavigateBack();
+        }
+    });
     const navigate = useNavigate();
     const location = useLocation();
     const { product } = location.state as LocationState;
@@ -48,25 +47,15 @@ export const EditProductScreen = () => {
         available: product.available,
         featured: product.available,
         price: product.price,
-        restaurant: product.user.name,
+        restaurant: product.user.id.toString(),
         description: product.description,
-        category: product.category.name,
+        category: product.category.id.toString(),
         images: product.productImages.map((image) => {
             return {
                 value: image.image,
             }
         }),
     }
-
-    const restaurantOptions = restaurants?.results.map((restaurant) => ({
-        label: restaurant.name,
-        value: restaurant.id.toString(),
-    }));
-
-    const categoryOptions = categories?.results.map((category) => ({
-        label: category.name,
-        value: category.id.toString(),
-    }));
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(editProductFormSchema),
@@ -78,8 +67,19 @@ export const EditProductScreen = () => {
         name: "images",
         control: form.control,
     })
-    function onSubmit(data: ProfileFormValues) {
-        console.log(data)
+    const onSubmit = (data: ProfileFormValues) => {
+        editProduct({
+            id: parseInt(productId),
+            payload: {
+                available: data.available ? "true" : "false",
+                categoryId: data.category,
+                description: data.description,
+                featured: data.featured ? "true" : "false",
+                price: data.price,
+                title: data.title,
+                vendorId: data.restaurant,
+            }
+        })
     }
 
     const handleNavigateBack = () => {
@@ -138,7 +138,7 @@ export const EditProductScreen = () => {
                                     <FormItem>
                                         <FormLabel>المطعم</FormLabel>
                                         <CustomSelect
-                                            options={restaurantOptions}
+                                            options={restaurantOptions || []}
                                             defaultValue={{
                                                 label: product.user.name,
                                                 value: product.user.id.toString(),
@@ -165,7 +165,7 @@ export const EditProductScreen = () => {
                                     <FormItem>
                                         <FormLabel>القسم</FormLabel>
                                         <CustomSelect
-                                            options={categoryOptions}
+                                            options={categoryOptions || []}
                                             defaultValue={{
                                                 label: product.category.name,
                                                 value: product.category.id.toString(),
@@ -289,13 +289,16 @@ export const EditProductScreen = () => {
                                 type="button"
                                 variant="outline"
                                 size="sm"
+                                isLoading={isLoading}
                                 className="mt-2"
                                 onClick={() => append({ value: "https://th.bing.com/th/id/OIP.R1keaRdir0ZYP5LaDS5PogAAAA?w=211&h=99&c=7&r=0&o=5&pid=1.7" })}
                             >
                                 اضافة صورة
                             </Button>
                             <div className="flex items-center gap-5">
-                                <Button type="submit" disabled={!form.formState.isValid}>تعديل المنتج</Button>
+                                <Button type="submit" disabled={
+                                    !form.formState.isValid || isLoading || !form.formState.isDirty
+                                }>تعديل المنتج</Button>
                                 <Button onClick={handleNavigateBack} type="reset" variant='outline'>الرجوع</Button>
                             </div>
                         </form>
