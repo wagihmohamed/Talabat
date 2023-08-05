@@ -312,7 +312,7 @@ export interface EditProductPayload {
   price: string;
   vendorId: string;
   categoryId: string;
-  featured: boolean;
-  available: boolean;
+  featured: string;
+  available: string;
   image?: File | undefined | FormData | string | object | null;
 }
