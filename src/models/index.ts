@@ -271,3 +271,37 @@ export interface LoginRoles {
   updatedAt: string;
   adminId: number;
 }
+
+export interface ProductsResponse {
+  count: number;
+  pages: number;
+  results: Product[];
+}
+
+export interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  available: boolean;
+  featured: boolean;
+  orders: number;
+  createdAt: Date;
+  updatedAt: Date;
+  vendorId: number;
+  categoryId: number;
+  productImages: ProductImage[];
+  user: ProductCategory;
+  category: ProductCategory;
+}
+
+export interface ProductCategory {
+  id: number;
+  name: string;
+  image: File | undefined | FormData | string | object | null;
+}
+
+export interface ProductImage {
+  id: number;
+  image: string;
+}

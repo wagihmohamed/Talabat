@@ -5,6 +5,7 @@ import {
   DeliveriesScreen,
   HomeScreen,
   LoginScreen,
+  ProductsScreen,
 } from "./screens";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/categories" element={<CategoriesScreen />} />
       <Route path="/admins" element={<AdminsScreen />} />
       <Route path="/deliveries" element={<DeliveriesScreen />} />
+      <Route path="/products" element={<ProductsScreen />} />
     </Routes>
   );
 }

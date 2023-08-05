@@ -38,6 +38,12 @@ export function Sidebar({ className, children }: SidebarProps) {
                   variant={checkPathName("/categories")}
                   onClick={() => navigation("/categories")}
                 />
+                <SideBarItem
+                  title="المنتجات"
+                  icon={<Utensils className="shrink-0" />}
+                  variant={checkPathName("/products")}
+                  onClick={() => navigation("/products")}
+                />
               </div>
             </div>
             <div className="px-3 mt-4 py-2">
