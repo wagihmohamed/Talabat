@@ -3,12 +3,13 @@ import { Carousel } from '@mantine/carousel';
 import { Button, Badge, Avatar, AvatarFallback, AvatarImage } from '@/components';
 import { useProductItemStyles } from './styles';
 import { Product } from '@/models';
+import { DeleteProductDialog } from '..';
 
 interface ProductItemProps {
     product: Product;
 }
 
-export const CarouselCard = ({ product }: ProductItemProps) => {
+export const ProductCard = ({ product }: ProductItemProps) => {
     const { classes } = useProductItemStyles();
 
     const images = product.productImages.map((image) => image.image);
@@ -83,8 +84,8 @@ export const CarouselCard = ({ product }: ProductItemProps) => {
                     </Badge>}
             </div>
             <Group mt="md">
-                <Button variant='destructive'>حذف</Button>
                 <Button variant='outline'>تعديل</Button>
+                <DeleteProductDialog product={product} />
             </Group>
         </Card>
     );

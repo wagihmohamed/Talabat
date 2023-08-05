@@ -17,3 +17,4 @@ export * from "./editDeliveryUser";
 export * from "./editCategory";
 export * from "./updateAdminRoles";
 export * from "./getAllProducts";
+export * from "./deleteProduct";
