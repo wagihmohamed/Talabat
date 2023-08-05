@@ -1,5 +1,5 @@
 import { LoadingErrorPlaceholder, Sidebar } from "@/components";
-import { CarouselCard } from "./components/ProductItem";
+import { ProductCard } from "./components/ProductItem";
 import { useProducts } from "@/hooks";
 
 export const ProductsScreen = () => {
@@ -19,7 +19,7 @@ export const ProductsScreen = () => {
                     >
                         <div className="grid grid-cols-4 gap-4">
                             {response.results.map((product) => (
-                                <CarouselCard product={product} key={product.id} />
+                                <ProductCard product={product} key={product.id} />
                             ))}
                         </div>
                     </LoadingErrorPlaceholder>
