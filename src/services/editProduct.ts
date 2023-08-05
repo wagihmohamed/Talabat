@@ -6,6 +6,10 @@ export const editProductService = async (
     id: number,
     payload: EditProductPayload
 ) => {
-    const response = await api.patch(editProduct + id, payload);
+    const response = await api.patch(editProduct + id, payload, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
     return response.data;
 };
