@@ -5,6 +5,7 @@ import { useProductItemStyles } from './styles';
 import { Product } from '@/models';
 import { DeleteProductDialog } from '..';
 import { useNavigate } from 'react-router-dom';
+import { DropdownMenuRadioGroupDemo } from '../ProductActionsDropdown';
 
 interface ProductItemProps {
     product: Product;
@@ -94,6 +95,7 @@ export const ProductCard = ({ product }: ProductItemProps) => {
                     });
                 }} variant='outline'>تعديل</Button>
                 <DeleteProductDialog product={product} />
+                <DropdownMenuRadioGroupDemo product={product} />
             </Group>
         </Card>
     );
