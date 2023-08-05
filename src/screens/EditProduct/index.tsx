@@ -1,5 +1,5 @@
 import { Product } from "@/models";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
@@ -31,7 +31,7 @@ type ProfileFormValues = z.infer<typeof editProductFormSchema>
 
 export const EditProductScreen = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { productId } = useParams();
+    // const { productId } = useParams();
     const { data: restaurants = {
         count: 0,
         results: []
