@@ -52,7 +52,7 @@ export const ProductCard = ({ product }: ProductItemProps) => {
             <div className="flex justify-between items-center">
                 <div>
                     <Text fz="sm" c="dimmed" mt="xs">
-                        القسم: {product.category.name}
+                        القسم: {product.category?.name ?? 'غير محدد'}
                     </Text>
                 </div>
                 <Text fz="sm" c="" mt="xs">
@@ -61,11 +61,11 @@ export const ProductCard = ({ product }: ProductItemProps) => {
             </div>
             <div className='flex gap-4 items-center'>
                 <Text fz="sm" c="dimmed" mt="xs">
-                    البائع: {product.user.name}
+                    البائع: {product.user?.name ?? 'غير محدد'}
                 </Text>
                 <Avatar>
-                    <AvatarImage src={product.user.image?.toString()} />
-                    <AvatarFallback>{product.user.name}</AvatarFallback>
+                    <AvatarImage src={product.user?.image?.toString()} />
+                    <AvatarFallback>{product.user?.name ?? 'MM'}</AvatarFallback>
                 </Avatar>
             </div>
 
