@@ -14,7 +14,8 @@ import {
   Input,
   DialogClode,
   Button,
-  buttonVariants
+  buttonVariants,
+  ImageUploader,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -31,6 +32,9 @@ export const EditAdminDialog = ({
   admin: AdminItem
 }) => {
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedImage, setSelectedImage] = useState<any>(admin.image);
+
   const {
     mutate: editAdmin,
     isLoading,
@@ -54,6 +58,8 @@ export const EditAdminDialog = ({
   });
 
   const onSubmit = (values: z.infer<typeof editAdminFormSchema>) => {
+    const fm = new FormData()
+    fm.append("image", selectedImage as File)
     editAdmin({
       id: admin.id,
       name: values.name,
@@ -61,6 +67,7 @@ export const EditAdminDialog = ({
       email: values.email,
       fcm: admin.fcm,
       address: values.address,
+      image: fm.get('image')?.valueOf() ?? null,
     });
   };
 
@@ -83,13 +90,16 @@ export const EditAdminDialog = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>اضافه مشرف</DialogTitle>
+          <DialogTitle>تعديل مشرف</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
+            <div className="mx-auto flex flex-col">
+              <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            </div>
             <FormField
               control={form.control}
               name="name"

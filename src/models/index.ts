@@ -324,4 +324,5 @@ export interface EditAdminPayload {
   phone: string;
   fcm: string;
   address: string;
+  image?: File | undefined | FormData | string | object | null;
 }
