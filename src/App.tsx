@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   AdminsScreen,
   CategoriesScreen,
+  CreateProductScreen,
   DeliveriesScreen,
   EditProductScreen,
   HomeScreen,
@@ -19,6 +20,7 @@ function App() {
       <Route path="/deliveries" element={<DeliveriesScreen />} />
       <Route path="/products" element={<ProductsScreen />} />
       <Route path="/products/:productId/edit" element={<EditProductScreen />} />
+      <Route path="/products/create" element={<CreateProductScreen />} />
     </Routes>
   );
 }
