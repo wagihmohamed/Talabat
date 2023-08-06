@@ -8,7 +8,6 @@ import {
   DropdownMenuTrigger,
   Button,
   Checkbox,
-  Badge,
   Avatar,
   AvatarImage,
   AvatarFallback,
@@ -70,24 +69,22 @@ export const adminColumns: ColumnDef<AdminItem>[] = [
     header: "البريد الالكتروني",
   },
   {
+    accessorKey: "address",
+    header: "العنوان",
+    cell: ({ row }) => {
+      const address = row.original.address;
+      return (
+        address || 'لا يوجد'
+      );
+    },
+  },
+  {
     accessorKey: "role",
     header: "الدور",
     cell: ({ row }) => {
       const roles = extractRoles(row.original.admin.adminRole);
 
       return <div className="text-center">{displayUserRoles(roles) || 'لا يوجد'}</div>;
-    },
-  },
-  {
-    accessorKey: "status",
-    header: "الحالة",
-    cell: ({ getValue }) => {
-      const status = getValue();
-      return (
-        <Badge variant={status === "active" ? "default" : "destructive"}>
-          {status === "active" ? "مفعل" : "غير مفعل"}
-        </Badge>
-      );
     },
   },
   {

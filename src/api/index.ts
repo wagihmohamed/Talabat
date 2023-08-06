@@ -6,7 +6,7 @@ console.log(baseURL);
 export const api = axios.create({
   baseURL,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
 });
 
