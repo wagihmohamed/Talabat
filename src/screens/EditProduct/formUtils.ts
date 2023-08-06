@@ -36,9 +36,10 @@ export const editProductFormSchema = z.object({
     available: z.boolean().optional(),
     featured: z.boolean().optional(),
     images: z.array(z.object({
-        value: z.string({
+        dataURL: z.string({
             invalid_type_error: "هذا الحقل مطلوب.",
-        })
+        }),
+        file: z.any(),
     })).min(1, {
         message: "يجب ان تضيف صورة واحدة على الاقل.",
     }),

@@ -20,3 +20,5 @@ export * from "./useProducts";
 export * from "./useDeleteProduct";
 export * from "./useEditProduct";
 export * from "./useCreateProduct";
+export * from "./useProductById";
+export * from "./useDeleteProductImage";

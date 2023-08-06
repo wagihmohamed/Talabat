@@ -59,9 +59,9 @@ export const CreateProductScreen = () => {
         const formData = new FormData();
         formData.append('title', data.title);
         formData.append('price', data.price);
-        formData.append('restaurant', data.restaurant);
+        formData.append('vendorId', data.restaurant);
         formData.append('description', data.description);
-        formData.append('category', data.category);
+        formData.append('categoryId', data.category);
         formData.append('available', data.available ? 'true' : 'false');
         formData.append('featured', data.featured ? 'true' : 'false');
         data.images.forEach((image) => {
