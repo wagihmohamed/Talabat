@@ -23,32 +23,32 @@ export const DropdownMenuRadioGroupDemo = ({
     });
 
     const handleStockChange = () => {
+        const formData = new FormData();
+        formData.append('title', product.title);
+        formData.append('price', product.price);
+        formData.append('vendorId', product.vendorId.toString());
+        formData.append('description', product.description);
+        formData.append('categoryId', product.categoryId.toString());
+        formData.append('available', product.available ? 'false' : 'true');
+        formData.append('featured', product.featured ? 'true' : 'false');
         changeProductStatus({
             id: product.id,
-            payload: {
-                available: product.available ? 'false' : 'true',
-                categoryId: product.categoryId.toString(),
-                featured: product.featured ? 'true' : 'false',
-                description: product.description,
-                price: product.price.toString(),
-                title: product.title,
-                vendorId: product.vendorId.toString(),
-            }
+            payload: formData
         })
     }
 
     const handleFeatureChange = () => {
+        const formData = new FormData();
+        formData.append('title', product.title);
+        formData.append('price', product.price);
+        formData.append('vendorId', product.vendorId.toString());
+        formData.append('description', product.description);
+        formData.append('categoryId', product.categoryId.toString());
+        formData.append('available', product.available ? 'true' : 'false');
+        formData.append('featured', product.featured ? 'false' : 'true');
         changeProductStatus({
             id: product.id,
-            payload: {
-                available: product.available ? 'true' : 'false',
-                categoryId: product.categoryId.toString(),
-                featured: product.featured ? 'false' : 'true',
-                description: product.description,
-                price: product.price.toString(),
-                title: product.title,
-                vendorId: product.vendorId.toString(),
-            }
+            payload: formData
         })
     }
 
