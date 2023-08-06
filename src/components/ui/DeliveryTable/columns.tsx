@@ -8,13 +8,12 @@ import {
   DropdownMenuTrigger,
   Button,
   Checkbox,
-  Badge,
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components";
 import { DeliveryUser } from "@/models";
-import { DeleteDeliveryDialog } from "./components";
+import { DeleteDeliveryDialog, EditDelivery } from "./components";
 
 export const deliveriesColumns: ColumnDef<DeliveryUser>[] = [
   {
@@ -62,25 +61,39 @@ export const deliveriesColumns: ColumnDef<DeliveryUser>[] = [
     header: "الهاتف",
   },
   {
-    accessorKey: "restaurantName",
-    header: "المطعم",
-    cell: ({ getValue }) => {
-      const restaurantName = getValue();
-      return restaurantName ? restaurantName : "لا يوجد";
+    accessorKey: "address",
+    header: "العنوان",
+    cell: ({ row }) => {
+      const value = row.original.address;
+      return (
+        value || "لا يوجد"
+      );
     }
   },
   {
-    accessorKey: "status",
-    header: "الحالة",
-    cell: ({ getValue }) => {
-      const status = getValue();
-      return (
-        <Badge variant={status === "active" ? "default" : "destructive"}>
-          {status === "active" ? "مفعل" : "غير مفعل"}
-        </Badge>
-      );
-    },
+    accessorKey: "email",
+    header: "البريد الالكتروني",
   },
+  // {
+  //   accessorKey: "restaurantName",
+  //   header: "المطعم",
+  //   cell: ({ getValue }) => {
+  //     const restaurantName = getValue();
+  //     return restaurantName ? restaurantName : "لا يوجد";
+  //   }
+  // },
+  // {
+  //   accessorKey: "status",
+  //   header: "الحالة",
+  //   cell: ({ getValue }) => {
+  //     const status = getValue();
+  //     return (
+  //       <Badge variant={status === "active" ? "default" : "destructive"}>
+  //         {status === "active" ? "مفعل" : "غير مفعل"}
+  //       </Badge>
+  //     );
+  //   },
+  // },
   {
     id: "actions",
     cell: ({ row }) => {
@@ -101,7 +114,7 @@ export const deliveriesColumns: ColumnDef<DeliveryUser>[] = [
                 الاجراءات
               </DropdownMenuLabel>
               <DeleteDeliveryDialog deliveryUser={deliveryUser} />
-              {/* <EditRestaurant deliveryUser={deliveryUser} /> */}
+              <EditDelivery deliveryUser={deliveryUser} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>

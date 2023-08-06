@@ -148,6 +148,15 @@ export interface DeliveryPerson {
   restaurantName: string;
 }
 
+export interface EditDeliveryPersonPayload {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  image?: File | undefined | FormData | string | object | null;
+}
+
 // API
 export interface DeliveryResponse {
   count: number;
