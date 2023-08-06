@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { EditProductPayload } from "@/models";
 import { editProductService } from "@/services";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -13,12 +12,13 @@ export const useEditProduct = ({
     return useMutation({
         mutationFn: ({ id, payload }: {
             id: number;
-            payload: EditProductPayload;
+            payload: FormData;
         }) => {
             return editProductService(id, payload)
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["products"]);
+            toast.success("تم تعديل المنتج بنجاح");
             onSuccess();
         },
         onError: (error: AxiosError<{ error: string }>) => {

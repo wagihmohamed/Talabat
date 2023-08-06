@@ -1,5 +1,12 @@
 import * as z from "zod";
-export const editProductFormSchema = z.object({
+
+const ImageTypeSchema = z.object({
+    dataURL: z.string().optional(),
+    file: z.instanceof(File).optional(),
+});
+
+
+export const addProductFormSchema = z.object({
     title: z
         .string({
             required_error: "هذا الحقل مطلوب."
@@ -35,12 +42,7 @@ export const editProductFormSchema = z.object({
         }),
     available: z.boolean().optional(),
     featured: z.boolean().optional(),
-    images: z.array(z.object({
-        dataURL: z.string({
-            invalid_type_error: "هذا الحقل مطلوب.",
-        }),
-        file: z.any(),
-    })).min(1, {
+    images: z.array(ImageTypeSchema).min(1, {
         message: "يجب ان تضيف صورة واحدة على الاقل.",
     }),
 })

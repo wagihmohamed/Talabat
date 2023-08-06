@@ -19,3 +19,6 @@ export * from "./updateAdminRoles";
 export * from "./getAllProducts";
 export * from "./deleteProduct";
 export * from "./editProduct";
+export * from "./createProduct";
+export * from "./getProductById";
+export * from "./deleteProductImage";

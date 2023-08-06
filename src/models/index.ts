@@ -335,3 +335,14 @@ export interface EditAdminPayload {
   address: string;
   image?: File | undefined | FormData | string | object | null;
 }
+
+export interface CreateProductPayload {
+  title: string;
+  description: string;
+  price: string;
+  vendorId: string;
+  categoryId: string;
+  featured: string;
+  available: string;
+  image?: File | undefined | FormData | string | object | null;
+}
