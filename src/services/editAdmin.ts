@@ -1,14 +1,8 @@
-import { sleep } from "@/lib/sleep";
-import { adminsData } from "@/mockup";
-import { AddAdminParams } from "@/models";
+import { api } from "@/api";
+import { editAdmin } from "@/api/apiURLs";
+import { EditAdminPayload } from "@/models";
 
-export const editAdminService = async (newRestauran: AddAdminParams) => {
-    await sleep(2000);
-    const newAdmintData = adminsData.map((admin) => {
-        if (admin.phone === newRestauran.phone) {
-            return newRestauran;
-        }
-        return admin;
-    });
-    return newAdmintData;
+export const editAdminService = async (newRestauran: EditAdminPayload) => {
+    const response = await api.patch<EditAdminPayload>(editAdmin, newRestauran);
+    return response.data;
 };

@@ -316,3 +316,12 @@ export interface EditProductPayload {
   available: string;
   image?: File | undefined | FormData | string | object | null;
 }
+
+export interface EditAdminPayload {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  fcm: string;
+  address: string;
+}
