@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editDeliveryUserService } from "@/services";
-import { DeliveryPerson } from "@/models";
+import { EditDeliveryPersonPayload } from "@/models";
 import { toast } from "react-toastify";
 
 export const useEditDeliveryUser = ({ onSuccess }: { onSuccess: () => void }) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newUserData: DeliveryPerson) => {
+        mutationFn: (newUserData: EditDeliveryPersonPayload) => {
             return editDeliveryUserService(newUserData);
         },
         onSuccess: () => {

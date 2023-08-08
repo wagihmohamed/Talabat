@@ -16,6 +16,8 @@ export const getAllProducts = 'api/product'
 export const deleteProduct = 'api/product/'
 export const editProduct = 'api/product/'
 export const editAdmin = 'admin/update-admin'
+export const editDeliveryUser = 'user/update'
 export const createProduct = 'api/product'
 export const getProductById = 'api/product/'
 export const deleteProductImage = 'api/productImage/'
+

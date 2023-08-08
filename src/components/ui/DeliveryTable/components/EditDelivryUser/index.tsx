@@ -15,31 +15,27 @@ import {
     DialogClode,
     Button,
     buttonVariants,
+    ImageUploader,
     // CustomSelect,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { addDeliveryFormSchema } from "../AddDelivey/formUtils";
+import { editDeliveryFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditDeliveryUser } from "@/hooks";
 import { useState } from "react";
-import { DeliveryPerson } from "@/models";
+import { DeliveryUser } from "@/models";
 import { Pencil } from "lucide-react";
 // import { useRestaurants } from "@/hooks";
 
 interface EditRestaurantProps {
-    deliveryUser: DeliveryPerson;
+    deliveryUser: DeliveryUser;
 }
 
-export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
-    // const { data: restaurants = {
-    //     results: []
-    // } } = useRestaurants();
-    // const restaurantsOptions = restaurants?.results.map((restaurant) => ({
-    //     label: restaurant.name,
-    //     value: restaurant.id.toString(),
-    // }));
+export const EditDelivery = ({ deliveryUser }: EditRestaurantProps) => {
     const [open, setOpen] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [selectedImage, setSelectedImage] = useState<any>(deliveryUser.image);
     const {
         mutate: editDeliveryUser,
         isLoading,
@@ -51,22 +47,26 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
             form.reset();
         },
     });
-    const form = useForm<z.infer<typeof addDeliveryFormSchema>>({
-        resolver: zodResolver(addDeliveryFormSchema),
+    const form = useForm<z.infer<typeof editDeliveryFormSchema>>({
+        resolver: zodResolver(editDeliveryFormSchema),
         defaultValues: {
             name: deliveryUser.name,
             phone: deliveryUser.phone,
+            address: deliveryUser.address || "",
+            email: deliveryUser.email,
         },
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const onSubmit = (values: z.infer<typeof addDeliveryFormSchema>) => {
+    const onSubmit = (values: z.infer<typeof editDeliveryFormSchema>) => {
+        const fm = new FormData()
+        fm.append("image", selectedImage as File)
         editDeliveryUser({
             id: deliveryUser.id,
             name: values.name,
             phone: values.phone,
-            restaurantId: 1,
-            restaurantName: '',
-            status: deliveryUser.status,
+            address: values.address,
+            email: values.email,
+            image: fm.get('image')?.valueOf() ?? null,
         });
     };
     return (
@@ -88,13 +88,16 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>اضافه عامل توصيل</DialogTitle>
+                    <DialogTitle>تعديل عامل توصيل</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="grid gap-4 py-4"
                     >
+                        <div className="mx-auto flex flex-col">
+                            <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+                        </div>
                         <FormField
                             control={form.control}
                             name="name"
@@ -125,35 +128,36 @@ export const EditRestaurant = ({ deliveryUser }: EditRestaurantProps) => {
                                 </>
                             )}
                         />
-                        {/* <FormField
+                        <FormField
                             control={form.control}
-                            name="restaurant"
+                            name="email"
                             render={({ field }) => (
                                 <>
                                     <FormItem className="grid grid-cols-8 items-center">
-                                        <FormLabel className="col-span-2">المطعم</FormLabel>
+                                        <FormLabel className="col-span-2">البريد الالكتروني</FormLabel>
                                         <FormControl className="col-span-6">
-                                            <CustomSelect
-                                                options={restaurantsOptions}
-                                                onChange={(e: {
-                                                    value: string | undefined,
-                                                    label: string | undefined
-                                                }) => {
-                                                    field.onChange(e);
-                                                }}
-                                                value={field.value}
-                                                placeholder="اختر مطعم"
-                                                error={!!form.formState.errors.restaurant}
-                                            />
+                                            <Input {...field} />
                                         </FormControl>
                                     </FormItem>
-                                    <p className="text-xs font-medium text-red-500">
-                                        {form.formState.errors.restaurant && "يجب اختيار مطعم"}
-                                    </p>
+                                    <FormMessage className="text-xs" />
                                 </>
                             )}
-                        /> */}
-
+                        />
+                        <FormField
+                            control={form.control}
+                            name="address"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2">العنوان</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
                         <DialogFooter className="mt-4">
                             <Button isLoading={isLoading} size="lg" type="submit">
                                 تعديل

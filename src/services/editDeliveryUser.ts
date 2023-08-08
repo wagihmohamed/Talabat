@@ -1,14 +1,8 @@
-import { sleep } from "@/lib/sleep";
-import { deliveriesPersons } from "@/mockup";
-import { DeliveryPerson } from "@/models";
+import { api } from "@/api";
+import { editDeliveryUser } from "@/api/apiURLs";
+import { EditDeliveryPersonPayload } from "@/models";
 
-export const editDeliveryUserService = async (newDeliveryData: DeliveryPerson) => {
-    await sleep(2000);
-    const newDeliveyUsersData = deliveriesPersons.map((delivery) => {
-        if (delivery.id === newDeliveryData.id) {
-            return newDeliveryData;
-        }
-        return delivery;
-    });
-    return newDeliveyUsersData;
+export const editDeliveryUserService = async (newDeliveryData: EditDeliveryPersonPayload) => {
+    const response = await api.patch<EditDeliveryPersonPayload>(editDeliveryUser, newDeliveryData);
+    return response.data;
 };
