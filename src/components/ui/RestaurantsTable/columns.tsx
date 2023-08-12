@@ -12,6 +12,7 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  Badge,
 } from "@/components";
 import { RestuarantItemResponse } from "@/models";
 import { EditRestaurant } from "./components/EditRestaurant";
@@ -68,6 +69,26 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
   {
     accessorKey: "email",
     header: "البريد الالكتروني",
+  },
+  {
+    accessorKey: "areas",
+    header: "المناطق",
+    cell: ({ row }) => {
+      const value = row.original;
+      return (
+        <div className="flex gap-1">
+          {value.areas.length ? value.areas.map((area) => (
+            <div key={area.id} className="mx-auto">
+              <Badge variant='secondary'>{area.name}</Badge>
+            </div>
+          )) : (
+            <div className="mx-auto">
+              <Badge variant='destructive'>لا يوجد</Badge>
+            </div>
+          )}
+        </div>
+      );
+    }
   },
   {
     id: "actions",

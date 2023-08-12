@@ -14,7 +14,26 @@ export interface RestuarantItemResponse {
   role: string;
   description: string;
   image: null | string;
+  cover: null | string;
+  areas: Area[];
 }
+
+export interface Area {
+  id: number;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deliveryCost: {
+    id: number;
+    cost: string;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: number;
+    areaId: number;
+  }
+}
+
+
 // API
 export interface CreateRestaurantParams {
   name: string;
@@ -26,7 +45,8 @@ export interface CreateRestaurantParams {
   description: string | null;
   password: string;
   confirm_password: string;
-  image: File | undefined | FormData | string | object | null;
+  image?: File | undefined | FormData | string | object | null;
+  cover?: File | undefined | FormData | string | object | null;
 }
 // API
 export interface EditRestaurantParams {
