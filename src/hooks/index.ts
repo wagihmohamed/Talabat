@@ -23,3 +23,4 @@ export * from "./useCreateProduct";
 export * from "./useProductById";
 export * from "./useDeleteProductImage";
 export * from "./useAddDeliveyCost";
+export * from "./useDeliveryAreas";

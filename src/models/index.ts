@@ -366,3 +366,12 @@ export interface CreateProductPayload {
   available: string;
   image?: File | undefined | FormData | string | object | null;
 }
+
+export interface DeliveryAreas {
+  results: {
+    id: number;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
+}
