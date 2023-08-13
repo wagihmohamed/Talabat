@@ -6,3 +6,4 @@ export * from "./Deliveries";
 export * from "./Products";
 export * from "./EditProduct";
 export * from "./CreateProduct";
+export * from "./DeliveryAreas";

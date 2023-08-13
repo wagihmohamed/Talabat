@@ -371,10 +371,12 @@ export interface CreateProductPayload {
 }
 
 export interface DeliveryAreas {
-  results: {
-    id: number;
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  results: DeliveryArea[];
+}
+
+export interface DeliveryArea {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
 }

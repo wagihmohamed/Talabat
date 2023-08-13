@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
-import { Beef, Utensils, User2, Bike } from "lucide-react";
+import { Beef, Utensils, User2, Bike, TreeDeciduous } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -67,22 +67,11 @@ export function Sidebar({ className, children }: SidebarProps) {
                 />
                 <SideBarItem
                   icon={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="ml-2 h-5 w-5"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
+                    <TreeDeciduous className="ml-2 h-5 w-5" strokeWidth={1.5} />
                   }
-                  title="Made for You"
-                  variant="ghost"
+                  title="مناطق التوصيل"
+                  variant={checkPathName("/delivery-areas")}
+                  onClick={() => navigation("/delivery-areas")}
                 />
                 <SideBarItem
                   icon={
