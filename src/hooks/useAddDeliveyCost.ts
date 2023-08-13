@@ -11,6 +11,7 @@ export const useAddDeliveryCost = ({ onSuccess }: { onSuccess: () => void }) => 
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["deliveryCosts"]);
+            queryClient.invalidateQueries(["restaurants"]);
             toast.success("تم تعديل مناطق التوصيل بنجاح");
             onSuccess();
         },

@@ -2,9 +2,9 @@ import { api } from "@/api";
 import { addDeliveryCostForVendor } from "@/api/apiURLs";
 
 export interface addDeliveryCostForVendorPayload {
-    vendorId: string;
+    vendorId: number;
     costs: {
-        area: string;
+        area: number;
         cost: number;
     }[];
 }

@@ -23,7 +23,7 @@ export interface Area {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  deliveryCost: {
+  delivery_cost: {
     id: number;
     cost: string;
     createdAt: Date;
