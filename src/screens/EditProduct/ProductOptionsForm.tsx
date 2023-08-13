@@ -45,12 +45,10 @@ export const ProductOptionsForm = () => {
     })
 
     const { mutateAsync: deleteProductOptionById } = useDeleteProductOptionById({
-        productId: productId,
-        onSuccess: () => { }
+        productId: productId
     })
     const { mutateAsync: deleteProductOptionGroupById } = useDeleteOptionsGroupById({
-        productId: productId,
-        onSuccess: () => { }
+        productId: productId
     })
 
     const defaultValues = useMemo(() => {
