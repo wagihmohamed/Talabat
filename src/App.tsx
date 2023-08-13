@@ -4,6 +4,7 @@ import {
   CategoriesScreen,
   CreateProductScreen,
   DeliveriesScreen,
+  DeliveryAreasScreen,
   EditProductScreen,
   HomeScreen,
   LoginScreen,
@@ -21,6 +22,7 @@ function App() {
       <Route path="/products" element={<ProductsScreen />} />
       <Route path="/products/:productId/edit" element={<EditProductScreen />} />
       <Route path="/products/create" element={<CreateProductScreen />} />
+      <Route path="/delivery-areas" element={<DeliveryAreasScreen />} />
     </Routes>
   );
 }
