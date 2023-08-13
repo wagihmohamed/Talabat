@@ -26,3 +26,4 @@ export * from "./addDeliveryCostForVendor";
 export * from "./getDeliveryAreas";
 export * from "./deleteRestauarantAreaCost";
 export * from "./editDeliveryCost";
+export * from "./deleteDeliveryArea";

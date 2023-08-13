@@ -1,5 +1,6 @@
 import { DeliveryArea } from "@/models";
 import { handleFormateDate } from "@/lib/formatDate";
+import { DeleteDeliveryAreaDialog } from "..";
 
 interface CategoryItemProps {
     area: DeliveryArea;
@@ -11,6 +12,7 @@ export const DeliveryAreaItem = ({ area }: CategoryItemProps) => {
             <div className="px-6 py-4">
                 <div className="flex justify-between items-center">
                     <div className="font-bold text-xl mb-2">{area.name}</div>
+                    <DeleteDeliveryAreaDialog area={area} />
                 </div>
                 <p className="text-gray-500 text-sm mt-2">
                     تم إنشاء المنطقة في: {handleFormateDate(area.createdAt)}
