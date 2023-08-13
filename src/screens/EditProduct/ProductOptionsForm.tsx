@@ -8,7 +8,11 @@ import {
     Button,
     LoadingErrorPlaceholder,
 } from "@/components"
-import { useProductsById, useDeleteProductOptionById } from "@/hooks"
+import {
+    useProductsById,
+    useDeleteProductOptionById,
+    useDeleteOptionsGroupById,
+} from "@/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -41,6 +45,10 @@ export const ProductOptionsForm = () => {
     })
 
     const { mutateAsync: deleteProductOptionById } = useDeleteProductOptionById({
+        productId: productId,
+        onSuccess: () => { }
+    })
+    const { mutateAsync: deleteProductOptionGroupById } = useDeleteOptionsGroupById({
         productId: productId,
         onSuccess: () => { }
     })
@@ -101,7 +109,16 @@ export const ProductOptionsForm = () => {
                                 <div key={field.id} className="border p-5 mb-5 rounded-lg shadow-md">
                                     <div className="flex justify-between items-center mb-5">
                                         <h3 className="text-xl font-bold">الخيار {field.name}</h3>
-                                        <Button onClick={() => remove(index)} variant='destructive'>حذف</Button>
+                                        <Button onClick={() => {
+                                            if (!field.id) {
+                                                remove(index)
+                                                return;
+                                            }
+                                            deleteProductOptionGroupById(field.id)
+                                                .then(() => {
+                                                    remove(index)
+                                                })
+                                        }} variant='destructive'>حذف</Button>
                                     </div>
                                     <FormItem>
                                         <FormLabel>اسم الخيار</FormLabel>

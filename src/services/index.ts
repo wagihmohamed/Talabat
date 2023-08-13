@@ -30,3 +30,4 @@ export * from "./deleteDeliveryArea";
 export * from "./addDeliveryArea";
 export * from './editDeliveryArea'
 export * from './deleteProductOptionById'
+export * from './deleteoptionsGroupById'
