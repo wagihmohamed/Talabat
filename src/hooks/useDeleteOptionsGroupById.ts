@@ -3,10 +3,8 @@ import { deleteOptionsGroupByIdService } from "@/services";
 import { toast } from "react-toastify";
 
 export const useDeleteOptionsGroupById = ({
-    onSuccess,
     productId,
 }: {
-    onSuccess: () => void;
     productId: string;
 }) => {
     const queryClient = useQueryClient();
@@ -16,7 +14,6 @@ export const useDeleteOptionsGroupById = ({
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["products", productId]);
-            onSuccess();
         },
         onError: () => {
             toast.error("حدث خطأ ما");
