@@ -4,9 +4,10 @@ import React from 'react'
 interface Props {
     selectedImage: File | undefined;
     setSelectedImage: React.Dispatch<React.SetStateAction<File | undefined>>;
+    placeholder?: string;
 }
 
-export const ImageUploader = ({ selectedImage, setSelectedImage }: Props) => {
+export const ImageUploader = ({ selectedImage, setSelectedImage, placeholder }: Props) => {
     return (
         <>
             {selectedImage ? (
@@ -27,7 +28,7 @@ export const ImageUploader = ({ selectedImage, setSelectedImage }: Props) => {
                 </div>) : (
                 <>
                     <div className="w-32 h-32 relative bg-gray-100 rounded-3xl flex justify-center items-center">
-                        اختيار صوره
+                        <span className="text-gray-500 text-xs text-center">{placeholder || "اضغط لاضافة صورة"}</span>
                         <input
                             type="file"
                             name="myImage"

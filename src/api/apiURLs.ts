@@ -20,4 +20,7 @@ export const editDeliveryUser = 'user/update'
 export const createProduct = 'api/product'
 export const getProductById = 'api/product/'
 export const deleteProductImage = 'api/productImage/'
-
+export const addDeliveryCostForVendor = 'api/costs'
+export const getDeliveryArea = 'api/area'
+export const deleteDeliveryCosy = 'api/costs/'
+export const editDeliveryCost = 'api/costs/'

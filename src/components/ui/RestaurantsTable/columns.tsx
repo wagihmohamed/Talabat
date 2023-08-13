@@ -12,9 +12,11 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  Badge,
 } from "@/components";
 import { RestuarantItemResponse } from "@/models";
 import { EditRestaurant } from "./components/EditRestaurant";
+import { AddDeliveryCost } from "./components/AddDeliveryCost";
 
 export const columns: ColumnDef<RestuarantItemResponse>[] = [
   {
@@ -70,6 +72,26 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
     header: "البريد الالكتروني",
   },
   {
+    accessorKey: "areas",
+    header: "المناطق",
+    cell: ({ row }) => {
+      const value = row.original;
+      return (
+        <div className="flex">
+          {value.areas.length ? value.areas.map((area) => (
+            <div key={area.id} className="mx-auto flex">
+              <Badge variant='secondary'>{area.name}</Badge>
+            </div>
+          )) : (
+            <div className="mx-auto flex justify-end">
+              <Badge variant='destructive'>لا يوجد</Badge>
+            </div>
+          )}
+        </div>
+      );
+    }
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const restuarant = row.original;
@@ -90,11 +112,11 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
               </DropdownMenuLabel>
               <EditRestaurant restaurant={restuarant} />
               <DeleteRestuarantDialog restuarant={restuarant} />
+              <AddDeliveryCost restaurant={restuarant} />
               <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>
           <div>
-            <span className="sr-only">الذهاب الى صفحة تفاصيل المطعم</span>
             <ChevronLeft className="h-4 w-4 cursor-pointer" />
           </div>
         </div>

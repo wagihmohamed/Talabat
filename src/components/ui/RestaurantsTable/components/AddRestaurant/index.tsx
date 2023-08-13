@@ -27,6 +27,7 @@ import { useState } from "react";
 export const AddRestaurant = () => {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File>();
+  const [selectedCover, setSelectedCover] = useState<File>();
 
   const {
     mutate: addRestaurant,
@@ -47,6 +48,7 @@ export const AddRestaurant = () => {
   const onSubmit = (values: z.infer<typeof addRestaurantFormSchema>) => {
     const fm = new FormData()
     fm.append("image", selectedImage as File)
+    fm.append("cover", selectedCover as File)
 
     addRestaurant({
       address: values.address,
@@ -59,9 +61,10 @@ export const AddRestaurant = () => {
       description: values.description,
       fcm: null,
       open: true,
+      cover: fm.get('cover')?.valueOf() ?? null,
     });
   };
-  
+
   return (
     <Dialog
       onOpenChange={(open) => {
@@ -83,8 +86,9 @@ export const AddRestaurant = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid gap-4 py-4"
           >
-            <div className="mx-auto flex flex-col">
-              <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            <div className="mx-auto flex gap-4">
+              <ImageUploader placeholder="اضغط لاضافه صوره للمطعم" selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+              <ImageUploader placeholder="اضغط لاضافه صوره خلفية للمطعم" selectedImage={selectedCover} setSelectedImage={setSelectedCover} />
             </div>
             <FormField
               control={form.control}

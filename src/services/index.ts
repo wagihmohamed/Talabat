@@ -22,3 +22,7 @@ export * from "./editProduct";
 export * from "./createProduct";
 export * from "./getProductById";
 export * from "./deleteProductImage";
+export * from "./addDeliveryCostForVendor";
+export * from "./getDeliveryAreas";
+export * from "./deleteRestauarantAreaCost";
+export * from "./editDeliveryCost";
