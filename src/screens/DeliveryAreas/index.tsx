@@ -1,6 +1,6 @@
 import { LoadingErrorPlaceholder, Sidebar } from "@/components";
 import { useDeliveryAreas } from "@/hooks";
-import { DeliveryAreaItem } from "./components";
+import { AddDeliveryArea, DeliveryAreaItem } from "./components";
 
 export const DeliveryAreasScreen = () => {
     const { data: areas = {
@@ -14,6 +14,7 @@ export const DeliveryAreasScreen = () => {
                     <p className="mb-5 text-gray-500 text-md">
                         يمكنك رؤية مناطق التوصيل المتاحة, يمكنك اضافه او حذف منطقة جديدة.
                     </p>
+                    <AddDeliveryArea />
                     <LoadingErrorPlaceholder
                         isEmpty={areas.results.length === 0}
                         emptyText={
