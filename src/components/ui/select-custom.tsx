@@ -41,7 +41,7 @@ export const CustomSelect = ({
   return (
     <>
       {withLabel && (
-        <p className="mb-2 text-sm font-bold flex self-end text-primary">
+        <p className="mb-2 text-sm font-bold flex self-end">
           {label}
         </p>
       )}

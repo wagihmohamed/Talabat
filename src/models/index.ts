@@ -47,6 +47,9 @@ export interface CreateRestaurantParams {
   confirm_password: string;
   image?: File | undefined | FormData | string | object | null;
   cover?: File | undefined | FormData | string | object | null;
+  delivery_time: string;
+  distance: string;
+  direction: string;
 }
 // API
 export interface EditRestaurantParams {

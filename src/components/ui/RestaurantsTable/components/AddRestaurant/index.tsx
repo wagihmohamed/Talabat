@@ -11,15 +11,19 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
   Input,
   DialogClode,
   Textarea,
   ImageUploader,
+  CustomSelect,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { addRestaurantFormInitialValues, addRestaurantFormSchema } from "./formUtils";
+import {
+  addRestaurantFormInitialValues,
+  addRestaurantFormSchema,
+  directionOptions,
+} from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddRestaurant } from "@/hooks";
 import { useState } from "react";
@@ -62,8 +66,13 @@ export const AddRestaurant = () => {
       fcm: null,
       open: true,
       cover: fm.get('cover')?.valueOf() ?? null,
+      delivery_time: values.deliveryTime.toString(),
+      direction: values.direction,
+      distance: values.distance.toString(),
     });
   };
+  console.log(form.formState.errors);
+  console.log(form.getValues());
 
   return (
     <Dialog
@@ -77,7 +86,7 @@ export const AddRestaurant = () => {
       <DialogTrigger asChild>
         <Button variant="outline">اضافه مطعم</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] md:max-w-[700px]">
+      <DialogContent className="sm:max-w-[425px] md:max-w-[800px]">
         <DialogHeader>
           <DialogTitle>اضافه مطعم</DialogTitle>
         </DialogHeader>
@@ -90,37 +99,38 @@ export const AddRestaurant = () => {
               <ImageUploader placeholder="اضغط لاضافه صوره للمطعم" selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
               <ImageUploader placeholder="اضغط لاضافه صوره خلفية للمطعم" selectedImage={selectedCover} setSelectedImage={setSelectedCover} />
             </div>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center">
-                    <FormLabel className="col-span-2">الاسم</FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <>
-                  <FormItem className="grid grid-cols-8 items-center">
-                    <FormLabel className="col-span-2">رقم الهاتف</FormLabel>
-                    <FormControl className="col-span-6">
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                  <FormMessage className="text-xs" />
-                </>
-              )}
-            />
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex justify items-center gap-7">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <>
+                    <FormItem className="grid grid-cols-8 items-center">
+                      <FormLabel className="col-span-2">الاسم</FormLabel>
+                      <FormControl className="col-span-6">
+                        <Input {...field} />
+                      </FormControl>
+                    </FormItem>
+                  </>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <>
+                    <FormItem className="flex-1 grid grid-cols-8 items-center">
+                      <FormLabel className="col-span-2">رقم الهاتف</FormLabel>
+                      <FormControl className="col-span-6">
+                        <Input {...field} />
+                      </FormControl>
+                    </FormItem>
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="flex justify-between items-center gap-4 mb-2">
               <div>
                 <FormField
                   control={form.control}
@@ -133,7 +143,6 @@ export const AddRestaurant = () => {
                           <Input {...field} />
                         </FormControl>
                       </FormItem>
-                      <FormMessage className="text-xs" />
                     </>
                   )}
                 />
@@ -152,11 +161,79 @@ export const AddRestaurant = () => {
                           <Input {...field} />
                         </FormControl>
                       </FormItem>
-                      <FormMessage className="text-xs" />
                     </>
                   )}
                 />
               </div>
+            </div>
+            <div className="flex justify items-center gap-4">
+              <FormField
+                control={form.control}
+                name="distance"
+                render={({ field }) => (
+                  <>
+                    <FormItem className="grid grid-cols-8 items-center">
+                      <FormLabel className="col-span-2">
+                        المسافة
+                      </FormLabel>
+                      <FormControl className="col-span-6">
+                        <Input
+                          {...field}
+                          type="number"
+                          value={field.value === 0 ? undefined : field.value}
+                          onChange={(e) => {
+                            field.onChange(parseInt(e.target.value));
+                          }}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  </>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="direction"
+                render={({ field }) => (
+                  <>
+                    <FormItem className="w-1/4 -mt-4">
+                      <CustomSelect
+                        withLabel
+                        label="الاتجاه"
+                        options={directionOptions}
+                        onChange={(e: {
+                          value: string,
+                          label: string
+                        }) => {
+                          field.onChange(e.value)
+                        }}
+                      />
+                    </FormItem>
+                  </>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="deliveryTime"
+                render={({ field }) => (
+                  <>
+                    <FormItem className="flex-1 grid grid-cols-8 items-center">
+                      <FormLabel className="col-span-2">
+                        وقت التوصيل
+                      </FormLabel>
+                      <FormControl className="col-span-6">
+                        <Input
+                          {...field}
+                          type="number"
+                          value={field.value === 0 ? undefined : field.value}
+                          onChange={(e) => {
+                            field.onChange(parseInt(e.target.value));
+                          }}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  </>
+                )}
+              />
             </div>
             <FormField
               control={form.control}
@@ -171,7 +248,6 @@ export const AddRestaurant = () => {
                       <Input type="password" {...field} />
                     </FormControl>
                   </FormItem>
-                  <FormMessage className="text-xs" />
                 </>
               )}
             />
@@ -188,7 +264,6 @@ export const AddRestaurant = () => {
                       <Input type="password" {...field} />
                     </FormControl>
                   </FormItem>
-                  <FormMessage className="text-xs" />
                 </>
               )}
             />
@@ -205,7 +280,6 @@ export const AddRestaurant = () => {
                       <Textarea  {...field} />
                     </FormControl>
                   </FormItem>
-                  <FormMessage className="text-xs" />
                 </>
               )}
             />
