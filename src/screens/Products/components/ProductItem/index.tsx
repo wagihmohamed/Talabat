@@ -66,7 +66,8 @@ export const ProductCard = ({ product }: ProductItemProps) => {
                 </Text>
                 <Avatar>
                     <AvatarImage src={product.user?.image?.toString()} />
-                    <AvatarFallback>{product.user?.name ?? 'MM'}</AvatarFallback>
+                    <AvatarFallback>{
+                        product.user?.name[0] + product.user?.name[1] || 'MM'}</AvatarFallback>
                 </Avatar>
             </div>
 
