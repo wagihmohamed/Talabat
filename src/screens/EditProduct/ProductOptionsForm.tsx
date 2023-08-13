@@ -8,7 +8,7 @@ import {
     Button,
     LoadingErrorPlaceholder,
 } from "@/components"
-import { useProductsById } from "@/hooks"
+import { useProductsById, useDeleteProductOptionById } from "@/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useMemo } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -38,6 +38,11 @@ export const ProductOptionsForm = () => {
     const { productId = '' } = useParams();
     const { data: productData, isLoading: isFetchLoading, isError } = useProductsById({
         productId: parseInt(productId),
+    })
+
+    const { mutateAsync: deleteProductOptionById } = useDeleteProductOptionById({
+        productId: productId,
+        onSuccess: () => { }
     })
 
     const defaultValues = useMemo(() => {
@@ -78,6 +83,7 @@ export const ProductOptionsForm = () => {
     const onSubmit = (data: ProductOptionsFormValues) => { }
 
     const watchedFields = form.watch("options_groups")
+    console.log(watchedFields);
 
 
     return (
@@ -115,10 +121,20 @@ export const ProductOptionsForm = () => {
                                                     />
                                                     <Button
                                                         onClick={() => {
-                                                            const options = form.getValues().options_groups[index].options
-                                                            const newOptions = options.filter((_, i) => i !== optionIndex)
-                                                            console.log(newOptions);
-                                                            form.setValue(`options_groups.${index}.options`, newOptions)
+                                                            if (!option.value) {
+                                                                const options = form.getValues().options_groups[index].options
+                                                                const newOptions = options.filter((_, i) => i !== optionIndex)
+                                                                console.log(newOptions);
+                                                                form.setValue(`options_groups.${index}.options`, newOptions)
+                                                                return;
+                                                            }
+                                                            deleteProductOptionById(option.id)
+                                                                .then(() => {
+                                                                    const options = form.getValues().options_groups[index].options
+                                                                    const newOptions = options.filter((_, i) => i !== optionIndex)
+                                                                    console.log(newOptions);
+                                                                    form.setValue(`options_groups.${index}.options`, newOptions)
+                                                                })
                                                         }}
                                                         variant='destructive'
                                                         className="w-1/6"
