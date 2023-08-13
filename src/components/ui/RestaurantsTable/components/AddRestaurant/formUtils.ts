@@ -8,7 +8,17 @@ export const addRestaurantFormInitialValues = {
   password: "",
   confirm_password: "",
   description: "",
+  distance: 0,
+  direction: "",
+  deliveryTime: 0,
 }
+
+export const directionOptions = [
+  { value: "north", label: "شمال" },
+  { value: "south", label: "جنوب" },
+  { value: "east", label: "شرق" },
+  { value: "west", label: "غرب" },
+];
 
 export const addRestaurantFormSchema = z.object({
   name: z
@@ -18,6 +28,22 @@ export const addRestaurantFormSchema = z.object({
     })
     .max(50, {
       message: "الاسم  يجب ان يكون اقل من 50 حرف",
+    }),
+  direction: z
+    .string(),
+  distance: z
+    .number({
+      invalid_type_error: "المسافة يجب ان يكون رقم",
+    })
+    .min(1, {
+      message: "المسافة  يجب ان يكون اكثر من 1 متر",
+    }),
+  deliveryTime: z
+    .number({
+      invalid_type_error: "وقت التوصيل يجب ان يكون رقم",
+    })
+    .min(1, {
+      message: "وقت التوصيل  يجب ان يكون اكثر من دقيقة واحدة",
     }),
   phone: z
     .string()
