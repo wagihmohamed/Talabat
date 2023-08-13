@@ -15,6 +15,7 @@ export interface RestuarantItemResponse {
   description: string;
   image: null | string;
   cover: null | string;
+  status: 'open' | 'close' | 'busy' | 'soon';
   areas: Area[];
 }
 
