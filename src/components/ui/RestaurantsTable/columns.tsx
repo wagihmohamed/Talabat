@@ -92,6 +92,34 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
     }
   },
   {
+    accessorKey: "status",
+    header: "الحالة",
+    cell: ({ row }) => {
+      const value = row.original;
+      return (
+        <div className="flex">
+          {value.status === 'open' ? (
+            <div className="mx-auto flex">
+              <Badge>مفتوح</Badge>
+            </div>
+          ) : value.status === 'close' ? (
+            <div className="mx-auto flex justify-end">
+              <Badge variant='destructive'>مغلق</Badge>
+            </div>
+          ) : value.status === 'busy' ? (
+            <div className="mx-auto flex justify-end">
+              <Badge variant='warning'>مشغول</Badge>
+            </div>
+          ) : value.status === 'soon' ? (
+            <div className="mx-auto flex justify-end">
+              <Badge variant='secondary'>قريبا</Badge>
+            </div>
+          ) : null}
+        </div>
+      );
+    }
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const restuarant = row.original;
