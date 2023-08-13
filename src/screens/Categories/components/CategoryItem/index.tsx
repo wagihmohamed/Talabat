@@ -17,9 +17,9 @@ export const CategoryItem = ({ category }: CategoryItemProps) => {
           <DeleteCategoryDialog category={category} />
           <EditCategory category={category} />
         </div>
-        <p className="text-gray-700 text-base mt-2">
+        {category.createdAt && <p className="text-gray-700 text-base mt-2">
           تم إنشاء القسم في: {handleFormateDate(category.createdAt)}
-        </p>
+        </p>}
       </div>
     </div>
   );
