@@ -30,4 +30,5 @@ export * from "./useDeleteDeliveryArea";
 export * from "./useAddDeliveryArea";
 export * from "./useEditDeliveryArea";
 export * from "./useDeleteProductOptionById";
-export * from "./useDeleteoptionsGroupById";
+export * from "./useDeleteOptionsGroupById";
+export * from "./useAddGroupOptions";
