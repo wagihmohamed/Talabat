@@ -13,6 +13,8 @@ import {
     useDeleteProductOptionById,
     useDeleteOptionsGroupById,
     useAddGroupOptions,
+    useEditProductOption,
+    useEditProductGroup,
 } from "@/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useMemo } from "react"
@@ -37,6 +39,7 @@ const productsOptionsSchema = z.object({
                     value: z.string().min(1, {
                         message: 'يجب ان يكون القيمة اكبر من حرف واحد',
                     }),
+                    old: z.boolean()
                 })
             ).min(1, {
                 message: 'يجب اضافة قيمة واحدة على الاقل لهذا الخيار'
@@ -54,9 +57,18 @@ export const ProductOptionsForm = () => {
         productId: parseInt(productId),
     })
     const { mutate: addGroupsOptions, isLoading: isSavingChanges } = useAddGroupOptions()
+    const { mutate: editProductGroup, isLoading: isEditingProductGroup } = useEditProductGroup({
+        onSuccess: () => { }
+    })
 
     const { mutateAsync: deleteProductOptionById } = useDeleteProductOptionById()
     const { mutateAsync: deleteProductOptionGroupById } = useDeleteOptionsGroupById()
+    const {
+        mutate: editProductOption,
+        isLoading: isEditingProductOptionLoading
+    } = useEditProductOption({
+        onSuccess: () => { }
+    })
 
     const defaultValues = useMemo(() => {
         if (productData) {
@@ -69,6 +81,7 @@ export const ProductOptionsForm = () => {
                             return {
                                 ...option,
                                 value: option.value.toString(),
+                                old: true,
                             }
                         })
                     }
@@ -114,9 +127,9 @@ export const ProductOptionsForm = () => {
         })
 
     }
-
     const watchedFields = form.watch("options_groups")
-    console.log(watchedFields);
+
+    const productDataLength = productData?.product.options_groups.length || 0
 
     return (
         <LoadingErrorPlaceholder isError={isError} isLoading={isFetchLoading}>
@@ -133,20 +146,42 @@ export const ProductOptionsForm = () => {
                 <div className="mb-10">
                     <Form {...form}>
                         {watchedFields.map((field, index) => {
+                            console.log(field);
+
                             return (
                                 <div key={field.id} className="border p-5 mb-5 rounded-lg shadow-md">
                                     <div className="flex justify-between items-center mb-5">
                                         <h3 className="text-xl font-bold">خيار {field.name}</h3>
-                                        <Button onClick={() => {
-                                            if (!field.id) {
-                                                remove(index)
-                                                return;
-                                            }
-                                            deleteProductOptionGroupById(field.id)
-                                                .then(() => {
+                                        <div className="flex items-center gap-4">
+                                            <Button
+                                                isLoading={isEditingProductGroup}
+                                                onClick={() => {
+                                                    editProductGroup({
+                                                        id: field.id || 0,
+                                                        payload: {
+                                                            name: field.name,
+                                                        }
+                                                    })
+                                                }}
+                                                variant='outline'
+                                            >
+                                                تعديل
+                                            </Button>
+                                            <Button onClick={() => {
+                                                if (!field.id) {
                                                     remove(index)
-                                                })
-                                        }} variant='destructive'>حذف</Button>
+                                                    return;
+                                                }
+                                                deleteProductOptionGroupById(field.id)
+                                                    .then(() => {
+                                                        remove(index)
+                                                    })
+                                            }}
+                                                variant='destructive'
+                                            >
+                                                حذف
+                                            </Button>
+                                        </div>
                                     </div>
                                     <FormItem>
                                         <FormLabel>اسم الخيار</FormLabel>
@@ -166,7 +201,7 @@ export const ProductOptionsForm = () => {
                                                     />
                                                     <Button
                                                         onClick={() => {
-                                                            if (!option.value) {
+                                                            if (!option.old) {
                                                                 const options = form.getValues().options_groups[index].options
                                                                 const newOptions = options.filter((_, i) => i !== optionIndex)
                                                                 console.log(newOptions);
@@ -186,6 +221,51 @@ export const ProductOptionsForm = () => {
                                                     >
                                                         حذف الخيار
                                                     </Button>
+                                                    {option.old ? (
+                                                        <Button
+                                                            isLoading={isEditingProductOptionLoading}
+                                                            disabled={!option.old}
+                                                            onClick={() => {
+                                                                if (!option.value) {
+                                                                    return;
+                                                                }
+                                                                editProductOption({
+                                                                    id: option.id,
+                                                                    payload: {
+                                                                        name: option.name,
+                                                                        value: parseInt(option.value),
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className="w-1/6"
+                                                        >
+                                                            تعديل الخيار
+                                                        </Button>
+                                                    ) : (
+                                                        <Button
+                                                            isLoading={isEditingProductOptionLoading}
+                                                            disabled={option.value === '' || option.name === ''}
+                                                            onClick={() => {
+                                                                const newItems = form.getValues().options_groups[index].options.map((item) => {
+                                                                    if (item.old === false) {
+                                                                        return {
+                                                                            name: item.name,
+                                                                            value: parseInt(item.value),
+                                                                        }
+                                                                    }
+                                                                })
+                                                                editProductGroup({
+                                                                    id: field.id || 0,
+                                                                    payload: {
+                                                                        options: newItems.filter((item) => item !== undefined).map((item) => item!),
+                                                                    }
+                                                                })
+                                                            }}
+                                                            className="w-1/6"
+                                                        >
+                                                            اضافة الخيار
+                                                        </Button>
+                                                    )}
                                                 </div>
                                             )
                                         })}
@@ -197,6 +277,7 @@ export const ProductOptionsForm = () => {
                                                     id: Date.now(),
                                                     name: '',
                                                     value: '',
+                                                    old: false,
                                                 }])
                                             }}
                                             className="mt-5"
@@ -217,15 +298,21 @@ export const ProductOptionsForm = () => {
                             <Button
                                 isLoading={isSavingChanges}
                                 onClick={form.handleSubmit(onSubmit)}
-                                disabled={!form.formState.isValid || !form.formState.isDirty}
+                                disabled={
+                                    !form.formState.isValid ||
+                                    isSavingChanges ||
+                                    isEditingProductGroup ||
+                                    isEditingProductOptionLoading
+                                    || form.getValues().options_groups.length <= productDataLength
+                                }
                                 className="mt-5">
                                 حفظ التغييرات
                             </Button>
                         </div>
                     </Form>
-                </div>
+                </div >
             )
             }
-        </LoadingErrorPlaceholder>
+        </LoadingErrorPlaceholder >
     );
 }
