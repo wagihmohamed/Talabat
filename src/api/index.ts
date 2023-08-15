@@ -1,5 +1,7 @@
 import axios from "axios";
-const baseURL = import.meta.env.VITE_BASE_URL || 'http://13.51.235.128:3000/'
+const baseURL = import.meta.env.VITE_BASE_URL
+
+console.log(baseURL);
 
 export const api = axios.create({
   baseURL,
@@ -10,6 +12,11 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
+    // const token = localStorage.getItem('token');
+
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
     return config;
   },
   async (error) => {
