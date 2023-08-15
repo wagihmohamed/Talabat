@@ -29,3 +29,8 @@ export * from "./editDeliveryCost";
 export * from "./deleteDeliveryArea";
 export * from "./addDeliveryArea";
 export * from './editDeliveryArea'
+export * from './deleteProductOptionById'
+export * from './deleteOptionsGroupById'
+export * from './addProductGroupOption'
+export * from './editProductOption'
+export * from './editProductGroup'

@@ -326,6 +326,15 @@ export interface Product {
   productImages: ProductImage[];
   user: ProductCategory;
   category: ProductCategory;
+  options_groups: {
+    id: number;
+    name: string;
+    options: {
+      id: number;
+      name: string;
+      value: string;
+    }[]
+  }[]
 }
 
 export interface ProductCategory {

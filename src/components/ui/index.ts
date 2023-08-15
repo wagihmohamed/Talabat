@@ -18,6 +18,7 @@ export * from "./textarea";
 export * from "./ImageUpload";
 export * from "./select";
 export * from "./switch";
+export * from "./tabs";
 import { AdminsTable } from "./AdminsTable";
 import { RestaurantsTable } from "./RestaurantsTable";
 import { DeliveryTable } from "./DeliveryTable";
