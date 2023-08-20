@@ -23,6 +23,7 @@ import {
   addRestaurantFormInitialValues,
   addRestaurantFormSchema,
   directionOptions,
+  ordersMethods,
 } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddRestaurant } from "@/hooks";
@@ -56,7 +57,7 @@ export const AddRestaurant = () => {
 
     addRestaurant({
       address: values.address,
-      email: values.email,
+      email: values.email.value,
       name: values.name,
       phone: values.phone,
       image: fm.get('image')?.valueOf() ?? null,
@@ -155,10 +156,17 @@ export const AddRestaurant = () => {
                     <>
                       <FormItem className="grid grid-cols-8 items-center gap-1">
                         <FormLabel className="col-span-2">
-                          البريد الالكتروني
+                          طريقة الطلب
                         </FormLabel>
                         <FormControl className="col-span-6">
-                          <Input {...field} />
+                          <CustomSelect
+                            options={ordersMethods}
+                            value={field.value}
+                            onChange={(e: {
+                              value: string,
+                              label: string
+                            }) => { field.onChange(e) }}
+                          />
                         </FormControl>
                       </FormItem>
                     </>

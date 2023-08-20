@@ -2,7 +2,10 @@ import * as z from "zod";
 
 export const addRestaurantFormInitialValues = {
   address: "",
-  email: "",
+  email: {
+    value: "",
+    label: "",
+  },
   name: "",
   phone: "",
   password: "",
@@ -62,15 +65,13 @@ export const addRestaurantFormSchema = z.object({
       message: "العنوان  يجب ان يكون اقل من 50 حرف",
     }),
   email: z
-    .string()
-    .email({
-      message: "البريد الالكتروني غير صحيح",
-    })
-    .min(5, {
-      message: "البريد الالكتروني  يجب ان يكون اكثر من 5 حروف",
-    })
-    .max(50, {
-      message: "البريد الالكتروني  يجب ان يكون اقل من 50 حرف",
+    .object({
+      value: z.string({
+        required_error: "طريقة التةصيل مطلوبة",
+      }),
+      label: z.string({
+        required_error: "طريقة التةصيل مطلوبة",
+      }),
     }),
   description: z
     .string(),
@@ -94,3 +95,8 @@ export const addRestaurantFormSchema = z.object({
   message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
   path: ["confirmPassword"],
 });
+
+export const ordersMethods = [
+  { value: "Phone", label: "الهاتف" },
+  { value: "Cart", label: "السلة" },
+];
