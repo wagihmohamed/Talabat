@@ -52,14 +52,14 @@ export function Sidebar({ className, children }: SidebarProps) {
               </h2>
               <div className="space-y-1">
                 <SideBarItem
-                  icon={<User2 className="ml-2 h-5 w-5" strokeWidth={1.5} />}
+                  icon={<User2 className="ml-2 h-5 w-5 shrink-0" strokeWidth={1.5} />}
                   title="المشرفين"
                   variant={checkPathName("/admins")}
                   onClick={() => navigation("/admins")}
                 />
                 <SideBarItem
                   icon={
-                    <Bike className="ml-2 h-5 w-5" strokeWidth={1.5} />
+                    <Bike className="ml-2 h-5 w-5 shrink-0" strokeWidth={1.5} />
                   }
                   title="موظفي التوصيل"
                   variant={checkPathName("/deliveries")}
@@ -67,51 +67,11 @@ export function Sidebar({ className, children }: SidebarProps) {
                 />
                 <SideBarItem
                   icon={
-                    <TreeDeciduous className="ml-2 h-5 w-5" strokeWidth={1.5} />
+                    <TreeDeciduous className="ml-2 h-5 w-5 shrink-0" strokeWidth={1.5} />
                   }
                   title="مناطق التوصيل"
                   variant={checkPathName("/delivery-areas")}
                   onClick={() => navigation("/delivery-areas")}
-                />
-                <SideBarItem
-                  icon={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="ml-2 h-5 w-5"
-                    >
-                      <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12" />
-                      <circle cx="17" cy="7" r="5" />
-                    </svg>
-                  }
-                  title="Artists"
-                  variant="ghost"
-                />
-                <SideBarItem
-                  icon={
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="ml-2 h-5 w-5"
-                    >
-                      <path d="m16 6 4 14" />
-                      <path d="M12 6v14" />
-                      <path d="M8 8v12" />
-                      <path d="M4 4v16" />
-                    </svg>
-                  }
-                  title="Albums"
-                  variant="ghost"
                 />
               </div>
             </div>
@@ -130,7 +90,7 @@ export function Sidebar({ className, children }: SidebarProps) {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="ml-2 h-5 w-5"
+                  className="ml-2 h-5 w-5 shrink-0"
                 >
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                   <polyline points="16 17 21 12 16 7" />
