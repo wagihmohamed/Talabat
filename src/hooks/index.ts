@@ -36,3 +36,4 @@ export * from "./useEditProductOption";
 export * from "./useEditProductGroup";
 export * from "./useSlider";
 export * from "./useDeleteSlider";
+export * from "./useAddSlider";
