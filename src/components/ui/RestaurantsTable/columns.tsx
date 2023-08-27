@@ -68,10 +68,6 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
     header: "الهاتف",
   },
   {
-    accessorKey: "email",
-    header: "البريد الالكتروني",
-  },
-  {
     accessorKey: "areas",
     header: "المناطق",
     cell: ({ row }) => {

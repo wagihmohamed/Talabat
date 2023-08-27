@@ -1,3 +1,4 @@
+import { useTheme } from "@/providers/theme-provider";
 import Select from "react-select";
 
 interface CustomSelectProps {
@@ -38,6 +39,8 @@ export const CustomSelect = ({
   className,
   defaultValue,
 }: CustomSelectProps) => {
+  const { theme } = useTheme();
+  const dark = theme === "dark";
   return (
     <>
       {withLabel && (
@@ -63,6 +66,7 @@ export const CustomSelect = ({
             minHeight: "45px",
             width,
             maxWidth,
+            backgroundColor: "bg-background",
             border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
             "&:hover": {
               border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
@@ -82,6 +86,21 @@ export const CustomSelect = ({
           menuList: (provided) => ({
             ...provided,
             maxHeight: "200px",
+          }),
+          menu: (provided) => ({
+            ...provided,
+            zIndex: 9999,
+            color: "#fff",
+            backgroundColor: dark ? "hsl(var(--background))" : "#fff",
+          }),
+          option: (provided) => ({
+            ...provided,
+            backgroundColor: dark ? "hsl(var(--background))" : "#fff",
+            color: dark ? "#fff" : "#000",
+            "&:hover": {
+              backgroundColor: "hsl(var(--muted))",
+              color: dark ? "#fff" : "#000",
+            },
           }),
         }}
         options={options}
