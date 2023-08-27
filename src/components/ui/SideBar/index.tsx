@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
-import { Beef, Utensils, User2, Bike, TreeDeciduous } from "lucide-react";
+import { Beef, Utensils, User2, Bike, TreeDeciduous, Image } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ModeToggle } from "./components/mode-toggle";
 
@@ -73,6 +73,14 @@ export function Sidebar({ className, children }: SidebarProps) {
                   title="مناطق التوصيل"
                   variant={checkPathName("/delivery-areas")}
                   onClick={() => navigation("/delivery-areas")}
+                />
+                <SideBarItem
+                  icon={
+                    <Image className="ml-2 h-5 w-5 shrink-0" strokeWidth={1.5} />
+                  }
+                  title="سلايدر الصور"
+                  variant={checkPathName("/slider")}
+                  onClick={() => navigation("/slider")}
                 />
               </div>
             </div>

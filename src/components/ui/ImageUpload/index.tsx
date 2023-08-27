@@ -27,7 +27,7 @@ export const ImageUploader = ({ selectedImage, setSelectedImage, placeholder }: 
                     </div>
                 </div>) : (
                 <>
-                    <div className="w-32 h-32 relative bg-gray-100 rounded-3xl flex justify-center items-center">
+                    <div className="w-32 h-32 relative rounded-3xl flex justify-center items-center border-4">
                         <span className="text-gray-500 text-xs text-center">{placeholder || "اضغط لاضافة صورة"}</span>
                         <input
                             type="file"

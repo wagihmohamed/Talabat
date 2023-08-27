@@ -8,7 +8,7 @@ interface CategoryItemProps {
 
 export const DeliveryAreaItem = ({ area }: CategoryItemProps) => {
     return (
-        <div className="max-w-sm col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 rounded-lg overflow-hidden shadow-lg">
+        <div className="max-w-sm border-2 col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 rounded-lg overflow-hidden shadow-lg">
             <div className="px-6 py-4">
                 <div className="flex justify-between items-center">
                     <div className="font-bold text-xl mb-2">{area.name}</div>

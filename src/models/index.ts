@@ -391,3 +391,17 @@ export interface DeliveryArea {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface SliderResponse {
+  results: SliderItem[];
+}
+
+export interface SliderItem {
+  id: number;
+  title: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  productId: null;
+  vendorId: null;
+}

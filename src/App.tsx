@@ -9,6 +9,7 @@ import {
   HomeScreen,
   LoginScreen,
   ProductsScreen,
+  SliderScreen,
 } from "./screens";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/products/:productId/edit" element={<EditProductScreen />} />
       <Route path="/products/create" element={<CreateProductScreen />} />
       <Route path="/delivery-areas" element={<DeliveryAreasScreen />} />
+      <Route path="/slider" element={<SliderScreen />} />
     </Routes>
   );
 }
