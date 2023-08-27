@@ -50,6 +50,7 @@ export const ProductDetailsForm = () => {
                 restaurant: productData?.product.user.id.toString(),
                 description: productData?.product.description,
                 category: productData?.product.category.id.toString(),
+                showPrice: productData?.product.show_price,
                 images: productData?.product.productImages.map((image) => {
                     return {
                         dataURL: image.image,
@@ -86,6 +87,7 @@ export const ProductDetailsForm = () => {
         formData.append('categoryId', data.category);
         formData.append('available', data.available ? 'true' : 'false');
         formData.append('featured', data.featured ? 'true' : 'false');
+        formData.append('show_price', data.showPrice ? 'true' : 'false');
         fields.forEach((image) => {
             formData.append('image', image.file);
         })
@@ -208,6 +210,28 @@ export const ProductDetailsForm = () => {
                                     يمكنك كتابة وصف للمنتج هنا, سيظهر للجميع
                                 </FormDescription>
                                 <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="showPrice"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                <div className="space-y-0.5">
+                                    <FormLabel className="text-base">
+                                        هل يظهر سعر المنتج؟
+                                    </FormLabel>
+                                    <FormDescription>
+                                        يمكنك التحكم في ظهور سعر المنتج من هنا
+                                    </FormDescription>
+                                </div>
+                                <FormControl>
+                                    <Switch
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
                             </FormItem>
                         )}
                     />

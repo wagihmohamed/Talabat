@@ -45,4 +45,5 @@ export const addProductFormSchema = z.object({
     images: z.array(ImageTypeSchema).min(1, {
         message: "يجب ان تضيف صورة واحدة على الاقل.",
     }),
+    showPrice: z.boolean().optional(),
 })

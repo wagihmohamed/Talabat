@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ProductFilters } from "./components";
 import { filterInitialState } from "@/lib/constants";
+import { Pagination } from '@mantine/core';
 
 export const ProductsScreen = () => {
     const [filters, setFilters] = useState<ProductsFilterTypes>(filterInitialState);
@@ -16,7 +17,8 @@ export const ProductsScreen = () => {
         results: []
     }, isLoading,
         isError,
-        isFetching } = useProducts(filters);
+        isFetching
+    } = useProducts(filters);
     return (
         <div className="border-t">
             <div className="h-screen">
@@ -32,12 +34,23 @@ export const ProductsScreen = () => {
                     />
                     <LoadingErrorPlaceholder
                         isError={isError}
-                        isLoading={isLoading}
+                        isLoading={isLoading || isFetching}
                     >
-                        <div className={`grid grid-cols-4 gap-4 ${isFetching && 'opacity-25'}`}>
+                        <div className="grid grid-cols-4 gap-4">
                             {response.results.map((product) => (
                                 <ProductCard product={product} key={product.id} />
                             ))}
+                        </div>
+                        <div className="mt-8 flex">
+                            <Pagination
+                                total={response.pages}
+                                dir="rtl"
+                                className="mx-auto"
+                                value={filters.page}
+                                onChange={(page) => setFilters({ ...filters, page })}
+                                withControls={false}
+                                color="hsl(var(--primary))"
+                            />
                         </div>
                     </LoadingErrorPlaceholder>
                 </Sidebar>
