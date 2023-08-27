@@ -37,11 +37,8 @@ export const editRestaurantFormSchema = z.object({
     }),
   email: z
     .string()
-    .email({
-      message: "البريد الالكتروني غير صحيح",
-    })
-    .min(5, {
-      message: "البريد الالكتروني  يجب ان يكون اكثر من 5 حروف",
+    .min(3, {
+      message: "البريد الالكتروني  يجب ان يكون اكثر من 3 حروف",
     })
     .max(50, {
       message: "البريد الالكتروني  يجب ان يكون اقل من 50 حرف",
@@ -56,3 +53,8 @@ export const editRestaurantFormSchema = z.object({
   //   message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
   //   path: ["confirmPassword"],
 });
+
+export const ordersMethods = [
+  { value: "Phone", label: "الهاتف" },
+  { value: "Cart", label: "السلة" },
+];
