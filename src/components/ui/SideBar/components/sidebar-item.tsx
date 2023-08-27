@@ -15,7 +15,7 @@ export const SideBarItem = ({
   return (
     <Button {...rest} variant={variant} className="w-full flex justify-start gap-2">
       {icon}
-      <p className="hidden md:block text-xs md:text-sm font-semibold text-slate-900">
+      <p className="hidden md:block text-xs md:text-sm font-semibold">
         {title}
       </p>
     </Button>
