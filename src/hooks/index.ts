@@ -34,3 +34,4 @@ export * from "./useDeleteOptionsGroupById";
 export * from "./useAddGroupOptions";
 export * from "./useEditProductOption";
 export * from "./useEditProductGroup";
+export * from "./useSlider";
