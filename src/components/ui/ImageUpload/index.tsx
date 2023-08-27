@@ -2,8 +2,8 @@ import { Trash2 } from 'lucide-react';
 import React from 'react'
 
 interface Props {
-    selectedImage: File | undefined | string;
-    setSelectedImage: React.Dispatch<React.SetStateAction<File | undefined | string>>;
+    selectedImage: File | undefined;
+    setSelectedImage: React.Dispatch<React.SetStateAction<File | undefined>>;
     placeholder?: string;
 }
 
