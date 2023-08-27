@@ -10,13 +10,21 @@ import {
     AlertDialogTrigger,
     Button,
 } from "@/components";
+import { useDeleteSlider } from "@/hooks";
 import { SliderItem } from "@/models";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
 export const DeleteSliderDialog = ({ slider }: { slider: SliderItem }) => {
+    const { mutate: deleteSlider, isLoading } = useDeleteSlider({
+        onSuccess: () => {
+            setOpen(false);
+        }
+    });
     const [open, setOpen] = useState(false);
-    const handleDelete = () => { };
+    const handleDelete = () => {
+        deleteSlider(slider.id);
+    };
 
     return (
         <AlertDialog
@@ -44,6 +52,7 @@ export const DeleteSliderDialog = ({ slider }: { slider: SliderItem }) => {
                                 e.preventDefault();
                                 handleDelete();
                             }}
+                            isLoading={isLoading}
                         >
                             حذف
                         </Button>
