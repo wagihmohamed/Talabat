@@ -51,6 +51,7 @@ export const AddSlider = () => {
             onOpenChange={(open) => {
                 setOpen(open);
                 form.reset();
+                setSelectedImage(undefined);
             }}
             open={open}
         >
