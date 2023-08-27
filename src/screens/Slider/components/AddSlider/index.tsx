@@ -22,8 +22,14 @@ import { useForm } from "react-hook-form";
 import { addSliderFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useAddSlider } from "@/hooks";
 
 export const AddSlider = () => {
+    const { mutate: addSlider, isLoading } = useAddSlider({
+        onSuccess: () => {
+            setOpen(false);
+        }
+    });
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<File>();
     const form = useForm<z.infer<typeof addSliderFormSchema>>({
@@ -35,7 +41,9 @@ export const AddSlider = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = (values: z.infer<typeof addSliderFormSchema>) => {
         const fm = new FormData()
+        fm.append("title", values.name)
         fm.append("image", selectedImage as File)
+        addSlider(fm)
     };
 
     return (
@@ -60,7 +68,7 @@ export const AddSlider = () => {
                     >
                         <div className="mx-auto flex flex-col">
                             <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
-                            {!selectedImage && (
+                            {!selectedImage && form.formState.isSubmitted && (
                                 <p className="text-destructive text-xs mt-2">
                                     يجب اختيار صوره
                                 </p>
@@ -83,7 +91,7 @@ export const AddSlider = () => {
                         />
 
                         <DialogFooter className="mt-4">
-                            <Button size="lg" type="submit">
+                            <Button isLoading={isLoading} size="lg" type="submit">
                                 اضافه
                             </Button>
                             <DialogClode
