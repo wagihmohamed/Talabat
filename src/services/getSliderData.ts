@@ -1,8 +1,8 @@
 import { api } from "@/api";
 import { getSliderData } from "@/api/apiURLs";
-import { ResultResponse } from "@/models";
+import { SliderResponse } from "@/models";
 
 export const getSliderDataService = async () => {
-    const response = await api.get<ResultResponse>(getSliderData);
+    const response = await api.get<SliderResponse>(getSliderData);
     return response.data;
 };
