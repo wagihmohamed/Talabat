@@ -391,3 +391,17 @@ export interface DeliveryArea {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ResultResponse {
+  results: Result[];
+}
+
+export interface Result {
+  id:        number;
+  title:     string;
+  image:     string;
+  createdAt: Date;
+  updatedAt: Date;
+  productId: null;
+  vendorId:  null;
+}
