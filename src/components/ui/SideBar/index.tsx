@@ -3,6 +3,7 @@ import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
 import { Beef, Utensils, User2, Bike, TreeDeciduous } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ModeToggle } from "./components/mode-toggle";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -18,7 +19,7 @@ export function Sidebar({ className, children }: SidebarProps) {
   };
   return (
     <div className="grid grid-cols-5 h-screen">
-      <div className={cn("pb-11 bg-slate-50", className)}>
+      <div className={cn("pb-11 bg-background", className)}>
         <div className="space-y-4 py-4 sticky top-0 h-screen flex flex-col">
           <div className="flex-1">
             <div className="px-3 py-2">
@@ -76,7 +77,13 @@ export function Sidebar({ className, children }: SidebarProps) {
               </div>
             </div>
           </div>
-          <div className="py-2 flex items-end">
+          <div className="py-2 flex flex-col items-end">
+            <div className="w-full flex justify-start gap-2 items-center">
+              <ModeToggle />
+              <p className="text-xs md:text-sm font-semibold">
+                وضع الظهور
+              </p>
+            </div>
             <SideBarItem
               onClick={logout}
               icon={
