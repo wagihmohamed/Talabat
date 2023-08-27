@@ -78,7 +78,7 @@ export function Sidebar({ className, children }: SidebarProps) {
             </div>
           </div>
           <div className="py-2 flex flex-col items-end">
-            <div className="w-full flex justify-start gap-2 items-center">
+            <div className="w-full flex justify-start gap-2 items-center py-2 px-3">
               <ModeToggle />
               <p className="text-xs md:text-sm font-semibold">
                 وضع الظهور
