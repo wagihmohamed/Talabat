@@ -7,3 +7,4 @@ export * from "./Products";
 export * from "./EditProduct";
 export * from "./CreateProduct";
 export * from "./DeliveryAreas";
+export * from "./Slider";
