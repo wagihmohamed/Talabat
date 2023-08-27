@@ -72,8 +72,6 @@ export const AddRestaurant = () => {
       distance: values.distance.toString(),
     });
   };
-  console.log(form.formState.errors);
-  console.log(form.getValues());
 
   return (
     <Dialog

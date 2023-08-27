@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button, Input, LoadingErrorPlaceholder } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddAdmin } from "./components/AddAdmin";
 
 interface DataTableProps<TData, TValue> {
@@ -34,8 +34,6 @@ export function AdminsTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedRows, setSelectedRows] = useState<TData[]>([]);
   const table = useReactTable({
     data,
     columns,
@@ -49,14 +47,6 @@ export function AdminsTable<TData, TValue>({
       rowSelection,
     },
   });
-
-  const tableSelectedInnerRows = table.getSelectedRowModel().rows;
-
-  useEffect(() => {
-    const selectedTableRows = tableSelectedInnerRows.map((row) => row.original);
-    setSelectedRows(selectedTableRows);
-  }, [tableSelectedInnerRows]);
-  console.log("selectedRows", selectedRows);
 
   return (
     <LoadingErrorPlaceholder isLoading={isLoading} isError={isError}>
@@ -84,9 +74,9 @@ export function AdminsTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}

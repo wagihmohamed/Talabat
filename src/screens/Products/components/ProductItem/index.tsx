@@ -46,7 +46,7 @@ export const ProductCard = ({ product }: ProductItemProps) => {
                 </Text>
                 <Group spacing={5}>
                     <Text fz="xl" span fw={500} className={classes.price}>
-                        {product.price}$
+                        {product.price} شيكل
                     </Text>
                 </Group>
             </Group>

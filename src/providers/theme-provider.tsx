@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { MantineProvider } from '@mantine/core';
+
 
 type Theme = "dark" | "light" | "system"
 
@@ -58,7 +60,9 @@ export function ThemeProvider({
 
     return (
         <ThemeProviderContext.Provider {...props} value={value}>
-            {children}
+            <MantineProvider theme={{ colorScheme: theme === "dark" ? "dark" : "light" }}>
+                {children}
+            </MantineProvider>
         </ThemeProviderContext.Provider>
     )
 }

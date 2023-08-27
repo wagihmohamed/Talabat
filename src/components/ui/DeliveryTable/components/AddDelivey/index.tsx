@@ -50,7 +50,6 @@ export const AddDelivery = () => {
             password: "",
         },
     });
-    console.log(form.formState.errors);
 
     const onSubmit = (values: z.infer<typeof addDeliveryFormSchema>) => {
         const fm = new FormData()
