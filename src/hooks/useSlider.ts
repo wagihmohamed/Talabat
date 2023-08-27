@@ -3,7 +3,7 @@ import { getSliderDataService } from "@/services";
 
 export const useSlider = () => {
   return useQuery({
-    queryKey: ["slider"],
+    queryKey: ["sliders"],
     queryFn: getSliderDataService,
   });
 };

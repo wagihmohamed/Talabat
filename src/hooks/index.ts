@@ -35,3 +35,4 @@ export * from "./useAddGroupOptions";
 export * from "./useEditProductOption";
 export * from "./useEditProductGroup";
 export * from "./useSlider";
+export * from "./useDeleteSlider";
