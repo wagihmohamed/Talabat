@@ -134,7 +134,7 @@ export const ProductOptionsForm = () => {
     return (
         <LoadingErrorPlaceholder isError={isError} isLoading={isFetchLoading}>
             {!form.getValues().options_groups?.length ? (
-                <div className="flex flex-col justify-center h-56 bg-slate-50 items-center">
+                <div className="flex flex-col justify-center h-56 items-center border-2 rounded-lg">
                     <p className="text-gray-500 font-bold text-lg">لا يوجد خيارات لهذا المنتج</p>
                     <Button onClick={() => append({
                         name: '',
@@ -146,8 +146,6 @@ export const ProductOptionsForm = () => {
                 <div className="mb-10">
                     <Form {...form}>
                         {watchedFields.map((field, index) => {
-                            console.log(field);
-
                             return (
                                 <div key={field.id} className="border p-5 mb-5 rounded-lg shadow-md">
                                     <div className="flex justify-between items-center mb-5">
@@ -204,7 +202,6 @@ export const ProductOptionsForm = () => {
                                                             if (!option.old) {
                                                                 const options = form.getValues().options_groups[index].options
                                                                 const newOptions = options.filter((_, i) => i !== optionIndex)
-                                                                console.log(newOptions);
                                                                 form.setValue(`options_groups.${index}.options`, newOptions)
                                                                 return;
                                                             }
@@ -212,7 +209,6 @@ export const ProductOptionsForm = () => {
                                                                 .then(() => {
                                                                     const options = form.getValues().options_groups[index].options
                                                                     const newOptions = options.filter((_, i) => i !== optionIndex)
-                                                                    console.log(newOptions);
                                                                     form.setValue(`options_groups.${index}.options`, newOptions)
                                                                 })
                                                         }}

@@ -56,7 +56,6 @@ export function DeliveryTable<TData, TValue>({
         const selectedTableRows = tableSelectedInnerRows.map((row) => row.original);
         setSelectedRows(selectedTableRows);
     }, [tableSelectedInnerRows]);
-    console.log("selectedRows", selectedRows);
 
     return (
         <LoadingErrorPlaceholder isLoading={isLoading} isError={isError}>

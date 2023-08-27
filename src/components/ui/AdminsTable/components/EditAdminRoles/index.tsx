@@ -23,7 +23,7 @@ export const EditAdminRoles = ({
             const hasRole = admin.admin.adminRole[role.value];
 
             return (
-                <div key={role.value} className="bg-slate-50 h-14 rounded flex justify-between items-center px-4">
+                <div key={role.value} className="h-14 rounded flex justify-between items-center px-4 border-2">
                     <span>{role.label}</span>
                     {hasRole ? (
                         <Trash2
