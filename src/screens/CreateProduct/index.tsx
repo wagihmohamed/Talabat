@@ -43,6 +43,7 @@ export const CreateProductScreen = () => {
         description: '',
         category: '',
         images: [],
+        showPrice: false,
     }
 
     const form = useForm<ProfileFormValues>({
@@ -64,6 +65,7 @@ export const CreateProductScreen = () => {
         formData.append('categoryId', data.category);
         formData.append('available', data.available ? 'true' : 'false');
         formData.append('featured', data.featured ? 'true' : 'false');
+        formData.append('show_price', data.showPrice ? 'true' : 'false');
         data.images.forEach((image) => {
             formData.append('image', image.file!);
         })
@@ -199,6 +201,28 @@ export const CreateProductScreen = () => {
                                             </FormLabel>
                                             <FormDescription>
                                                 يمكنك تغيير حالة المنتج من هنا
+                                            </FormDescription>
+                                        </div>
+                                        <FormControl>
+                                            <Switch
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="showPrice"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                        <div className="space-y-0.5">
+                                            <FormLabel className="text-base">
+                                                هل يظهر سعر المنتج؟   
+                                            </FormLabel>
+                                            <FormDescription>
+                                                يمكنك التحكم في ظهور سعر المنتج من هنا
                                             </FormDescription>
                                         </div>
                                         <FormControl>

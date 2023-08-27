@@ -318,6 +318,7 @@ export interface Product {
   price: string;
   available: boolean;
   featured: boolean;
+  show_price: boolean;
   orders: number;
   createdAt: Date;
   updatedAt: Date;

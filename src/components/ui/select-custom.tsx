@@ -102,6 +102,10 @@ export const CustomSelect = ({
               color: dark ? "#fff" : "#000",
             },
           }),
+          singleValue: (provided) => ({
+            ...provided,
+            color: dark ? "#fff" : "#000",
+          }),
         }}
         options={options}
         onChange={(e) => {
