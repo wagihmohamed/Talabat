@@ -16,10 +16,11 @@ import {
   Button,
   buttonVariants,
   ImageUploader,
+  CustomSelect,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { editRestaurantFormSchema } from "./formUtils";
+import { editRestaurantFormSchema, ordersMethods } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditRestaurant } from "@/hooks";
 import { useState } from "react";
@@ -56,6 +57,15 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
       phone: restaurant.phone,
     },
   });
+
+  const getOrderMethod = (value: string) => {
+    if (value === "Cart") {
+      return ordersMethods.find((method) => method.value === "Cart");
+    } else if (value === "Phone") {
+      return ordersMethods.find((method) => method.value === "Phone");
+    }
+  };
+
   const onSubmit = (values: z.infer<typeof editRestaurantFormSchema>) => {
     const fm = new FormData()
     fm.append("image", selectedImage as File)
@@ -66,7 +76,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
       name: values.name,
       phone: values.phone,
       id: restaurant.id,
-      image: fm.get('image')?.valueOf() ?? null,
+      image: fm.get('image') ?? null,
     });
   };
   return (
@@ -129,7 +139,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
               )}
             />
             <div className="flex justify-between items-center gap-4">
-              <div>
+              <div className="flex-1">
                 <FormField
                   control={form.control}
                   name="address"
@@ -146,21 +156,22 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
                   )}
                 />
               </div>
-              <div>
+              <div className="flex-1 h-10">
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <>
-                      <FormItem className="grid grid-cols-8 items-center gap-1">
-                        <FormLabel className="col-span-2">
-                          البريد الالكتروني
-                        </FormLabel>
-                        <FormControl className="col-span-6">
-                          <Input {...field} />
-                        </FormControl>
-                      </FormItem>
-                      <FormMessage className="text-xs" />
+                      <CustomSelect
+                        options={ordersMethods}
+                        value={getOrderMethod(field.value)}
+                        onChange={(value: {
+                          label: string;
+                          value: string;
+                        }) => {
+                          field.onChange(value.value);
+                        }}
+                      />
                     </>
                   )}
                 />
