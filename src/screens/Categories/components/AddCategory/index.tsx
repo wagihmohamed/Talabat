@@ -36,12 +36,14 @@ export const AddCategory = () => {
       reset();
       setOpen(false);
       form.reset();
+      setSelectedImage(undefined)
     },
   });
   const form = useForm<z.infer<typeof addCategoryFormSchema>>({
     resolver: zodResolver(addCategoryFormSchema),
     defaultValues: {
       name: "",
+      order: "",
     },
   });
   const onSubmit = (values: z.infer<typeof addCategoryFormSchema>) => {
@@ -50,6 +52,7 @@ export const AddCategory = () => {
     addCategory({
       image: fm.get('image')?.valueOf() ?? null,
       name: values.name,
+      order: values.order ? parseInt(values.order) : undefined,
     });
   };
   return (
@@ -74,6 +77,9 @@ export const AddCategory = () => {
           >
             <div className="mx-auto flex flex-col">
               <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+              {!selectedImage && form.formState.isSubmitted && <p className="text-xs text-destructive">
+                يجب اختيار صوره
+              </p>}
             </div>
             <FormField
               control={form.control}
@@ -90,9 +96,29 @@ export const AddCategory = () => {
                 </>
               )}
             />
+            <FormField
+              control={form.control}
+              name="order"
+              render={({ field }) => (
+                <>
+                  <FormItem className="grid grid-cols-8 items-center">
+                    <FormLabel className="col-span-2">الترتيب</FormLabel>
+                    <FormControl className="col-span-6">
+                      <Input {...field} type="number" />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
 
             <DialogFooter className="mt-4">
-              <Button isLoading={isLoading} size="lg" type="submit">
+              <Button
+                disabled={!selectedImage}
+                isLoading={isLoading}
+                size="lg"
+                type="submit"
+              >
                 اضافه
               </Button>
               <DialogClode

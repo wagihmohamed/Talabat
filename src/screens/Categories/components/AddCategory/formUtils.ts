@@ -9,4 +9,5 @@ export const addCategoryFormSchema = z.object({
     .max(50, {
       message: "الاسم  يجب ان يكون اقل من 50 حرف",
     }),
+    order: z.string().optional(),
 });

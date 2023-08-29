@@ -1,6 +1,5 @@
 import { Category } from "@/models";
 import { DeleteCategoryDialog } from "../DeleteCategory";
-import { handleFormateDate } from "@/lib/formatDate";
 import { EditCategory } from "../EditCategory";
 
 interface CategoryItemProps {
@@ -14,12 +13,14 @@ export const CategoryItem = ({ category }: CategoryItemProps) => {
       <div className="px-6 py-4">
         <div className="flex justify-between items-center">
           <div className="font-bold text-xl mb-2">{category.name}</div>
-          <DeleteCategoryDialog category={category} />
-          <EditCategory category={category} />
+          <div className="flex items-center gap-3">
+            <DeleteCategoryDialog category={category} />
+            <EditCategory category={category} />
+          </div>
         </div>
-        {category.createdAt && <p className="text-gray-700 text-base mt-2">
-          تم إنشاء القسم في: {handleFormateDate(category.createdAt)}
-        </p>}
+        <p className="text-base mt-2">
+          الترتيب: {category.order}
+        </p>
       </div>
     </div>
   );

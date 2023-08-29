@@ -6,6 +6,7 @@ import { AxiosResponse } from "axios";
 export interface AddCategoryPayload {
   name: string;
   image: File | undefined | FormData | string | object | null;
+  order?: number;
 }
 
 interface AddCategoryResponse {

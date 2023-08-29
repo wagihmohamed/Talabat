@@ -4,7 +4,7 @@ import { editCategory } from "@/api/apiURLs";
 export interface EditCategoryPayload {
     name: string;
     image: File | undefined | FormData | string | object | null;
-
+    order?: number;
 }
 
 export const editCategoryService = async (categorytId: number, newCategoryDate: EditCategoryPayload) => {
