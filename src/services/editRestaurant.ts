@@ -3,7 +3,7 @@ import { editRestaurant } from "@/api/apiURLs";
 import { EditRestaurantParams, CreateRestaurantResponse } from "@/models";
 import { AxiosResponse } from "axios";
 
-export const editRestaurantsService = async (newRestauran: EditRestaurantParams) => {
+export const editRestaurantsService = async (newRestauran: FormData) => {
   const response = await api.patch<
     EditRestaurantParams,
     AxiosResponse<CreateRestaurantResponse>
