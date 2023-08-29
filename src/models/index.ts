@@ -108,6 +108,7 @@ export interface Category {
   id: number;
   name: string;
   image: File | undefined | FormData | string | object | null;
+  order: number;
   createdAt: string;
   updatedAt: string;
 }

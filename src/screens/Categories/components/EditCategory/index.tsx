@@ -14,16 +14,16 @@ import {
     FormMessage,
     Input,
     DialogClode,
-    ImageUploader,
 } from "@/components";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { addCategoryFormSchema } from "./formUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditCategory } from "@/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Category } from "@/models";
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
+import ImageUploading, { ImageListType } from "react-images-uploading";
 
 interface Props {
     category: Category;
@@ -32,7 +32,17 @@ interface Props {
 export const EditCategory = ({ category }: Props) => {
     const [open, setOpen] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [selectedImage, setSelectedImage] = useState<any>(category.image);
+    const [images, setImages] = useState<any>([]);
+
+    useEffect(() => {
+        if (!category.image?.toString()?.includes("null")) {
+            setImages([{
+                dataURL: category.image,
+                file: null,
+            }])
+        }
+    }, [category.image])
+
     const {
         mutate: editCategory,
         isLoading,
@@ -48,24 +58,35 @@ export const EditCategory = ({ category }: Props) => {
         resolver: zodResolver(addCategoryFormSchema),
         defaultValues: {
             name: category.name,
+            order: category.order.toString(),
         },
     });
     const onSubmit = (values: z.infer<typeof addCategoryFormSchema>) => {
-        const fm = new FormData()
-        fm.append("image", selectedImage as File)
         editCategory({
             categoryId: category.id,
             newCategoryDate: {
-                image: fm.get('image')?.valueOf() ?? null,
+                image: images[0]?.dataURL?.file ?? null,
                 name: values.name,
+                order: values.order ? parseInt(values.order) : undefined,
             }
         });
     };
+
+    const onImagesChange = (
+        imageList: ImageListType,
+    ) => {
+        setImages(imageList as never[]);
+    };
+
     return (
         <Dialog
             onOpenChange={(open) => {
                 setOpen(open);
                 form.reset();
+                setImages([{
+                    dataURL: category.image,
+                    file: null,
+                }])
             }}
             open={open}
         >
@@ -82,7 +103,39 @@ export const EditCategory = ({ category }: Props) => {
                         className="grid gap-4 py-4"
                     >
                         <div className="mx-auto flex flex-col">
-                            <ImageUploader selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+                            <ImageUploading
+                                multiple
+                                value={images}
+                                onChange={onImagesChange}
+                            >
+                                {({ imageList, onImageUpload, onImageRemove, }) => (
+                                    <div className="upload__image-wrapper">
+                                        {imageList.length < 1 && <div onClick={onImageUpload} className="w-32 h-32 relative rounded-3xl cursor-pointer flex justify-center items-center border-4">
+                                            <span className="text-gray-500 text-xs text-center">{"اضغط لاضافة صورة"}</span>
+                                        </div>}
+                                        &nbsp;
+                                        {imageList[0]?.dataURL && <div key={imageList[0]?.dataURL} className="image-item">
+                                            <div>
+                                                <div className="relative">
+                                                    <img
+                                                        alt="not found"
+                                                        className="w-32 h-32 rounded-3xl object-contain"
+                                                        src={imageList[0]?.dataURL}
+                                                    />
+                                                    <br />
+                                                    <Trash2
+                                                        className="w-6 h-6 text-red-500 cursor-pointer absolute top-0 right-0"
+                                                        onClick={() => onImageRemove(0)}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>}
+                                    </div>
+                                )}
+                            </ImageUploading>
+                            {!images[0]?.dataURL && <p className="text-xs text-center text-destructive">
+                                يجب اختيار صوره
+                            </p>}
                         </div>
                         <FormField
                             control={form.control}
@@ -99,10 +152,30 @@ export const EditCategory = ({ category }: Props) => {
                                 </>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="order"
+                            render={({ field }) => (
+                                <>
+                                    <FormItem className="grid grid-cols-8 items-center">
+                                        <FormLabel className="col-span-2">الترتيب</FormLabel>
+                                        <FormControl className="col-span-6">
+                                            <Input {...field} type="number" />
+                                        </FormControl>
+                                    </FormItem>
+                                    <FormMessage className="text-xs" />
+                                </>
+                            )}
+                        />
 
                         <DialogFooter className="mt-4">
-                            <Button isLoading={isLoading} size="lg" type="submit">
-                                اضافه
+                            <Button
+                                disabled={!images[0]?.dataURL}
+                                isLoading={isLoading}
+                                size="lg"
+                                type="submit"
+                            >
+                                تعديل
                             </Button>
                             <DialogClode
                                 className={buttonVariants({
