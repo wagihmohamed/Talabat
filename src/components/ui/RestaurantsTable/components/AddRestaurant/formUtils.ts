@@ -34,13 +34,13 @@ export const addRestaurantFormSchema = z.object({
     }),
   direction: z
     .string(),
-  distance: z
-    .number({
-      invalid_type_error: "المسافة يجب ان يكون رقم",
-    })
-    .min(1, {
-      message: "المسافة  يجب ان يكون اكثر من 1 متر",
-    }),
+  // distance: z
+  //   .number({
+  //     invalid_type_error: "المسافة يجب ان يكون رقم",
+  //   })
+  //   .min(1, {
+  //     message: "المسافة  يجب ان يكون اكثر من 1 متر",
+  //   }),
   deliveryTime: z
     .number({
       invalid_type_error: "وقت التوصيل يجب ان يكون رقم",

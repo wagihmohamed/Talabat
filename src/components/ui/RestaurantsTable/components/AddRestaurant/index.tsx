@@ -69,7 +69,7 @@ export const AddRestaurant = () => {
       cover: fm.get('cover')?.valueOf() ?? null,
       delivery_time: values.deliveryTime.toString(),
       direction: values.direction,
-      distance: values.distance.toString(),
+      distance: "10",
     });
   };
 
@@ -173,7 +173,7 @@ export const AddRestaurant = () => {
               </div>
             </div>
             <div className="flex justify items-center gap-4">
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="distance"
                 render={({ field }) => (
@@ -195,13 +195,13 @@ export const AddRestaurant = () => {
                     </FormItem>
                   </>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="direction"
                 render={({ field }) => (
                   <>
-                    <FormItem className="w-1/4 -mt-4">
+                    <FormItem className="w-1/3 -mt-4">
                       <CustomSelect
                         withLabel
                         label="الاتجاه"
