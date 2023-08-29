@@ -60,6 +60,7 @@ export interface EditRestaurantParams {
   phone: string;
   address: string;
   image: File | undefined | FormData | string | object | null;
+  cover: File | undefined | FormData | string | object | null;
 }
 // API
 export interface CreateRestaurantResponse {
