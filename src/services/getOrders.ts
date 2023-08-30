@@ -9,7 +9,7 @@ export interface OrdersResponse {
 
 export interface Order {
     id: number;
-    status: string;
+    status: "not started" | "started" | "preparing" | "in the way" | "complete";
     name: string;
     address: string;
     location: string;

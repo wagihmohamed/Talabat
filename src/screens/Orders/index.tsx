@@ -1,22 +1,23 @@
-import { Sidebar, } from "@/components";
-// import { useRestaurants } from "@/hooks";
+import { OrdersTable, Sidebar, } from "@/components";
+import { columns } from "@/components/ui/OrdersTable/columns";
+import { useOrders } from "@/hooks";
 
 export const OrdersScreen = () => {
-    //   const { data: restaurants = {
-    //     results: []
-    //   }, isLoading, isError } = useRestaurants();
+    const { data: orders = {
+        results: [],
+    }, isLoading, isError } = useOrders();
 
     return (
         <div className="border-t">
             <div className="h-screen">
                 <Sidebar className="block">
                     <h1 className="text-2xl font-bold mb-8">كل الطلبات</h1>
-                    {/* <RestaurantsTable
+                    <OrdersTable
                         isLoading={isLoading}
                         isError={isError}
                         columns={columns}
-                        data={restaurants.results}
-                    /> */}
+                        data={orders.results}
+                    />
                 </Sidebar>
             </div>
         </div>
