@@ -20,6 +20,7 @@ export * from "./select";
 export * from "./switch";
 export * from "./tabs";
 import { AdminsTable } from "./AdminsTable";
+import { OrdersTable } from "./OrdersTable";
 import { RestaurantsTable } from "./RestaurantsTable";
 import { DeliveryTable } from "./DeliveryTable";
-export { DeliveryTable, RestaurantsTable, AdminsTable };
+export { DeliveryTable, RestaurantsTable, AdminsTable, OrdersTable };
