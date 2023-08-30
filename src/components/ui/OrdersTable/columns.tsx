@@ -18,7 +18,6 @@ export const columns: ColumnDef<Order>[] = [
         header: "الهاتف",
     },
     {
-        accessorKey: "cart_products",
         header: "الطلبات",
         cell: ({ row }) => {
             const value = row.original;
@@ -42,7 +41,7 @@ export const columns: ColumnDef<Order>[] = [
                 <div className="flex">
                     <div className="mx-auto flex justify-end">
                         {value.cart_products.map((item, index) => (
-                            <Badge className="text-white" key={index}>{item.product.user.name}</Badge>
+                            <Badge variant='outline' className="text-white" key={index}>{item.product.user.name}</Badge>
                         ))}
                     </div>
                 </div>
