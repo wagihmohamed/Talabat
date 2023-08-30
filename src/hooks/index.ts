@@ -38,3 +38,4 @@ export * from "./useSlider";
 export * from "./useDeleteSlider";
 export * from "./useAddSlider";
 export * from "./useEditSlider";
+export * from "./useOrders";
