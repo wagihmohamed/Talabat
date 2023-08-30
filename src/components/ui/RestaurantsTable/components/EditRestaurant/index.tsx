@@ -33,25 +33,18 @@ interface EditRestaurantProps {
 
 export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
   const [open, setOpen] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [images, setImages] = useState<any>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [coverImages, setCoverImages] = useState<any>([]);
+  const [images, setImages] = useState<ImageListType>([]);
+  const [coverImages, setCoverImages] = useState<ImageListType>([]);
 
   useEffect(() => {
-    if (!restaurant.image?.includes("null")) {
-      setImages([{
-        dataURL: restaurant.image,
-        file: null,
-      }])
+    if (restaurant.image) {
+      setImages([{ dataURL: restaurant.image }]);
+
     }
-    if (!restaurant.cover?.includes("null")) {
-      setCoverImages([{
-        dataURL: restaurant.cover,
-        file: null,
-      }])
+    if (restaurant.cover) {
+      setCoverImages([{ dataURL: restaurant.cover }]);
     }
-  }, [restaurant.image, restaurant.cover])
+  }, [restaurant]);
 
   const {
     mutate: editRestaurant,
@@ -83,35 +76,33 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
     }
   };
 
-  const onSubmit = (values: z.infer<typeof editRestaurantFormSchema>) => {
-    console.log({
-      image: images[0]?.file,
-      cover: coverImages[0]?.file,
-    });
+  const onImagesChange = (
+    imageList: ImageListType,
+  ) => {
+    setImages(imageList);
+  };
 
+  const onCoverChange = (
+    imageList: ImageListType,
+  ) => {
+    setCoverImages(imageList);
+  };
+
+  const onSubmit = (values: z.infer<typeof editRestaurantFormSchema>) => {
     const formData = new FormData();
+
     formData.append("address", values.address);
     formData.append("email", values.email);
     formData.append("name", values.name);
     formData.append("phone", values.phone);
     formData.append("id", restaurant.id.toString());
-    formData.append("image", images[0]?.file || null);
-    formData.append("cover", coverImages[0]?.file || null);
+    if (restaurant.image !== images[0]?.dataURL) {
+      formData.append("image", images[0]?.file || '');
+    }
+    if (restaurant.cover !== coverImages[0]?.dataURL) {
+      formData.append("cover", coverImages[0]?.file || '');
+    }
     editRestaurant(formData);
-  };
-
-  const onImagesChange = (
-    imageList: ImageListType,
-  ) => {
-    // data for submit
-    setImages(imageList as never[]);
-  };
-  const onCoverChange = (
-    imageList: ImageListType,
-  ) => {
-    // data for submit
-
-    setCoverImages(imageList as never[]);
   };
 
   return (
@@ -146,9 +137,10 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
                   multiple
                   value={images}
                   onChange={onImagesChange}
+                  key={images[0]?.dataURL}
                 >
                   {({ imageList, onImageUpload, onImageRemove, }) => (
-                    <div className="upload__image-wrapper">
+                    <div>
                       {imageList.length < 1 && <div onClick={onImageUpload} className="w-32 h-32 relative rounded-3xl cursor-pointer flex justify-center items-center border-4">
                         <span className="text-gray-500 text-xs text-center">{"اضغط لاضافة صورة"}</span>
                       </div>}
@@ -179,6 +171,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
                   multiple
                   value={coverImages}
                   onChange={onCoverChange}
+                  key={coverImages[0]?.dataURL}
                 >
                   {({ imageList, onImageUpload, onImageRemove, }) => (
                     <div className="upload__image-wrapper">
