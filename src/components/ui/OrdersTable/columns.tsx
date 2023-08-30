@@ -3,6 +3,7 @@ import {
     Badge,
 } from "@/components";
 import { Order } from "@/services";
+import { DeleteOrderDialog } from "./components/DeleteOrder";
 
 export const columns: ColumnDef<Order>[] = [
     {
@@ -85,12 +86,12 @@ export const columns: ColumnDef<Order>[] = [
     },
     {
         id: "actions",
-        cell: () => {
-            // const restuarant = row.original;
+        cell: ({ row }) => {
+            const order = row.original;
 
             return (
                 <div className="flex justify-center items-center gap-4">
-                    {/* <DeleteRestuarantDialog restuarant={restuarant} /> */}
+                    <DeleteOrderDialog order={order} />
                 </div>
             );
         },
