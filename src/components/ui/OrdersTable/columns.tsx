@@ -4,6 +4,8 @@ import {
 } from "@/components";
 import { Order } from "@/services";
 import { DeleteOrderDialog } from "./components/DeleteOrder";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const columns: ColumnDef<Order>[] = [
     {
@@ -88,10 +90,15 @@ export const columns: ColumnDef<Order>[] = [
         id: "actions",
         cell: ({ row }) => {
             const order = row.original;
-
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const navigate = useNavigate();
+            const handleClick = () => {
+                navigate(`/orders/${order.id}`);
+            };
             return (
                 <div className="flex justify-center items-center gap-4">
                     <DeleteOrderDialog order={order} />
+                    <ChevronLeft onClick={handleClick} className="w-6 h-6 cursor-pointer" />
                 </div>
             );
         },

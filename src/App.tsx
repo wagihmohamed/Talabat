@@ -8,6 +8,7 @@ import {
   EditProductScreen,
   HomeScreen,
   LoginScreen,
+  OrderItemDetailsScreen,
   OrdersScreen,
   ProductsScreen,
   SliderScreen,
@@ -27,6 +28,7 @@ function App() {
       <Route path="/delivery-areas" element={<DeliveryAreasScreen />} />
       <Route path="/slider" element={<SliderScreen />} />
       <Route path="/orders" element={<OrdersScreen />} />
+      <Route path="/orders/:orderId" element={<OrderItemDetailsScreen />} />
     </Routes>
   );
 }
