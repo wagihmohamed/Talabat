@@ -86,7 +86,12 @@ export interface OrderUser {
     address: null | string;
 }
 
-export const getOrdersService = async () => {
-    const response = await api.get<OrdersResponse>(getOrders);
+export const getOrdersService = async (page: number) => {
+    const response = await api.get<OrdersResponse>(getOrders, {
+        params: {
+            size: 6,
+            page: page || 1,
+        },
+    });
     return response.data;
 };

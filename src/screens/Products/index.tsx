@@ -41,7 +41,7 @@ export const ProductsScreen = () => {
                                 <ProductCard product={product} key={product.id} />
                             ))}
                         </div>
-                        {response.pages && <div className="mt-8 flex">
+                        {response.pages ? <div className="mt-8 flex">
                             <Pagination
                                 total={response.pages}
                                 dir="rtl"
@@ -51,7 +51,7 @@ export const ProductsScreen = () => {
                                 withControls={false}
                                 color="hsl(var(--primary))"
                             />
-                        </div>}
+                        </div> : null}
                     </LoadingErrorPlaceholder>
                 </Sidebar>
             </div>
