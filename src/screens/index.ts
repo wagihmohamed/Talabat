@@ -9,3 +9,4 @@ export * from "./CreateProduct";
 export * from "./DeliveryAreas";
 export * from "./Slider";
 export * from "./Orders";
+export * from "./OrderDetails";
