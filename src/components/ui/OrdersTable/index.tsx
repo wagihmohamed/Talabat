@@ -15,14 +15,18 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Button, Input, LoadingErrorPlaceholder } from "@/components";
+import { Input, LoadingErrorPlaceholder } from "@/components";
 import { useState } from "react";
+import { Pagination } from "@mantine/core";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     isLoading?: boolean;
     isError?: boolean;
+    setPage?: (page: number) => void;
+    totalPages?: number;
+    page?: number;
 }
 
 export function OrdersTable<TData, TValue>({
@@ -30,6 +34,9 @@ export function OrdersTable<TData, TValue>({
     data,
     isError = false,
     isLoading = false,
+    setPage = () => { },
+    totalPages,
+    page,
 }: DataTableProps<TData, TValue>) {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [rowSelection, setRowSelection] = useState({});
@@ -111,30 +118,19 @@ export function OrdersTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex justify-between items-center">
-                <div className="flex items-center justify-start gap-4 space-x-2 py-4">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        السابق
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        التالي
-                    </Button>
-                </div>
-                <div className=" ml-4 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} من{" "}
-                    {table.getFilteredRowModel().rows.length} صفوف محدده.
-                </div>
-            </div>
-        </LoadingErrorPlaceholder>
+            {totalPages ? < div className="flex justify-between items-center mt-6">
+                <Pagination
+                    total={totalPages}
+                    dir="rtl"
+                    className="mx-auto"
+                    value={page}
+                    onChange={(value) => {
+                        setPage(value);
+                    }}
+                    withControls={false}
+                    color="hsl(var(--primary))"
+                />
+            </div> : null}
+        </LoadingErrorPlaceholder >
     );
 }
