@@ -2,7 +2,7 @@ import { api } from "@/api";
 import { addProductGroupOption } from "@/api/apiURLs";
 
 export interface NewProductOptions {
-    productId: number;
+    products: [number];
     groups: {
         name: string;
         options: {
