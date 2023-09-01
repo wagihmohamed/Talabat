@@ -20,7 +20,7 @@ export function Sidebar({ className, children }: SidebarProps) {
   return (
     <div className="grid grid-cols-5 h-screen">
       <div className={cn("pb-11 bg-background", className)}>
-        <div className="space-y-4 py-4 sticky top-0 h-screen flex flex-col border-l-4">
+        <div className="space-y-4 py-4 fixed w-1/6 top-0 h-screen flex flex-col border-l-4">
           <div className="flex-1">
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 text-sm md:text-lg font-semibold tracking-tight">

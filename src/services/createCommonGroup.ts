@@ -8,7 +8,7 @@ export interface CreateCommonGroupPayload {
         type: string;
         options: {
             name: string;
-            value: string;
+            value: number;
         }[];
     }[];
 }
@@ -16,6 +16,10 @@ export interface CreateCommonGroupPayload {
 export const createCommonGroupService = async (
     payload: CreateCommonGroupPayload
 ) => {
-    const response = await api.post<CreateCommonGroupPayload>(createCommonGroup, payload);
+    const response = await api.post<CreateCommonGroupPayload>(createCommonGroup, payload, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
     return response;
 };
