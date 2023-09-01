@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, ChevronLeft } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +17,7 @@ import {
 import { RestuarantItemResponse } from "@/models";
 import { EditRestaurant } from "./components/EditRestaurant";
 import { AddDeliveryCost } from "./components/AddDeliveryCost";
+import { useNavigate } from "react-router-dom";
 
 export const columns: ColumnDef<RestuarantItemResponse>[] = [
   {
@@ -119,6 +120,8 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
     id: "actions",
     cell: ({ row }) => {
       const restuarant = row.original;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const navigate = useNavigate();
 
       return (
         <div className="flex justify-center items-center gap-4">
@@ -138,11 +141,15 @@ export const columns: ColumnDef<RestuarantItemResponse>[] = [
               <DeleteRestuarantDialog restuarant={restuarant} />
               <AddDeliveryCost restaurant={restuarant} />
               <DropdownMenuSeparator />
+              <Button
+                className="flex w-full items-center justify-end gap-2 "
+                variant="ghost"
+                onClick={() => navigate(`/restaurants/${restuarant.id}`)}
+              >
+                <p>اضافه خيارات متعدده</p>
+              </Button>
             </DropdownMenuContent>
           </DropdownMenu>
-          <div>
-            <ChevronLeft className="h-4 w-4 cursor-pointer" />
-          </div>
         </div>
       );
     },

@@ -11,6 +11,7 @@ import {
   OrderItemDetailsScreen,
   OrdersScreen,
   ProductsScreen,
+  RestaurantCommonGroups,
   SliderScreen,
 } from "./screens";
 
@@ -29,6 +30,7 @@ function App() {
       <Route path="/slider" element={<SliderScreen />} />
       <Route path="/orders" element={<OrdersScreen />} />
       <Route path="/orders/:orderId" element={<OrderItemDetailsScreen />} />
+      <Route path="/restaurants/:restaurantId" element={<RestaurantCommonGroups />} />
     </Routes>
   );
 }
