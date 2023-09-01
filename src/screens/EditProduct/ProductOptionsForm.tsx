@@ -122,7 +122,7 @@ export const ProductOptionsForm = () => {
         });
 
         addGroupsOptions({
-            productId: parseInt(productId),
+            products: [parseInt(productId)],
             groups: newOptions.filter((option) => option !== undefined).map((option) => option!)
         })
 
