@@ -41,3 +41,4 @@ export * from "./useEditSlider";
 export * from "./useOrders";
 export * from "./useDeleteOrder";
 export * from "./useOrderDetails";
+export * from "./useCreateCommonGroup";
