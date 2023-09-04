@@ -43,3 +43,4 @@ export * from "./useDeleteOrder";
 export * from "./useOrderDetails";
 export * from "./useCreateCommonGroup";
 export * from "./useSendNotifications";
+export * from "./useGetAllUsers";

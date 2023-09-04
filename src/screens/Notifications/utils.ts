@@ -21,14 +21,6 @@ export const sendNotificationSchema = z.object({
         .enum(["vendor", "delivery", "customer", "manual"], {
             description: "يجب اختيار موضوع الإشعار",
         }),
-    // usersIds: z
-    //     .array(z.string())
-    //     .min(1, {
-    //         message: "يجب اختيار مستخدم واحد على الأقل",
-    //     })
-    //     .max(100, {
-    //         message: "يجب اختيار مستخدم واحد على الأقل",
-    //     }).optional(),
 })
 
 
@@ -51,3 +43,17 @@ export const topics = [
         value: "manual",
     },
 ]
+
+export const renderUserRole = (role: string) => {
+    switch (role) {
+        case 'admin':
+            return 'ادمن';
+        case 'customer':
+            return 'عميل';
+        case 'vendor':
+            return 'متجر';
+        case 'delivery':
+            return 'مندوب';
+        default: return 'غير معروف';
+    }
+};

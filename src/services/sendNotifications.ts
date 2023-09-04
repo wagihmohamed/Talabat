@@ -19,6 +19,10 @@ export const sendNotificationService = async ({
         description,
         topic,
         usersIds,
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
     });
     return response.data;
 }
