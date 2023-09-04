@@ -67,16 +67,16 @@ export const CustomSelect = ({
             width,
             maxWidth,
             backgroundColor: "bg-background",
-            border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
+            border: error ? "1px solid hsl(var(--destructive))" : `1px solid hsl(var(--border))`,
             "&:hover": {
-              border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
+              border: error ? "1px solid hsl(var(--destructive))" : `1px solid hsl(var(--border))`,
             },
-            outline: `1px solid #D3D3D3`,
+            outline: `1px solid hsl(var(--border))`,
             "&:focus": {
-              border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
+              border: error ? "1px solid hsl(var(--destructive))" : `1px solid hsl(var(--border))`,
             },
             "&:active": {
-              border: error ? "1px solid #d32f2f" : `1px solid #D3D3D3`,
+              border: error ? "1px solid hsl(var(--destructive))" : `1px solid hsl(var(--border))`,
             },
           }),
           valueContainer: (provided) => ({
@@ -92,6 +92,7 @@ export const CustomSelect = ({
             zIndex: 9999,
             color: "#fff",
             backgroundColor: dark ? "hsl(var(--background))" : "#fff",
+            border: "1px solid hsl(var(--border))",
           }),
           option: (provided) => ({
             ...provided,
