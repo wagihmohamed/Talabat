@@ -7,6 +7,7 @@ import {
     Input,
     Button,
     LoadingErrorPlaceholder,
+    Switch,
 } from "@/components"
 import {
     useProductsById,
@@ -28,6 +29,7 @@ const productsOptionsSchema = z.object({
             id: z.number().optional(),
             name: z.string(),
             oldOption: z.boolean(),
+            type: z.enum(['single', 'multi']),
             options: z.array(
                 z.object({
                     id: z.number(),
@@ -77,6 +79,7 @@ export const ProductOptionsForm = () => {
                     return {
                         ...optionGroup,
                         oldOption: true,
+                        type: optionGroup.type,
                         options: optionGroup.options.map((option) => {
                             return {
                                 ...option,
@@ -111,6 +114,7 @@ export const ProductOptionsForm = () => {
             if (!group.oldOption) {
                 return {
                     name: group.name,
+                    type: group.type,
                     options: group.options.map((option) => {
                         return {
                             name: option.name,
@@ -139,6 +143,8 @@ export const ProductOptionsForm = () => {
                     <Button onClick={() => append({
                         name: '',
                         options: [],
+                        type: 'single',
+                        id: Math.random(),
                         oldOption: false
                     })} className="mt-5">اضافة خيار</Button>
                 </div>
@@ -180,6 +186,25 @@ export const ProductOptionsForm = () => {
                                                 حذف
                                             </Button>
                                         </div>
+                                    </div>
+                                    <div className="flex items-center gap-4 mb-5">
+                                        <FormLabel>خيارات متعددة</FormLabel>
+                                        <Switch
+                                            checked={field.type === 'multi'}
+                                            onCheckedChange={(checked) => {
+                                                const newItems = form.getValues().options_groups.map((item, i) => {
+                                                    if (i === index) {
+                                                        return {
+                                                            ...item,
+                                                            type: checked ? 'multi' : 'single'
+                                                        }
+                                                    }
+                                                    return item;
+                                                })
+                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                                form.setValue(`options_groups`, newItems as any)
+                                            }}
+                                        />
                                     </div>
                                     <FormItem>
                                         <FormLabel>اسم الخيار</FormLabel>
@@ -286,7 +311,7 @@ export const ProductOptionsForm = () => {
                         })}
                         <Button
                             type="button"
-                            onClick={() => append({ name: '', options: [], oldOption: false })}
+                            onClick={() => append({ name: '', type: "single", options: [], oldOption: false, id: Math.random() })}
                             className="mt-5">
                             اضافه خيار رئيسي
                         </Button>
