@@ -332,6 +332,7 @@ export interface Product {
   options_groups: {
     id: number;
     name: string;
+    type: 'single' | 'multi';
     options: {
       id: number;
       name: string;
