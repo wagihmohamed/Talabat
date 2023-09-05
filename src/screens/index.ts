@@ -11,4 +11,5 @@ export * from "./Slider";
 export * from "./Orders";
 export * from "./OrderDetails";
 export * from "./RestaurantCommonGroups";
+export * from "./Notifications";
 

@@ -8,6 +8,7 @@ import {
   EditProductScreen,
   HomeScreen,
   LoginScreen,
+  NotificationsScreen,
   OrderItemDetailsScreen,
   OrdersScreen,
   ProductsScreen,
@@ -31,6 +32,7 @@ function App() {
       <Route path="/orders" element={<OrdersScreen />} />
       <Route path="/orders/:orderId" element={<OrderItemDetailsScreen />} />
       <Route path="/restaurants/:restaurantId" element={<RestaurantCommonGroups />} />
+      <Route path="/notifications" element={<NotificationsScreen />} />
     </Routes>
   );
 }

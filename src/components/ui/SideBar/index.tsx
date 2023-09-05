@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
-import { Beef, Utensils, User2, Bike, TreeDeciduous, Image, Cookie } from "lucide-react";
+import { Beef, Utensils, User2, Bike, TreeDeciduous, Image, Cookie, SendHorizonal } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ModeToggle } from "./components/mode-toggle";
 
@@ -50,6 +50,12 @@ export function Sidebar({ className, children }: SidebarProps) {
                   icon={<Cookie className="shrink-0" />}
                   variant={checkPathName("/orders")}
                   onClick={() => navigation("/orders")}
+                />
+                <SideBarItem
+                  title="ارسال اشعار"
+                  icon={<SendHorizonal className="shrink-0" />}
+                  variant={checkPathName("/notifications")}
+                  onClick={() => navigation("/notifications")}
                 />
               </div>
             </div>
