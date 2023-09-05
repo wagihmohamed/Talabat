@@ -7,13 +7,24 @@ import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-
 const productsOptionsSchema = z.object({
     groups: z.array(
         z.object({
             id: z.number().optional(),
-            name: z.string(),
-            type: z.string(),
+            name: z.string()
+                .min(1, {
+                    message: 'يجب ان يكون الاسم اكبر من حرف واحد',
+                })
+                .max(255, {
+                    message: 'يجب ان يكون الاسم اقل من 255 حرف',
+                }),
+            type: z.string()
+                .min(1, {
+                    message: 'يجب ان يكون النوع اكبر من حرف واحد',
+                })
+                .max(255, {
+                    message: 'يجب ان يكون النوع اقل من 255 حرف',
+                }),
             options: z.array(
                 z.object({
                     id: z.number(),
@@ -86,10 +97,10 @@ export const RestaurantCommonGroups = () => {
     })
 
     const watchedFields = form.watch("groups")
+    console.log(form.formState.errors);
 
     const handleSubmit = () => {
         const { groups } = form.getValues()
-        console.log(selectedProducts);
 
         createGroup({
             products: selectedProducts.map((product) => parseInt(product.value)),
@@ -137,99 +148,105 @@ export const RestaurantCommonGroups = () => {
                             </p>
                             <div className="flex flex-col gap-4">
                                 <Form {...form}>
-                                    {watchedFields.map((group, groupIndex) => (
-                                        <div key={group.id} className="flex flex-col gap-4">
-                                            <div className="flex items-center gap-4">
-                                                <Input
-                                                    autoFocus
-                                                    className="border border-gray-300 rounded-md w-1/2 p-2"
-                                                    placeholder="اسم المجموعة"
-                                                    {...form.register(`groups.${groupIndex}.name`)}
-                                                />
-                                                <CustomSelect
-                                                    className="border-gray-300 rounded-md w-1/2 p-2"
-                                                    options={[
-                                                        {
-                                                            label: 'فردي',
-                                                            value: 'single',
-                                                        },
-                                                        {
-                                                            label: 'متعدد',
-                                                            value: 'multiple',
-                                                        },
-                                                    ]}
-                                                    onChange={(e: {
-                                                        value: string;
-                                                        label: string;
-                                                    }) => form.setValue(`groups.${groupIndex}.type`, e.value)}
-                                                />
-                                            </div>
-                                            <div className="flex flex-col gap-4">
-                                                {group.options.map((option, optionIndex) => (
-                                                    <div key={option.id} className="flex gap-4">
-                                                        <Input
-                                                            autoFocus
-                                                            className="border border-gray-300 rounded-md w-1/2 p-2"
-                                                            placeholder="اسم الخيار"
-                                                            {...form.register(`groups.${groupIndex}.options.${optionIndex}.name`)}
-                                                        />
-                                                        <Input
-                                                            className="border border-gray-300 rounded-md w-1/2 p-2"
-                                                            placeholder="قيمة الخيار"
-                                                            {...form.register(`groups.${groupIndex}.options.${optionIndex}.value`)}
-                                                            type="number"
-                                                        />
-                                                        <Trash2 onClick={() => {
-                                                            const options = form.getValues(`groups.${groupIndex}.options`)
-                                                            form.setValue(`groups.${groupIndex}.options`, options.filter((_, index) => index !== optionIndex))
-                                                        }} className="w-8 h-8 cursor-pointer" />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className="flex gap-4">
-                                                <Button
-                                                    variant='destructive'
-                                                    onClick={() => remove(groupIndex)}
-                                                    disabled={watchedFields.length === 1}
-                                                >
-                                                    حذف المجموعة
-                                                </Button>
-                                                <Button
-                                                    onClick={() => append({
-                                                        name: '',
-                                                        type: '',
-                                                        options: [
+                                    <form onSubmit={form.handleSubmit(handleSubmit)}>
+                                        {watchedFields.map((group, groupIndex) => (
+                                            <div key={group.id} className="flex flex-col gap-4">
+                                                <div className="flex items-center gap-4">
+                                                    <Input
+                                                        autoFocus
+                                                        className="border border-gray-300 rounded-md w-1/2 p-2"
+                                                        placeholder="اسم المجموعة"
+                                                        {...form.register(`groups.${groupIndex}.name`)}
+                                                    />
+                                                    <CustomSelect
+                                                        className="border-gray-300 rounded-md w-1/2 p-2"
+                                                        options={[
                                                             {
+                                                                label: 'فردي',
+                                                                value: 'single',
+                                                            },
+                                                            {
+                                                                label: 'متعدد',
+                                                                value: 'multiple',
+                                                            },
+                                                        ]}
+                                                        onChange={(e: {
+                                                            value: string;
+                                                            label: string;
+                                                        }) => form.setValue(`groups.${groupIndex}.type`, e.value)}
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col gap-4">
+                                                    {group.options.map((option, optionIndex) => (
+                                                        <div key={option.id} className="flex gap-4">
+                                                            <Input
+                                                                autoFocus
+                                                                className="border border-gray-300 rounded-md w-1/2 p-2"
+                                                                placeholder="اسم الخيار"
+                                                                {...form.register(`groups.${groupIndex}.options.${optionIndex}.name`)}
+                                                            />
+                                                            <Input
+                                                                className="border border-gray-300 rounded-md w-1/2 p-2"
+                                                                placeholder="قيمة الخيار"
+                                                                {...form.register(`groups.${groupIndex}.options.${optionIndex}.value`)}
+                                                                type="number"
+                                                            />
+                                                            <Trash2 onClick={() => {
+                                                                const options = form.getValues(`groups.${groupIndex}.options`)
+                                                                form.setValue(`groups.${groupIndex}.options`, options.filter((_, index) => index !== optionIndex))
+                                                            }} className="w-8 h-8 cursor-pointer" />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <div className="flex gap-4">
+                                                    <Button
+                                                        variant='destructive'
+                                                        onClick={() => remove(groupIndex)}
+                                                        disabled={watchedFields.length === 1}
+                                                    >
+                                                        حذف المجموعة
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() => append({
+                                                            name: '',
+                                                            type: '',
+                                                            options: [
+                                                                {
+                                                                    name: '',
+                                                                    value: '',
+                                                                    id: Math.random(),
+                                                                }
+                                                            ]
+                                                        })}
+                                                    >
+                                                        اضافة مجموعة جديدة
+                                                    </Button>
+                                                    <Button
+                                                        variant='secondary'
+                                                        onClick={() => {
+                                                            const options = form.getValues(`groups.${groupIndex}.options`)
+                                                            form.setValue(`groups.${groupIndex}.options`, [...options, {
                                                                 name: '',
                                                                 value: '',
                                                                 id: Math.random(),
-                                                            }
-                                                        ]
-                                                    })}
-                                                >
-                                                    اضافة مجموعة جديدة
-                                                </Button>
-                                                <Button
-                                                    variant='secondary'
-                                                    onClick={() => {
-                                                        const options = form.getValues(`groups.${groupIndex}.options`)
-                                                        form.setValue(`groups.${groupIndex}.options`, [...options, {
-                                                            name: '',
-                                                            value: '',
-                                                            id: Math.random(),
-                                                        }])
-                                                    }}
-                                                >
-                                                    اضافة خيار جديد
-                                                </Button>
+                                                            }])
+                                                        }}
+                                                    >
+                                                        اضافة خيار جديد
+                                                    </Button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </form>
                                 </Form>
                                 <Button
                                     onClick={handleSubmit}
                                     isLoading={isCreating}
-                                // disabled={form.formState.isSubmitting || !form.formState.isValid}
+                                    disabled={
+                                        form.formState.isSubmitting
+                                        || !form.formState.isValid
+                                        || selectedProducts.length === 0
+                                    }
                                 >
                                     حفظ
                                 </Button>
