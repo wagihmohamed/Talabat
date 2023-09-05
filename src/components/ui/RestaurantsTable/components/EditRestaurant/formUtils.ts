@@ -21,8 +21,8 @@ export const editRestaurantFormSchema = z.object({
     }),
   phone: z
     .string()
-    .min(10, {
-      message: "رقم الهاتف  يجب ان يكون اكثر من 10 حروف",
+    .min(9, {
+      message: "رقم الهاتف  يجب ان يكون اكثر من 9 حروف",
     })
     .max(50, {
       message: "رقم الهاتف  يجب ان يكون اقل من 50 حرف",
