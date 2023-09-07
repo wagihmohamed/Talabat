@@ -192,17 +192,13 @@ export const ProductOptionsForm = () => {
                                         <Switch
                                             checked={field.type === 'multi'}
                                             onCheckedChange={(checked) => {
-                                                const newItems = form.getValues().options_groups.map((item, i) => {
-                                                    if (i === index) {
-                                                        return {
-                                                            ...item,
-                                                            type: checked ? 'multi' : 'single'
-                                                        }
+                                                editProductGroup({
+                                                    id: field.id || 0,
+                                                    payload: {
+                                                        type: checked ? 'multi' : 'single',
+
                                                     }
-                                                    return item;
                                                 })
-                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                                form.setValue(`options_groups`, newItems as any)
                                             }}
                                         />
                                     </div>
