@@ -42,3 +42,4 @@ export const getOrderDetails = 'api/order/'
 export const createCommonGroup = 'api/group'
 export const sendNotification = 'api/send-notification'
 export const getAllUsers = 'user/all-users'
+export const getNotifications = 'api/user-notifications';

@@ -12,11 +12,14 @@ import {
   OrderItemDetailsScreen,
   OrdersScreen,
   ProductsScreen,
+  RecievedNotifications,
   RestaurantCommonGroups,
   SliderScreen,
 } from "./screens";
+import { useNotifications } from "./hooks";
 
 function App() {
+  useNotifications();
   return (
     <Routes>
       <Route path="/" element={<LoginScreen />} />
@@ -32,7 +35,9 @@ function App() {
       <Route path="/orders" element={<OrdersScreen />} />
       <Route path="/orders/:orderId" element={<OrderItemDetailsScreen />} />
       <Route path="/restaurants/:restaurantId" element={<RestaurantCommonGroups />} />
-      <Route path="/notifications" element={<NotificationsScreen />} />
+      <Route path="/send-notifications" element={<NotificationsScreen />} />
+      <Route path="/notifications" element={<RecievedNotifications />} />
+      Rec
     </Routes>
   );
 }
