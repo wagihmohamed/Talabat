@@ -70,6 +70,7 @@ export const AddRestaurant = () => {
       delivery_time: values.deliveryTime.toString(),
       direction: values.direction,
       distance: "10",
+      free_delivery_limit: values.free_delivery_limit,
     });
   };
 
@@ -173,20 +174,20 @@ export const AddRestaurant = () => {
               </div>
             </div>
             <div className="flex justify items-center gap-4">
-              {/* <FormField
+              <FormField
                 control={form.control}
-                name="distance"
+                name="free_delivery_limit"
                 render={({ field }) => (
                   <>
-                    <FormItem className="grid grid-cols-8 items-center">
+                    <FormItem className="flex flex-col gap-2">
                       <FormLabel className="col-span-2">
-                        المسافة
+                        قيمه التوصيل المجاني
                       </FormLabel>
                       <FormControl className="col-span-6">
                         <Input
                           {...field}
                           type="number"
-                          value={field.value === 0 ? undefined : field.value}
+                          value={field.value === '' ? undefined : field.value}
                           onChange={(e) => {
                             field.onChange(parseInt(e.target.value));
                           }}
@@ -195,7 +196,7 @@ export const AddRestaurant = () => {
                     </FormItem>
                   </>
                 )}
-              /> */}
+              />
               <FormField
                 control={form.control}
                 name="direction"

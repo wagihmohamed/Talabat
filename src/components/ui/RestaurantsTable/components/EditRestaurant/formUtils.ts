@@ -8,6 +8,7 @@ export const addRestaurantFormInitialValues = {
   password: "",
   confirm_password: "",
   description: "",
+  free_delivery_limit: "",
 }
 
 export const editRestaurantFormSchema = z.object({
@@ -43,6 +44,8 @@ export const editRestaurantFormSchema = z.object({
     .max(50, {
       message: "البريد الالكتروني  يجب ان يكون اقل من 50 حرف",
     }),
+  free_delivery_limit: z
+    .string()
   //   description: z
   //     .string(),
   //   password: z
