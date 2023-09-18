@@ -65,6 +65,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
       email: restaurant.email,
       name: restaurant.name,
       phone: restaurant.phone,
+      free_delivery_limit: restaurant.free_delivery_limit,
     },
   });
 
@@ -102,6 +103,7 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
     if (restaurant.cover !== coverImages[0]?.dataURL) {
       formData.append("cover", coverImages[0]?.file || '');
     }
+    formData.append("free_delivery_limit", values.free_delivery_limit);
     editRestaurant(formData);
   };
 
@@ -223,6 +225,21 @@ export const EditRestaurant = ({ restaurant }: EditRestaurantProps) => {
                 <>
                   <FormItem className="grid grid-cols-8 items-center">
                     <FormLabel className="col-span-2">رقم الهاتف</FormLabel>
+                    <FormControl className="col-span-6">
+                      <Input {...field} />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="free_delivery_limit"
+              render={({ field }) => (
+                <>
+                  <FormItem className="grid grid-cols-8 items-center">
+                    <FormLabel className="col-span-2">قيمة التوصيل المجاني</FormLabel>
                     <FormControl className="col-span-6">
                       <Input {...field} />
                     </FormControl>

@@ -33,7 +33,7 @@ export const OrderItemDetailsScreen = () => {
                         isLoading={isLoading}
                         isError={isError}
                     >
-                        <div className="grid grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <OrderDetailsItem
                                 title="اسم العميل"
                                 value={orderDetails?.order.name}
@@ -47,7 +47,7 @@ export const OrderItemDetailsScreen = () => {
                                 value={orderDetails?.order.phone}
                             />
                         </div>
-                        <div className="grid grid-cols-4 mt-4 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-6">
                             <OrderDetailsItem
                                 title="قيمة الطلب"
                                 value={orderDetails?.order.subtotal}
@@ -73,7 +73,7 @@ export const OrderItemDetailsScreen = () => {
                                 ملاحظات: {orderDetails.order.notes}
                             </p>
                         )}
-                        <div className="grid grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {orderDetails?.order.cart_products?.map((product) => (
                                 <OrderDetailsItem
                                     key={product.id}

@@ -17,6 +17,7 @@ export interface RestuarantItemResponse {
   cover: null | string;
   status: 'open' | 'close' | 'busy' | 'soon';
   areas: Area[];
+  free_delivery_limit: string;
 }
 
 export interface Area {
@@ -50,6 +51,7 @@ export interface CreateRestaurantParams {
   cover?: File | undefined | FormData | string | object | null;
   delivery_time: string;
   distance: string;
+  free_delivery_limit: string;
   direction: string;
 }
 // API

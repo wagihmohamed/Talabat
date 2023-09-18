@@ -29,7 +29,7 @@ export function Sidebar({ className, children }: SidebarProps) {
         <div className="space-y-4 py-4 fixed w-1/6 top-0 h-screen flex flex-col border-l-4">
           <div className="flex-1">
             <div className="px-3 py-2">
-              <h2 className="mb-2 px-4 text-sm md:text-lg font-semibold tracking-tight">
+              <h2 className="mb-2 px-4 text-sm md:text-lg font-semibold hidden sm:block tracking-tight">
                 الرئيسية
               </h2>
               <div className="space-y-1">
@@ -119,7 +119,7 @@ export function Sidebar({ className, children }: SidebarProps) {
           <div className="py-2 flex flex-col items-end">
             <div className="w-full flex justify-start gap-2 items-center py-2 px-3">
               <ModeToggle />
-              <p className="text-xs md:text-sm font-semibold">
+              <p className="text-xs md:text-sm hidden sm:block font-semibold">
                 وضع الظهور
               </p>
             </div>
