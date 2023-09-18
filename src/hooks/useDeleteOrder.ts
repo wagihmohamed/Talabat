@@ -14,6 +14,7 @@ export const useDeleteOrder = ({
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["orders"]);
+            queryClient.invalidateQueries(["notifications"]);
             toast.success("تم حذف الطلب بنجاح");
             onSuccess();
         },
