@@ -52,7 +52,7 @@ export const DeleteOrderDialog = ({
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        هل انت متأكد من حذف طلب {order.name}؟
+                        هل انت متأكد من حذف طلب {order?.name}؟
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         لا يمكنك التراجع عن هذا الاجراء, سيتم حذف الطلب نهائياً

@@ -97,7 +97,7 @@ export const columns: ColumnDef<Order>[] = [
             };
             return (
                 <div className="flex justify-center items-center gap-4">
-                    <DeleteOrderDialog order={order} />
+                    {order && <DeleteOrderDialog order={order} />}
                     <ChevronLeft onClick={handleClick} className="w-6 h-6 cursor-pointer" />
                 </div>
             );
