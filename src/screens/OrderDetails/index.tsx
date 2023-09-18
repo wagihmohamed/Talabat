@@ -26,7 +26,7 @@ export const OrderItemDetailsScreen = () => {
                             <h1 className="text-2xl font-bold ml-4">
                                 الطلب الخاص ب{orderDetails?.order?.name}
                             </h1>
-                            <DeleteOrderDialog order={orderDetails?.order} />
+                            {orderDetails?.order && <DeleteOrderDialog order={orderDetails?.order} />}
                         </div>
                     </div>
                     <LoadingErrorPlaceholder
