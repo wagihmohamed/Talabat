@@ -1,13 +1,34 @@
-import { Badge, LoadingErrorPlaceholder, Sidebar, } from "@/components";
+import { Badge, Button, LoadingErrorPlaceholder, Sidebar, } from "@/components";
 import { DeleteOrderDialog } from "@/components/ui/OrdersTable/components/DeleteOrder";
 import { useOrderDetails } from "@/hooks";
 import { Order } from "@/services";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Printer } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { OrderDetailsItem } from "./components/OrderDetailsItem";
+import { Receipt } from "@/components/Recipt";
+import { useReactToPrint } from 'react-to-print';
+import { useRef } from "react";
+
 
 export const OrderItemDetailsScreen = () => {
     const { orderId = '' } = useParams();
+    const componentRef = useRef(null);
+    const handlePrint = useReactToPrint({
+        content: () => {
+            const printableComponent = componentRef.current as HTMLElement | null;
+            if (printableComponent) {
+                printableComponent.classList.remove("hidden");
+            }
+            return printableComponent;
+        },
+        onAfterPrint: () => {
+            const printableComponent = componentRef.current as HTMLElement | null;
+            if (printableComponent) {
+                printableComponent.classList.add("hidden");
+            }
+        },
+    });
+
     const { data: orderDetails = {
         message: '',
         order: {} as Order
@@ -27,6 +48,9 @@ export const OrderItemDetailsScreen = () => {
                                 الطلب الخاص ب{orderDetails?.order?.name}
                             </h1>
                             {orderDetails?.order && <DeleteOrderDialog order={orderDetails?.order} />}
+                            <Button onClick={handlePrint} variant='secondary'>
+                                <Printer onClick={handlePrint} className="h-4 w-4 cursor-pointer" />
+                            </Button>
                         </div>
                     </div>
                     <LoadingErrorPlaceholder
@@ -112,6 +136,11 @@ export const OrderItemDetailsScreen = () => {
                                     }
                                 />
                             ))}
+                            <Receipt
+                                order={orderDetails.order}
+                                innerRef={componentRef}
+                                className="hidden"
+                            />
                         </div>
                     </LoadingErrorPlaceholder>
                 </Sidebar>
