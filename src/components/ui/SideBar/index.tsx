@@ -10,9 +10,6 @@ import { useMediaQuery } from '@mantine/hooks'
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
