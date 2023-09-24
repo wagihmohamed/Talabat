@@ -8,9 +8,9 @@ export const HomeScreen = () => {
   }, isLoading, isError } = useRestaurants();
 
   return (
-    <div className="border-t">
+    <div >
       <div className="h-screen">
-        <Sidebar className="block">
+        <Sidebar>
           <h1 className="text-2xl font-bold mb-8">كل المطاعم</h1>
           <RestaurantsTable
             isLoading={isLoading}
