@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { cn } from "@/lib/utils";
 import { SideBarItem } from "./components/sidebar-item";
 import { useAuth } from "@/store";
@@ -15,7 +14,6 @@ import {
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
-
 export function Sidebar({ className, children }: SidebarProps) {
   const { logout } = useAuth();
   const navigation = useNavigate();
@@ -165,7 +163,9 @@ export function Sidebar({ className, children }: SidebarProps) {
             </div>
 
           </SheetContent>
-        </Sheet>) : (<>
+        </Sheet>
+      ) : (
+        <>
           <div className={cn("pb-11 bg-background", className)}>
             <div className="space-y-4 py-4 fixed w-1/6 top-0 h-screen flex flex-col border-l-4">
               <div className="flex-1">
@@ -291,7 +291,7 @@ export function Sidebar({ className, children }: SidebarProps) {
             </div>
           </div>
         </>)}
-      <div className="col-span-4 lg:border-l p-6">{children}</div>
+      <div className="col-span-4 lg:border-l p-6 overflow-hidden">{children}</div>
     </div>
   );
 }

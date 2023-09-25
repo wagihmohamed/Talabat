@@ -12,7 +12,7 @@ export const useNotifications = () => {
             if (data?.results.some((notification) => !notification.seen)) {
                 return Infinity
             }
-            return 30000
+            return 10000
         },
         refetchOnWindowFocus: (query) => {
             if (query.state?.data?.results.some((notification) => !notification.seen)) {
@@ -20,5 +20,6 @@ export const useNotifications = () => {
             }
             return true
         },
+        refetchOnMount: false,
     });
 };
