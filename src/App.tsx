@@ -16,10 +16,8 @@ import {
   RestaurantCommonGroups,
   SliderScreen,
 } from "./screens";
-import { useNotifications } from "./hooks";
 
 function App() {
-  useNotifications();
   return (
     <Routes>
       <Route path="/" element={<LoginScreen />} />

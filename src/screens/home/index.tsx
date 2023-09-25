@@ -1,12 +1,12 @@
 import { Sidebar, RestaurantsTable } from "@/components";
 import { columns } from "@/components/ui/RestaurantsTable/columns";
-import { useRestaurants } from "@/hooks";
+import { useNotifications, useRestaurants } from "@/hooks";
 
 export const HomeScreen = () => {
   const { data: restaurants = {
     results: []
   }, isLoading, isError } = useRestaurants();
-
+  useNotifications();
   return (
     <div className="border-t">
       <div className="h-screen">
