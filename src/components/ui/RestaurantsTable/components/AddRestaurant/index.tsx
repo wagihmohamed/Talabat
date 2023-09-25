@@ -49,8 +49,6 @@ export const AddRestaurant = () => {
     resolver: zodResolver(addRestaurantFormSchema),
     defaultValues: addRestaurantFormInitialValues,
   });
-  console.log(form.formState.errors);
-
 
   const onSubmit = (values: z.infer<typeof addRestaurantFormSchema>) => {
     const fm = new FormData()
