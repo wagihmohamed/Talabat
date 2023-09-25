@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getNotificationsService } from "@/services/getNotifications";
 import { useAuth } from "@/store";
+import { useLocation } from "react-router-dom";
 
 export const useNotifications = () => {
     const { user } = useAuth();
+    const url = useLocation();
+    const isNavigation = url.pathname.startsWith("/notifications");
     return useQuery({
         queryKey: ["notifications"],
         queryFn: getNotificationsService,
@@ -20,6 +23,6 @@ export const useNotifications = () => {
             }
             return true
         },
-        refetchOnMount: false,
+        refetchOnMount: isNavigation ? true : false,
     });
 };
