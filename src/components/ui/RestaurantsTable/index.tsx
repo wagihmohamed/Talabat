@@ -63,8 +63,8 @@ export function RestaurantsTable<TData, TValue>({
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-md border relative max-h-screen overflow-y-scroll">
-        <Table className="">
+      <div className="rounded-md border">
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
