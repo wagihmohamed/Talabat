@@ -49,6 +49,8 @@ export const AddRestaurant = () => {
     resolver: zodResolver(addRestaurantFormSchema),
     defaultValues: addRestaurantFormInitialValues,
   });
+  console.log(form.formState.errors);
+
 
   const onSubmit = (values: z.infer<typeof addRestaurantFormSchema>) => {
     const fm = new FormData()
@@ -70,7 +72,7 @@ export const AddRestaurant = () => {
       delivery_time: values.deliveryTime.toString(),
       direction: values.direction,
       distance: "10",
-      free_delivery_limit: values.free_delivery_limit,
+      free_delivery_limit: values.free_delivery_limit.toString(),
     });
   };
 
@@ -187,7 +189,7 @@ export const AddRestaurant = () => {
                         <Input
                           {...field}
                           type="number"
-                          value={field.value === '' ? undefined : field.value}
+                          value={field.value === 0 ? undefined : field.value}
                           onChange={(e) => {
                             field.onChange(parseInt(e.target.value));
                           }}

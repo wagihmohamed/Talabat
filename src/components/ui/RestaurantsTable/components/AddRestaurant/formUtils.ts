@@ -14,7 +14,7 @@ export const addRestaurantFormInitialValues = {
   distance: 0,
   direction: "",
   deliveryTime: 0,
-  free_delivery_limit: '',
+  free_delivery_limit: 0,
 }
 
 export const directionOptions = [
@@ -93,7 +93,7 @@ export const addRestaurantFormSchema = z.object({
       message: "كلمة المرور  يجب ان يكون اقل من 50 حرف",
     }),
   free_delivery_limit: z
-    .string()
+    .number()
 
 }).refine((data) => data.password === data.confirm_password, {
   message: "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
