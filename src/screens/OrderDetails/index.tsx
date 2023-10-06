@@ -139,7 +139,7 @@ export const OrderItemDetailsScreen = () => {
                             <Receipt
                                 order={orderDetails.order}
                                 innerRef={componentRef}
-                                className=""
+                                className="hidden"
                             />
                         </div>
                     </LoadingErrorPlaceholder>
