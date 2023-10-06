@@ -52,7 +52,7 @@ export const Receipt = ({ order, innerRef, className }: {
                 <table>
                     <thead>
                         <tr className="tabletitle">
-                            <td className="item"><p className='itemtext'>الاسم</p></td>
+                            <td className="item"><p className='text-4xl'>الاسم</p></td>
                             <td className="Hours"><p className='text-2xl'>العدد</p></td>
                             <td className="Rate"><p className='text-2xl'>الاجمالي</p></td>
                             <td className="Rate"><p className='text-2xl'>الملاحظات</p></td>
