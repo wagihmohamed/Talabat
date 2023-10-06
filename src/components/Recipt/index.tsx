@@ -6,14 +6,16 @@ interface TableRowProps {
     item: string;
     quantity: string;
     subtotal: string;
+    notes?: string;
 }
 
-function TableRow({ item, quantity, subtotal }: TableRowProps) {
+function TableRow({ item, quantity, subtotal, notes }: TableRowProps) {
     return (
         <tr className="service">
             <td className="tableitem"><p className="itemtext">{item}</p></td>
             <td className="tableitem"><p className="itemtext">{quantity}</p></td>
             <td className="tableitem"><p className="itemtext">{subtotal}</p></td>
+            {notes && <td className="tableitem"><p className="itemtext">{notes || "--"}</p></td>}
         </tr>
     );
 }
@@ -29,13 +31,13 @@ export const Receipt = ({ order, innerRef, className }: {
             <center id="top">
                 <img className="logo" src={LogoBG} />
                 <div className="info">
-                    <p className='mt-2'>طلباتك</p>
+                    <p className='mt-2 font-bold'>طلباتك</p>
                 </div>
             </center>
             <div id="mid">
                 <div className="info">
                     <h2>معلومات التوصيل</h2>
-                    <p>
+                    <p className='font-bold'>
                         العنوان : {order.address}<br />
                         الهاتف: {order.phone}<br />
                         الاجمالي: {order.total}<br />
@@ -50,9 +52,10 @@ export const Receipt = ({ order, innerRef, className }: {
                 <table>
                     <thead>
                         <tr className="tabletitle">
-                            <td className="item"><p className='text-4xl'>الاسم</p></td>
+                            <td className="item"><p className='itemtext'>الاسم</p></td>
                             <td className="Hours"><p className='text-2xl'>العدد</p></td>
                             <td className="Rate"><p className='text-2xl'>الاجمالي</p></td>
+                            <td className="Rate"><p className='text-2xl'>الملاحظات</p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +65,7 @@ export const Receipt = ({ order, innerRef, className }: {
                                 item={product.product.title}
                                 quantity={product.quantity.toString()}
                                 subtotal={product.total.toString()}
+                                notes={product.notes}
                             />
                         ))}
                     </tbody>

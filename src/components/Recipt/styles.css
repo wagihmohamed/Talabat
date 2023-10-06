@@ -2,7 +2,7 @@
   box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
   padding: 2mm;
   margin: 0 auto;
-  width: 44mm;
+  width: 55mm;
   background: #fff;
 }
 
@@ -27,7 +27,7 @@
 
 #invoice-POS h3 {
   font-size: 1.2em;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 2em;
 }
 
@@ -97,8 +97,9 @@ td {
 
 .tabletitle {
   /* padding: 5px; */
-  font-size: 0.5em;
+  font-size: 0.9em;
   background: #eee;
+  font-weight: bold;
 }
 
 .service {
@@ -110,7 +111,8 @@ td {
 }
 
 .itemtext {
-  font-size: 0.5em;
+  font-size: 0.6em;
+  font-weight: bold;
 }
 
 #legalcopy {
