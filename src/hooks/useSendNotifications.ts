@@ -2,7 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sendNotificationService, SendNotificationParams } from "@/services/sendNotifications";
 import { toast } from "react-toastify";
 
-export const useSendNotifications = () => {
+export const useSendNotifications = ({
+    onSuccess,
+}: {
+    onSuccess: () => void
+}) => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({
@@ -19,6 +23,10 @@ export const useSendNotifications = () => {
         onSuccess: () => {
             toast.success("تم إرسال الإشعار بنجاح");
             queryClient.invalidateQueries(["notifications"]);
+            onSuccess();
+        },
+        onSettled: () => {
+            onSuccess();
         }
     })
 }

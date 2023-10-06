@@ -9,21 +9,32 @@ import { useState } from "react";
 import { useDebounce } from 'use-debounce';
 
 export const NotificationsScreen = () => {
-    const { mutate: sendNotification, isLoading } = useSendNotifications();
+    const defaultValues = {
+        title: "",
+        description: "",
+        topic: undefined,
+        // usersIds: [],
+    }
+
+    const form = useForm<z.infer<typeof sendNotificationSchema>>({
+        resolver: zodResolver(sendNotificationSchema),
+        defaultValues,
+    });
+
+    const { mutate: sendNotification, isLoading } = useSendNotifications({
+        onSuccess: () => {
+            form.reset(defaultValues);
+            setSelectedUsers([]);
+            setSelectedRole(undefined);
+            setSearchTerm("");
+        },
+    });
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const [value] = useDebounce(searchTerm, 1000);
     const [selectedRole, setSelectedRole] = useState<string | undefined>(undefined);
 
-    const form = useForm<z.infer<typeof sendNotificationSchema>>({
-        resolver: zodResolver(sendNotificationSchema),
-        defaultValues: {
-            title: "",
-            description: "",
-            topic: undefined,
-            // usersIds: [],
-        },
-    });
+
 
     const { data: usersData = {
         results: []
