@@ -26,6 +26,7 @@ export const Receipt = ({ order, innerRef, className }: {
     innerRef: any
     className?: string
 }) => {
+
     return (
         <div className={className} id="invoice-POS" ref={innerRef}>
             <center id="top">
@@ -76,6 +77,26 @@ export const Receipt = ({ order, innerRef, className }: {
                             <td className="payment"><p className='text-2xl'>{order.total}</p></td>
                         </tr>
                     </tfoot>
+                </table>
+            </div>
+
+            {/*  */}
+            <div id="table" className='mt-4'>
+                <table>
+                    <thead>
+                        <tr className="tabletitle">
+                            <td className="item"><p className='text-4xl'>الاضافه</p></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {order.cart_products?.map((product) => {
+                            return product.options.map((option) => (
+                                <tr className="service">
+                                    <td className="tableitem"><p className="itemtext">{option.name}</p></td>
+                                </tr>
+                            ))
+                        })}
+                    </tbody>
                 </table>
             </div>
         </div >
