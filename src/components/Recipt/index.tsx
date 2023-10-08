@@ -91,7 +91,7 @@ export const Receipt = ({ order, innerRef, className }: {
                     <tbody>
                         {order.cart_products?.map((product) => {
                             return product.options.map((option) => (
-                                <tr className="service">
+                                <tr key={option.id} className="service">
                                     <td className="tableitem"><p className="itemtext">{option.name}</p></td>
                                 </tr>
                             ))
