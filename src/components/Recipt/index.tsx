@@ -15,7 +15,7 @@ function TableRow({ item, quantity, subtotal, notes }: TableRowProps) {
             <td className="tableitem"><p className="itemtext">{item}</p></td>
             <td className="tableitem"><p className="itemtext">{quantity}</p></td>
             <td className="tableitem"><p className="itemtext">{subtotal}</p></td>
-            {notes && <td className="tableitem"><p className="itemtext">{notes || "--"}</p></td>}
+            <td className="tableitem"><p className="itemtext">{notes || "--"}</p></td>
         </tr>
     );
 }
@@ -26,6 +26,7 @@ export const Receipt = ({ order, innerRef, className }: {
     innerRef: any
     className?: string
 }) => {
+
     return (
         <div className={className} id="invoice-POS" ref={innerRef}>
             <center id="top">
@@ -40,11 +41,6 @@ export const Receipt = ({ order, innerRef, className }: {
                     <p className='font-bold'>
                         العنوان : {order.address}<br />
                         الهاتف: {order.phone}<br />
-                        الاجمالي: {order.total}<br />
-                        {order.shipping && <>
-                            <span>قيمة التوصيل: {order.shipping}</span>
-                            <br />
-                        </>}
                     </p>
                 </div>
             </div>
@@ -68,6 +64,38 @@ export const Receipt = ({ order, innerRef, className }: {
                                 notes={product.notes}
                             />
                         ))}
+                    </tbody>
+                    <tfoot>
+                        <tr className="tabletitle">
+                            <td></td>
+                            <td className="Rate"><p className='text-2xl'>قيمة التوصيل</p></td>
+                            <td className="payment"><p className='text-2xl'>{order.shipping}</p></td>
+                        </tr>
+                        <tr className="tabletitle">
+                            <td></td>
+                            <td className="Rate"><p className='text-2xl'>الاجمالي</p></td>
+                            <td className="payment"><p className='text-2xl'>{order.total}</p></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            {/*  */}
+            <div id="table" className='mt-4'>
+                <table>
+                    <thead>
+                        <tr className="tabletitle">
+                            <td className="item"><p className='text-4xl'>الاضافه</p></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {order.cart_products?.map((product) => {
+                            return product.options.map((option) => (
+                                <tr className="service">
+                                    <td className="tableitem"><p className="itemtext">{option.name}</p></td>
+                                </tr>
+                            ))
+                        })}
                     </tbody>
                 </table>
             </div>
