@@ -45,3 +45,4 @@ export * from "./useCreateCommonGroup";
 export * from "./useSendNotifications";
 export * from "./useGetAllUsers";
 export * from "./useNotifications";
+export * from "./useStatistics";
