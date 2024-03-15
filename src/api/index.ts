@@ -1,6 +1,5 @@
 import axios from "axios";
-// const baseURL ='http://13.51.235.128:3000/'
-const baseURL = 'https://talabatek.net/'
+const baseURL = import.meta.env.VITE_DEV_BASE_URL as string;
 
 export const api = axios.create({
   baseURL,
@@ -11,7 +10,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
